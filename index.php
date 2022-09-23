@@ -12,7 +12,7 @@ else
 	$uc = $_REQUEST['uc'];
 
  
-switch($uc)
+switch($uc) // traitement de l'uc : on charge le controleur approprié.
 {
 	case 'accueil':
 		{include("vues/v_accueil.html");break;}

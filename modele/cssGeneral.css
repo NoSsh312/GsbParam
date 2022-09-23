@@ -152,7 +152,21 @@ div.prixCard{
     bottom:50px;
 	background-color :#EFEFEF;
 }
+div.titre{
+	text-align: center;
+	margin-right:20%;
+	margin-bottom:5%;
+}
+div.titre span{
+	font-size : 25px;
+	border: 2px solid;
+    padding: 7px;
+    border-radius: 20px;
+    border-color: green;
+    color: green;
+}
 div.imgCard{
     position:absolute;
     bottom:5px;
 }
+

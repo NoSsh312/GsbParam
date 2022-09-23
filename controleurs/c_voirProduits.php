@@ -1,13 +1,27 @@
 ﻿<?php
 // contrôleur qui gère l'affichage des produits
 initPanier(); // se charge de réserver un emplacement mémoire pour le panier si pas encore fait
+
 $action = $_REQUEST['action'];
 switch($action)
 {
+
+
+	case 'nosProduits':
+	{
+		$lesProduits = getTousLesProduits();
+		include("vues/v_produits.php");
+		break;
+
+	}
+
+
+
 	case 'voirCategories':
 	{
   		$lesCategories = getLesCategories();
 		include("vues/v_categories.php");
+		header('Location:index.php?uc=voirProduits&action=voirProduits&categorie=CH');
   		break;
 	}
 	case 'voirProduits' :
@@ -15,8 +29,16 @@ switch($action)
 		$lesCategories = getLesCategories();
 		include("vues/v_categories.php");
   		$categorie = $_REQUEST['categorie'];
+  		?>
+  			<div class="titre">
+  				<span>
+  					<?php echo 'Produits de la catégorie '. getLeLibelleCategorie($categorie);?>
+  				</span>
+  			</div>
+  		<?php
 		$lesProduits = getLesProduitsDeCategorie($categorie);
 		include("vues/v_produitsDeCategorie.php");
+		
 		break;
 	}
 	case 'ajouterAuPanier' :

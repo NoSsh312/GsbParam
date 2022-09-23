@@ -54,7 +54,46 @@ include_once 'bd.inc.php';
         die();
 		}
 	}
-/**
+	function getLeLibelleCategorie($idCategorie)
+	{
+		try 
+		{
+        $monPdo = connexionPDO();
+		$req = 'SELECT libelle FROM categorie WHERE id="'.$idCategorie.'"';
+		$res = $monPdo->query($req);
+		$laLigne = $res->fetch(PDO::FETCH_ASSOC);
+		return $laLigne['libelle'];
+		} 
+		catch (PDOException $e) 
+		{
+        print "Erreur !: " . $e->getMessage();
+        die();
+		}
+	}
+
+	function getTousLesProduits()
+	{
+
+		try 
+		{
+			$lesProduits = array();
+        $monPdo = connexionPDO();
+	    $req='select id, description, prix, image, idCategorie from produit';
+		$res = $monPdo->query($req);
+		$lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
+			foreach($lesLignes as $laLigne){
+				$lesProduits[] = $laLigne;
+			}
+		return $lesProduits; 
+		} 
+		catch (PDOException $e) 
+		{
+        print "Erreur !: " . $e->getMessage();
+        die();
+		}
+
+	}
+	/**
  * Retourne sous forme d'un tableau associatif tous les produits de la
  * catégorie passée en argument
  * 
@@ -64,6 +103,7 @@ include_once 'bd.inc.php';
 
 	function getLesProduitsDeCategorie($idCategorie)
 	{
+
 		try 
 		{
         $monPdo = connexionPDO();
@@ -77,6 +117,7 @@ include_once 'bd.inc.php';
         print "Erreur !: " . $e->getMessage();
         die();
 		}
+
 	}
 /**
  * Retourne les produits concernés par le tableau des idProduits passée en argument
