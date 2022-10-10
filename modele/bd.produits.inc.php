@@ -191,6 +191,46 @@ include_once 'bd.inc.php';
         die();
 		}
 	}
+
+	function ajouterClient($nomUtil,$mdp,$nom,$rue,$cp,$ville,$tel,$mail )
+	{
+		$testDouble =true;
+        $monPdo = connexionPDO();
+        
+	    $reqN=$monPdo -> prepare('select nomUtil from client where nomUtil= :nomUtil1 OR courriel = :mail1');
+	    $reqN -> bindValue(':nomUtil1',$nomUtil,PDO::PARAM_STR);
+	    $reqN -> bindValue(':mail1',$mail,PDO::PARAM_STR);
+	    $reqN->execute();
+		$lesLignesN = $reqN->fetchAll(PDO::FETCH_ASSOC);
+			if(empty($lesLignesN)){
+
+		$req = "insert into client (nomUtil, mdp, nom, adresse, ville, cp, tel, courriel) values ('$nomUtil','$mdp','$nom','$rue','$ville','$cp','$tel','$mail')";
+		$res = $monPdo->exec($req);
+		// insertion produits commandés
+		$testDouble =false;
+	}
+		return $testDouble;
+		
+		
+}
+
+function seConnecter($nomUtil, $mdp){
+
+	$testExist =false;
+        $monPdo = connexionPDO();
+        
+	    $reqN=$monPdo -> prepare('select nomUtil, mdp from client where nomUtil= :nomUtil1 AND mdp = :mdp1');
+	    $reqN -> bindValue(':nomUtil1',$nomUtil,PDO::PARAM_STR);
+	    $reqN -> bindValue(':mdp1',$mdp,PDO::PARAM_STR);
+	    $reqN->execute();
+	    $lesLignesN = $reqN->fetchAll(PDO::FETCH_ASSOC);
+			if(!empty($lesLignesN)){
+				$testExist =true;
+				$_SESSION['nomUtil'] = $nomUtil;
+				$_SESSION['mdp'] = $mdp;
+			}
+			return $testExist;
+		}
 	/**
 	 * Retourne les produits concernés par le tableau des idProduits passée en argument
 	 *

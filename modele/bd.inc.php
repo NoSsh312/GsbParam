@@ -31,4 +31,19 @@ function connexionPDO() {
     }
 }
 
+
+function connexionPDO2($nom , $mdp) {
+    
+
+    try {
+        $conn = new PDO("mysql:host=localhost;dbname=ryu_m2gsbparam;port=3307",$nom,$mdp, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'')); 
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $conn;
+    } catch (PDOException $e) {
+        print "Erreur de connexion PDO ";
+        die();
+    }
+}
+
+
 ?>

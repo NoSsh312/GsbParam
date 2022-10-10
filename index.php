@@ -4,7 +4,7 @@ include("vues/v_entete.html") ;
 require_once("modele/fonctions.inc.php");
 require_once("modele/bd.produits.inc.php");
 
-include("vues/v_bandeau.html") ;
+include("vues/v_bandeau.php") ;
 
 if(!isset($_REQUEST['uc']))
      $uc = 'accueil'; // si $_GET['uc'] n'existe pas , $uc reçoit une valeur par défaut
@@ -22,6 +22,13 @@ switch($uc) // traitement de l'uc : on charge le controleur approprié.
 		{ include("controleurs/c_gestionPanier.php");break; }
 	case 'administrer' :
 	  { include("controleurs/c_gestionProduits.php");break;  }
+		
+	case 'seDeconnecter':
+	{
+	include("controleurs/c_gestionDeconnexion.php");break;}
+
+	  case 'seConnecter' :
+	  { include("controleurs/c_gestionConnexion.php");break;  }
 }
 include("vues/v_pied.html") ;
 ?>

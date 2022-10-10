@@ -23,7 +23,7 @@ fieldset {
 label {
 	background:transparent none;
 	display: block;
-	width: 20%;
+	width: 32%;
 	float: left;
 	padding-right: 1%;
 	text-align: left;
@@ -170,3 +170,58 @@ div.imgCard{
     bottom:5px;
 }
 
+#link-vider{
+	position : fixed;
+	border-radius: 20px;
+	padding:10px;
+	background-color: green;
+	color: white;
+	height:22px !important;
+	margin-top: 25%;
+	margin-left: 5%;
+}
+#connexion{
+	margin-left:40px;
+	width: 100%;
+
+}
+#connexion fieldset{
+	width: 94%;
+
+}
+#connexion label{
+	margin-left: 2%;
+	width:20%;
+	
+}
+#nomUtil, #mdp{
+	width:50%;
+}
+
+.envoyer{
+	text-align: center;
+}
+#inscription{
+	margin-left: 3%;
+	 }
+
+#inscription input{
+	width : 45%;
+}
+#inscription .response{
+	margin-left: 2%;
+	width:20%;
+}
+
+#inscription fieldset{
+	width : 97.5%;
+}
+
+#link-insc{
+	margin-top: 1%;
+	margin-left: 3%;
+}
+.message-form{
+	margin-left: 3%;
+	margin-top:2%;
+}

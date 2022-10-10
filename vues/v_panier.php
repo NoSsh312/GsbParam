@@ -22,7 +22,8 @@ foreach( $lesProduitsDuPanier as $unProduit)
 }
 ?>
 <div class="commande">
-<a href="index.php?uc=gererPanier&action=passerCommande"><img src="images/commander.jpg" title="Passer commande" alt="Commander"></a>
-</div>
+<a href="index.php?uc=gererPanier&action=passerCommande"><img src="images/commander.jpg" title="Passer commande" alt="Commander"></a></div>
+<div class="viderLaCom">
+<a id='link-vider' href="index.php?uc=gererPanier&action=viderPanier"> Vider Mon Panier</a>
 </div>
 <br/>

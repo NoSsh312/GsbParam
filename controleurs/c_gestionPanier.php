@@ -10,6 +10,7 @@ switch($action)
 			$desIdProduit = getLesIdProduitsDuPanier();
 			$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
 			include("vues/v_panier.php");
+			
 		}
 		else
 		{
@@ -43,7 +44,7 @@ switch($action)
 		break;
 	case 'confirmerCommande'	:
 	{
-		$nom =$_REQUEST['nom'];$rue=$_REQUEST['rue'];$ville =$_REQUEST['ville'];$cp=$_REQUEST['cp'];$mail=$_REQUEST['mail'];
+		$nom =$_REQUEST['nom'];$rue=htmlspecialchars($_REQUEST['rue'], ENT_QUOTES); $ville =$_REQUEST['ville']; $cp=$_REQUEST['cp']; $mail=$_REQUEST['mail'];
 	 	$msgErreurs = getErreursSaisieCommande($nom,$rue,$ville,$cp,$mail);
 		if (count($msgErreurs)!=0)
 		{
@@ -60,6 +61,14 @@ switch($action)
 		}
 		break;
 	}
+	case 'viderPanier' :
+	{
+		supprimerPanier();
+		$message = "panier vide !!";
+			include ("vues/v_message.php");
+		break;
+	}
+
 }
 
 
