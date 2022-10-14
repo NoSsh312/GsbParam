@@ -18,21 +18,20 @@ switch($action)
 	}
 	case 'inscriptionR':
 	{
-	$testDouble =ajouterClient($_POST['nomUtil2'],$_POST['mdp'],$_POST['nomInsc'],$_POST['adresseInsc'],
-								$_POST['codePostInsc'],$_POST['villeInsc'],$_POST['tel'], $_POST['courriel']);
+	$testDouble =ajouterClient($_POST['nomUtil2'],password_hash($_POST['mdp'], PASSWORD_DEFAULT),$_POST['nomInsc'],$_POST['adresseInsc'], $_POST['codePostInsc'],$_POST['villeInsc'],$_POST['tel'], $_POST['courriel']);
 
-			ajouterClient($_POST['nomUtil2'],$_POST['mdp'],$_POST['nomInsc'],$_POST['adresseInsc'],
-						  $_POST['codePostInsc'],$_POST['villeInsc'],$_POST['tel'], $_POST['courriel']);
+			
 
 
 			include('vues/v_inscription.php');?>
 
 			<div class = "message-form"><?php
-			if($testDouble){?>
+			if($testDouble){
+			?>
 				<p id = "message-failed">  Ajout du client échoué</p><?php
 			}
 			else{?>
-				<p id = "message-reussi">  Ajout du client réussi</p>'<?php
+				<p id = "message-reussi">  Ajout du client réussi</p><?php
 			}
 		break;
 	}
@@ -40,15 +39,18 @@ switch($action)
 	{
 		$testConnexion = seConnecter($_POST['nomUtil'],$_POST['mdp']);
 
-		 seConnecter($_POST['nomUtil'],$_POST['mdp']);
 		
 		include('vues/v_seConnecter.php');?>
 	<div class = "message-form"><?php
+
 			if($testConnexion){ 
+
+				
 				header('Location:index.php');
 			
 			}
-			else{?>
+			else{
+				?>
 				<p id = "message-reussi">   Authentification échouée / Nom d'utilisateur ou Mot de passe incorrect</p><?php
 			}
 		break;

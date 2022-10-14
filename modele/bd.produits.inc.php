@@ -215,21 +215,32 @@ include_once 'bd.inc.php';
 }
 
 function seConnecter($nomUtil, $mdp){
-
+	try 
+		{
 	$testExist =false;
         $monPdo = connexionPDO();
-        
-	    $reqN=$monPdo -> prepare('select nomUtil, mdp from client where nomUtil= :nomUtil1 AND mdp = :mdp1');
-	    $reqN -> bindValue(':nomUtil1',$nomUtil,PDO::PARAM_STR);
-	    $reqN -> bindValue(':mdp1',$mdp,PDO::PARAM_STR);
-	    $reqN->execute();
-	    $lesLignesN = $reqN->fetchAll(PDO::FETCH_ASSOC);
-			if(!empty($lesLignesN)){
+	    $reqN1=$monPdo -> prepare('select nomUtil,mdp from client where nomUtil= :nomUtil1 ');
+	    $reqN1 -> bindValue(':nomUtil1',$nomUtil,PDO::PARAM_STR);
+	 
+	    $reqN1->execute();
+	    $lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
+
+
+
+			if(!empty($lesLignesN1) && password_verify($mdp, $lesLignesN1['mdp'])){
+			
 				$testExist =true;
 				$_SESSION['nomUtil'] = $nomUtil;
-				$_SESSION['mdp'] = $mdp;
+				
+			
 			}
 			return $testExist;
+	}
+		catch (PDOException $e) 
+		{
+        print "Erreur !: " . $e->getMessage();
+        die();
+		}
 		}
 	/**
 	 * Retourne les produits concernés par le tableau des idProduits passée en argument
