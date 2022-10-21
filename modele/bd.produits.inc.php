@@ -136,10 +136,12 @@ include_once 'bd.inc.php';
 		{
 			foreach($desIdProduit as $unIdProduit)
 			{
-				$req = 'select id, description, prix, image, idCategorie from produit where id = "'.$unIdProduit.'"';
+				$req = 'select id, description, prix, image, idCategorie from produit where id = "'.$unIdProduit['id'].'"';
 				$res = $monPdo->query($req);
 				$unProduit = $res->fetch(PDO::FETCH_ASSOC);
+				$unProduit['qte']= $unIdProduit['qte'];
 				$lesProduits[] = $unProduit;
+
 			}
 		}
 		return $lesProduits;
@@ -215,16 +217,17 @@ include_once 'bd.inc.php';
 }
 
 function seConnecter($nomUtil, $mdp){
+	$testExist =false;
 	try 
 		{
-	$testExist =false;
+	
         $monPdo = connexionPDO();
 	    $reqN1=$monPdo -> prepare('select nomUtil,mdp from client where nomUtil= :nomUtil1 ');
-	    $reqN1 -> bindValue(':nomUtil1',$nomUtil,PDO::PARAM_STR);
+	    $reqN1 -> bindParam(':nomUtil1',$nomUtil,PDO::PARAM_STR);
 	 
 	    $reqN1->execute();
 	    $lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
-
+		
 
 
 			if(!empty($lesLignesN1) && password_verify($mdp, $lesLignesN1['mdp'])){

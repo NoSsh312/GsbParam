@@ -42,17 +42,23 @@ function supprimerPanier()
  * @param string $idProduit identifiant de produit
  * @return boolean $ok vrai si le produit n'était pas dans la variable, faux sinon 
 */
-function ajouterAuPanier($idProduit)
+function ajouterAuPanier($idProduit,$qte)
 {
-	
+	$i =0;
 	$ok = true;
-	if(in_array($idProduit,$_SESSION['produits']))
-	{
+	foreach($_SESSION['produits'] as $unProduit)
+	{if($unProduit['id'] == $idProduit){
+
 		$ok = false;
+	
 	}
-	else
-	{
-		$_SESSION['produits'][]= $idProduit; // l'indice n'est pas précisé : il sera automatiquement celui qui suit le dernier occupé
+	$i++;
+	}
+	if($ok){
+		$produit = ['id' => $idProduit, 'qte' => $qte];
+		$_SESSION['produits'][$i] = $produit;
+		
+	
 	}
 	return $ok;
 }

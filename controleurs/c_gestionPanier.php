@@ -4,6 +4,7 @@ switch($action)
 {
 	case 'voirPanier':
 	{
+		
 		$n= nbProduitsDuPanier();
 		if($n >0)
 		{
@@ -26,6 +27,7 @@ switch($action)
 		$desIdProduit = getLesIdProduitsDuPanier();
 		$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
 		include("vues/v_panier.php");
+		header("Location:index.php?uc=gererPanier&action=voirPanier");
 		break;
 	}
 	case 'passerCommande' :

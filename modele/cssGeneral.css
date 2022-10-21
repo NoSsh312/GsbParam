@@ -170,16 +170,7 @@ div.imgCard{
     bottom:5px;
 }
 
-#link-vider{
-	position : fixed;
-	border-radius: 20px;
-	padding:10px;
-	background-color: green;
-	color: white;
-	height:22px !important;
-	margin-top: 25%;
-	margin-left: 5%;
-}
+
 #connexion{
 	margin-left:40px;
 	width: 100%;
@@ -224,4 +215,46 @@ div.imgCard{
 .message-form{
 	margin-left: 3%;
 	margin-top:2%;
+}
+.quantite {
+	position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+
+#label-quantite{
+	width:39%;
+	position: absolute;
+    bottom: 10px;
+    right: 33%;
+}
+#quantiteNum{
+	    position: absolute;
+    right: 5px;
+    bottom: 10px;
+}
+#logo-panier{
+	margin-top:40px;
+	width:20%;
+}
+.viderLaCom{
+	margin-top: 35px !important;
+	position: relative;
+    width: 180px;
+    height: 250px;
+    float: left;
+    padding: 10px;
+    margin: 10px;
+}
+.toutPanier{
+	    display: flex;
+    flex-direction: column;
+
+}
+#total{
+	margin-left:13%;
+}
+.actionsCom{
+	margin-left: 13%;
 }
