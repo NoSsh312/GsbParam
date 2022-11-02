@@ -219,20 +219,14 @@ div.imgCard{
 }
 .quantite {
 	position: absolute;
-<<<<<<< HEAD
 	bottom: 20px;
 	right: 20px;
-=======
-    bottom: 20px;
-    right: 20px;
->>>>>>> bdcf40c4a20e83f8804ac828515dad20f9ce9ef9
 }
 
 
 #label-quantite{
 	width:39%;
 	position: absolute;
-<<<<<<< HEAD
 	bottom: 10px;
 	right: 33%;
 }
@@ -240,21 +234,11 @@ div.imgCard{
 	position: absolute;
 	right: 5px;
 	bottom: 10px;
-=======
-    bottom: 10px;
-    right: 33%;
-}
-#quantiteNum{
-	    position: absolute;
-    right: 5px;
-    bottom: 10px;
->>>>>>> bdcf40c4a20e83f8804ac828515dad20f9ce9ef9
 }
 #logo-panier{
 	margin-top:40px;
 	width:20%;
 }
-<<<<<<< HEAD
 #produits{
 	display: flex;
 	justify-content: center;
@@ -301,25 +285,4 @@ div.imgCard{
 #link-modif{
 	width: 50% !important;
     height: 20px !important;
-=======
-.viderLaCom{
-	margin-top: 35px !important;
-	position: relative;
-    width: 180px;
-    height: 250px;
-    float: left;
-    padding: 10px;
-    margin: 10px;
-}
-.toutPanier{
-	    display: flex;
-    flex-direction: column;
-
-}
-#total{
-	margin-left:13%;
-}
-.actionsCom{
-	margin-left: 13%;
->>>>>>> bdcf40c4a20e83f8804ac828515dad20f9ce9ef9
 }

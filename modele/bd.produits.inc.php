@@ -140,10 +140,7 @@ include_once 'bd.inc.php';
 				$res = $monPdo->query($req);
 				$unProduit = $res->fetch(PDO::FETCH_ASSOC);
 				$unProduit['qte']= $unIdProduit['qte'];
-<<<<<<< HEAD
 			
-=======
->>>>>>> bdcf40c4a20e83f8804ac828515dad20f9ce9ef9
 				$lesProduits[] = $unProduit;
 
 			}

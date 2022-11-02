@@ -26,15 +26,10 @@ switch($action)
 		retirerDuPanier($idProduit);
 		$desIdProduit = getLesIdProduitsDuPanier();
 		$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
-<<<<<<< HEAD
 		
 		header("Location:index.php?uc=gererPanier&action=voirPanier");
 		
 		
-=======
-		include("vues/v_panier.php");
-		header("Location:index.php?uc=gererPanier&action=voirPanier");
->>>>>>> bdcf40c4a20e83f8804ac828515dad20f9ce9ef9
 		break;
 	}
 	case 'passerCommande' :
