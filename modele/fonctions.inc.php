@@ -1,4 +1,5 @@
 ﻿<?php
+
 /**
  * @file fonctions.inc.php
  * @author Marielle Jouin <jouin.marielle@gmail.com>
@@ -42,20 +43,46 @@ function supprimerPanier()
  * @param string $idProduit identifiant de produit
  * @return boolean $ok vrai si le produit n'était pas dans la variable, faux sinon 
 */
-function ajouterAuPanier($idProduit)
+function ajouterAuPanier($idProduit,$qte)
 {
-	
+	$i =0;
 	$ok = true;
-	if(in_array($idProduit,$_SESSION['produits']))
-	{
-		$ok = false;
+	foreach($_SESSION['produits'] as $unProduit)
+		{if($unProduit['id'] == $idProduit){
+
+			$ok = false;
+
+		}
+		$i++;
 	}
-	else
-	{
-		$_SESSION['produits'][]= $idProduit; // l'indice n'est pas précisé : il sera automatiquement celui qui suit le dernier occupé
+	if($ok){
+		$produit = ['id' => $idProduit, 'qte' => $qte];
+		$_SESSION['produits'][$i] = $produit;
+		
+
 	}
 	return $ok;
 }
+function modifyQty($idProduit,$qte)
+{
+
+	$i =0;
+	
+	foreach($_SESSION['produits'] as $unProduit)
+		{
+			if($unProduit['id'] == $idProduit){
+
+			$produit = ['id' => $idProduit, 'qte' => $qte];
+			$_SESSION['produits'][$i] = $produit;
+
+		}
+		$i++;
+	}
+	
+	}
+	
+
+
 /**
  * Retourne les produits du panier
  *
@@ -81,7 +108,7 @@ function nbProduitsDuPanier()
 	$n = 0;
 	if(isset($_SESSION['produits']))
 	{
-	$n = count($_SESSION['produits']);
+		$n = count($_SESSION['produits']);
 	}
 	return $n;
 }
@@ -96,8 +123,19 @@ function nbProduitsDuPanier()
 */
 function retirerDuPanier($idProduit)
 {
-		$index =array_search($idProduit,$_SESSION['produits']);
-		unset($_SESSION['produits'][$index]);
+
+	
+	$_SESSION['produits'] = array_values($_SESSION['produits']);
+	
+	$i =0;
+	foreach ($_SESSION['produits'] as $unProduit) {
+		# code.
+		if($unProduit['id']==$idProduit){
+			unset($_SESSION['produits'][$i]);
+		}
+		$i++;
+	}
+
 }
 /**
  * teste si une chaîne a un format de code postal
@@ -109,8 +147,8 @@ function retirerDuPanier($idProduit)
 */
 function estUnCp($codePostal)
 {
-   
-   return strlen($codePostal)== 5 && estEntier($codePostal);
+
+	return strlen($codePostal)== 5 && estEntier($codePostal);
 }
 /**
  * teste si une chaîne est un entier
@@ -135,7 +173,7 @@ function estEntier($valeur)
 */
 function estUnMail($mail)
 {
-return  preg_match ('#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#', $mail);
+	return  preg_match ('#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#', $mail);
 }
 /**
  * Retourne un tableau d'erreurs de saisie pour une commande
@@ -156,7 +194,7 @@ function getErreursSaisieCommande($nom,$rue,$ville,$cp,$mail)
 	}
 	if($rue=="")
 	{
-	$lesErreurs[]="Il faut saisir le champ rue";
+		$lesErreurs[]="Il faut saisir le champ rue";
 	}
 	if($ville=="")
 	{
@@ -186,4 +224,6 @@ function getErreursSaisieCommande($nom,$rue,$ville,$cp,$mail)
 	}
 	return $lesErreurs;
 }
+
+
 ?>

@@ -44,8 +44,8 @@ switch($action)
 	case 'ajouterAuPanier' :
 	{
 		$idProduit=$_REQUEST['produit'];
-		
-		$ok = ajouterAuPanier($idProduit);
+		$qte = $_REQUEST['quantiteNum'];
+		$ok = ajouterAuPanier($idProduit,$qte);
 		if(!$ok)
 		{
 			$message = "Cet article est déjà dans le panier !!";

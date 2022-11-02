@@ -16,8 +16,8 @@
  * pour effectuer ensuite des requêtes
 */
 function connexionPDO() {
-    $login = 'cligsb';
-    $mdp = 'climdp';
+    $login = 'root';
+    $mdp = '';
     $bd = 'ryu_m2gsbparam';
     $serveur = 'localhost';
 

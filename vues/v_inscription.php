@@ -13,7 +13,7 @@
     </p>
       <p>
          <label class="response" for="nomInsc">Nom*</label>
-         <input id="nomInsc" type="nomInsc" name="nomInsc" size="30" maxlength="32" required>
+         <input id="nomInsc" type="text" name="nomInsc" size="30" maxlength="32" required>
       </p>
          
        <p>
@@ -34,7 +34,7 @@
       </p>
          <p>
          <label class="response" for="courriel">Courriel*</label>
-         <input id="courriel" type="email" name="courriel" maxlength="32"required>
+         <input id="courriel" type="email" name="courriel" maxlength="50"required>
       </p>
       
       

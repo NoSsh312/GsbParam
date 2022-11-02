@@ -136,10 +136,13 @@ include_once 'bd.inc.php';
 		{
 			foreach($desIdProduit as $unIdProduit)
 			{
-				$req = 'select id, description, prix, image, idCategorie from produit where id = "'.$unIdProduit.'"';
+				$req = 'select id, description, prix, image, idCategorie from produit where id = "'.$unIdProduit['id'].'"';
 				$res = $monPdo->query($req);
 				$unProduit = $res->fetch(PDO::FETCH_ASSOC);
+				$unProduit['qte']= $unIdProduit['qte'];
+			
 				$lesProduits[] = $unProduit;
+
 			}
 		}
 		return $lesProduits;
@@ -164,7 +167,7 @@ include_once 'bd.inc.php';
 	 * @param array $lesIdProduit tableau associatif contenant les id des produits commandés
 	 
 	*/
-	function creerCommande($nom,$rue,$cp,$ville,$mail, $lesIdProduit )
+	function creerCommande($idCli,$nom,$rue,$cp,$ville,$mail, $lesIdProduit )
 	{
 		try 
 		{
@@ -176,12 +179,13 @@ include_once 'bd.inc.php';
 		$maxi = $laLigne['maxi'] ;// on place le dernier id de commande dans $maxi
 		$idCommande = $maxi+1; // on augmente le dernier id de commande de 1 pour avoir le nouvel idCommande
 		$date = date('Y/m/d'); // récupération de la date système
-		$req = "insert into commande values ('$idCommande','$date','$nom','$rue','$cp','$ville','$mail')";
+		$req = "insert into commande values ('$idCommande','$idCli','$date','$nom','$rue','$cp','$ville','$mail')";
 		$res = $monPdo->exec($req);
 		// insertion produits commandés
 		foreach($lesIdProduit as $unIdProduit)
-		{
-			$req = "insert into contenir values ('$idCommande','$unIdProduit')";
+		{	$idProd=$unIdProduit['id'];
+			$prodQte=$unIdProduit['qte'];
+			$req = "insert into contenir values ('$idCommande','$idProd','$prodQte')";
 			$res = $monPdo->exec($req);
 		}
 		}
@@ -215,16 +219,17 @@ include_once 'bd.inc.php';
 }
 
 function seConnecter($nomUtil, $mdp){
+	$testExist =false;
 	try 
 		{
-	$testExist =false;
+	
         $monPdo = connexionPDO();
 	    $reqN1=$monPdo -> prepare('select nomUtil,mdp from client where nomUtil= :nomUtil1 ');
-	    $reqN1 -> bindValue(':nomUtil1',$nomUtil,PDO::PARAM_STR);
+	    $reqN1 -> bindParam(':nomUtil1',$nomUtil,PDO::PARAM_STR);
 	 
 	    $reqN1->execute();
 	    $lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
-
+		
 
 
 			if(!empty($lesLignesN1) && password_verify($mdp, $lesLignesN1['mdp'])){
@@ -242,6 +247,27 @@ function seConnecter($nomUtil, $mdp){
         die();
 		}
 		}
+
+function getIdCli(){
+	if(isset($_SESSION['nomUtil'])){
+try 
+		{
+$monPdo = connexionPDO();
+	    $reqN1=$monPdo -> prepare('select idCli from client where nomUtil= :nomUtil1 ');
+	    $reqN1 -> bindParam(':nomUtil1',$_SESSION['nomUtil'],PDO::PARAM_STR);
+		$reqN1->execute();
+	    $lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
+	    return $lesLignesN1['idCli'];
+		
+	    }
+		catch (PDOException $e) 
+		{
+        print "Erreur !: " . $e->getMessage();
+        die();
+		}
+		
+		}
+}
 	/**
 	 * Retourne les produits concernés par le tableau des idProduits passée en argument
 	 *

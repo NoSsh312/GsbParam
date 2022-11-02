@@ -18,6 +18,7 @@ switch($action)
 	}
 	case 'inscriptionR':
 	{
+
 	$testDouble =ajouterClient($_POST['nomUtil2'],password_hash($_POST['mdp'], PASSWORD_DEFAULT),$_POST['nomInsc'],$_POST['adresseInsc'], $_POST['codePostInsc'],$_POST['villeInsc'],$_POST['tel'], $_POST['courriel']);
 
 			
@@ -37,7 +38,9 @@ switch($action)
 	}
 	case 'connexion':
 	{
-		$testConnexion = seConnecter($_POST['nomUtil'],$_POST['mdp']);
+		$nomUtilisateur = $_POST['nomUtil'];
+		$mdpUtil=$_POST['mdp'];
+		$testConnexion = seConnecter($nomUtilisateur,$mdpUtil);
 
 		
 		include('vues/v_seConnecter.php');?>
@@ -50,8 +53,9 @@ switch($action)
 			
 			}
 			else{
-				?>
-				<p id = "message-reussi">   Authentification échouée / Nom d'utilisateur ou Mot de passe incorrect</p><?php
+				
+				$message= " Authentification échouée / Nom d'utilisateur ou Mot de passe incorrect";
+				include('vues/v_message.php');
 			}
 		break;
 

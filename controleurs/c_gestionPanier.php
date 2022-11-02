@@ -4,6 +4,7 @@ switch($action)
 {
 	case 'voirPanier':
 	{
+		
 		$n= nbProduitsDuPanier();
 		if($n >0)
 		{
@@ -25,7 +26,10 @@ switch($action)
 		retirerDuPanier($idProduit);
 		$desIdProduit = getLesIdProduitsDuPanier();
 		$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
-		include("vues/v_panier.php");
+		
+		header("Location:index.php?uc=gererPanier&action=voirPanier");
+		
+		
 		break;
 	}
 	case 'passerCommande' :
@@ -44,7 +48,14 @@ switch($action)
 		break;
 	case 'confirmerCommande'	:
 	{
-		$nom =$_REQUEST['nom'];$rue=htmlspecialchars($_REQUEST['rue'], ENT_QUOTES); $ville =$_REQUEST['ville']; $cp=$_REQUEST['cp']; $mail=$_REQUEST['mail'];
+		$nom =$_REQUEST['nom'];
+		$rue=htmlspecialchars($_REQUEST['rue'], ENT_QUOTES); 
+		$ville =$_REQUEST['ville']; 
+		$cp=$_REQUEST['cp']; 
+		$mail=$_REQUEST['mail'];
+		if (isset($_SESSION['nomUtil'])){
+			$idCli = getIdCli();
+		}
 	 	$msgErreurs = getErreursSaisieCommande($nom,$rue,$ville,$cp,$mail);
 		if (count($msgErreurs)!=0)
 		{
@@ -54,18 +65,38 @@ switch($action)
 		else
 		{
 			$lesIdProduit = getLesIdProduitsDuPanier();
-			creerCommande($nom,$rue,$cp,$ville,$mail, $lesIdProduit );
+			creerCommande($idCli,$nom,$rue,$cp,$ville,$mail, $lesIdProduit );
 			$message = "Commande enregistrée";
 			supprimerPanier();
 			include ("vues/v_message.php");
 		}
 		break;
 	}
+
 	case 'viderPanier' :
 	{
 		supprimerPanier();
 		$message = "panier vide !!";
 			include ("vues/v_message.php");
+		break;
+	}
+
+	case 'modifierQte' :
+	{
+		$idProduit=$_REQUEST['produit'];	
+		$desIdProduit = getLesIdProduitsDuPanier();
+		$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
+		
+		include("vues/v_modifierQte.php");
+		break;
+	}
+
+	case 'modifierQteValide' :
+	{
+		$idProduit=$_REQUEST['produit'];
+		$qte = $_POST['quantiteModif'];
+		modifyQty($idProduit,$qte);
+		header("Location:index.php?uc=gererPanier&action=voirPanier");
 		break;
 	}
 

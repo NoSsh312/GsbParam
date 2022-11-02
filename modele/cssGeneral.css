@@ -1,5 +1,5 @@
 html {
-font:normal 100%/1.2em "Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;
+	font:normal 100%/1.2em "Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;
 }
 body{
 	padding : 0% 5%;
@@ -13,11 +13,11 @@ body{
 
 
 fieldset {
- 		display:block;
- 		width:50%;
-		border: 1px dotted #353535;
-		padding:2px;
- 		overflow:hidden;                   
+	display:block;
+	width:50%;
+	border: 1px solid #353535;
+	padding:2px;
+	overflow:hidden;                   
 }
 
 label {
@@ -46,16 +46,16 @@ input[type="submit"]
 	width: 30%;
 }
 .erreur{ 
-   background-color:rgb(237,210,229);
-   color:rgb(203,28,128);
-   font-size:1.1em;
-   width:95%;
+	background-color:rgb(237,210,229);
+	color:rgb(203,28,128);
+	font-size:1.1em;
+	width:95%;
 }
 .message{ 
-   background-color:rgb(99, 184, 255);
-   color:rgb(0,0,205);
-   font-size:1.1em;
-   width:95%;
+	background-color:rgb(99, 184, 255);
+	color:rgb(0,0,205);
+	font-size:1.1em;
+	width:95%;
 }
 
 #bandeau {
@@ -63,15 +63,17 @@ input[type="submit"]
 }
 
 #menu{
-height: 1.8em ;
+	height: 1.8em ;
+	display: flex;
+	justify-content: center;
 }
 
 #categories{
-float:left;
+	float:left;
 }
 
 #produits{
-padding:0 150px;
+	padding:0 150px;
 }
 
 #contenu{
@@ -79,107 +81,96 @@ padding:0 150px;
 }
 
 #menu li {
-		list-style-type: none;
-		list-style-image:none;
-		float : left;
-		text-align: center;
-		width: 240px ; 
-		border: 1px solid #600 ; 
-		margin-right: 2px ; 
-		color: #fff ; 
-		background: #ccff11 ;
+	list-style-type: none;
+	list-style-image:none;
+	float : left;
+	text-align: center;
+	width: 240px ; 
+	border: 1px solid #600 ; 
+	margin-right: 2px ; 
+	color: #fff ; 
+	background: #ccff11 ;
 }
 
 #menu li a , #categories li a {
-		text-decoration:none;
+	text-decoration:none;
 }
 
 #categories li {
-		list-style-type: none;
-		list-style-image:none;
-		/*float:left; */
-    margin-right: 1px ;
-    border:1px solid #600;
-    width:100px;
-    text-align:center;
-background:#ccff11;
+	list-style-type: none;
+	list-style-image:none;
+	/*float:left; */
+	margin-right: 1px ;
+	border:1px solid #600;
+	width:100px;
+	text-align:center;
+	background:#ccff11;
 }
 
 
 #produits a {
-		list-style-type: none;
-		list-style-image:none;
-		display:inline; 
-    width:175px;
-    text-align:center;
-    height:205px;
-    font: 1em "Trebuchet MS",Arial,sans-serif ;
+	list-style-type: none;
+	list-style-image:none;
+	display:inline; 
+	width:175px;
+	text-align:center;
+	height:205px;
+	font: 1em "Trebuchet MS",Arial,sans-serif ;
 }
 .commande{
-	position : relative;
-    width:180px;
-	height : 250px;
-    float:left;
-    padding:10px;
-    margin : 10px;
+	text-align: center;
+	position: relative;
+	width: 180px;
+	height: 50%;
+	float: left;
+	padding: 10px;
+	margin: 10px;
 }
-.commande img{
-	position:absolute;
-	bottom:80px;
-}
+
 div.card{
-    position : relative;
-    width:180px;
-    height : 250px;
-    float:left;
-    padding:10px;
-    margin : 10px;
-    background-color : var(--fondC);
-    box-shadow: 1px 1px 4px #bbb;
+	position : relative;
+	width:180px;
+	height : 250px;
+	float:left;
+	padding:10px;
+	margin : 10px;
+	background-color : var(--fondC);
+	box-shadow: 1px 1px 4px #bbb;
 }
 div.photoCard>img{
-    max-width : 200px;
-    max-height: 140px;
-    
+	max-width : 200px;
+	max-height: 140px;
+
 }
 div.descrCard{
-    top:0px;
+	top:0px;
 	font: .8em "Trebuchet MS",Arial,sans-serif ;
 }
 div.prixCard{
 	text-align:center;
 	position:absolute;
-    bottom:50px;
+	bottom:50px;
 	background-color :#EFEFEF;
 }
 div.titre{
 	text-align: center;
-	margin-right:20%;
+	margin-right:10%;
 	margin-bottom:5%;
 }
 div.titre span{
 	font-size : 25px;
 	border: 2px solid;
-    padding: 7px;
-    border-radius: 20px;
-    border-color: green;
-    color: green;
+	padding: 7px;
+	border-radius: 20px;
+	border-color: green;
+	color: green;
 }
 div.imgCard{
-    position:absolute;
-    bottom:5px;
+	position:absolute;
+	bottom:5px;
 }
 
-#link-vider{
-	position : fixed;
-	border-radius: 20px;
-	padding:10px;
-	background-color: green;
-	color: white;
-	height:22px !important;
-	margin-top: 25%;
-	margin-left: 5%;
-}
+
 #connexion{
 	margin-left:40px;
 	width: 100%;
@@ -187,6 +178,7 @@ div.imgCard{
 }
 #connexion fieldset{
 	width: 94%;
+
 
 }
 #connexion label{
@@ -203,7 +195,7 @@ div.imgCard{
 }
 #inscription{
 	margin-left: 3%;
-	 }
+}
 
 #inscription input{
 	width : 45%;
@@ -224,4 +216,73 @@ div.imgCard{
 .message-form{
 	margin-left: 3%;
 	margin-top:2%;
+}
+.quantite {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
+
+
+#label-quantite{
+	width:39%;
+	position: absolute;
+	bottom: 10px;
+	right: 33%;
+}
+#quantiteNum{
+	position: absolute;
+	right: 5px;
+	bottom: 10px;
+}
+#logo-panier{
+	margin-top:40px;
+	width:20%;
+}
+#produits{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.actions{
+	position: fixed;
+	top: 2%;
+	right: 2%;
+
+	display: flex;
+	flex-direction: column;
+}
+.viderLaCom{
+	position: relative;
+	width: 180px;
+	height: 50%;
+	float: left;
+	padding: 10px;
+	margin: 10px;
+	text-align: center;
+}
+#link-vider{
+	text-decoration: blink;
+	background-color: green;
+	border-radius: 20px;
+	padding: 10px;
+	color: white;
+}
+#total p{
+	text-align: center;
+}
+
+#valide-quantite{
+	    display: flex;
+    justify-content: flex-end;
+    margin-top: 20%;
+}
+#input-valide-quantite{
+	width:50%;
+}
+
+#link-modif{
+	width: 50% !important;
+    height: 20px !important;
 }
