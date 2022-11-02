@@ -48,6 +48,7 @@ function ajouterAuPanier($idProduit,$qte)
 	$i =0;
 	$ok = true;
 	foreach($_SESSION['produits'] as $unProduit)
+<<<<<<< HEAD
 		{if($unProduit['id'] == $idProduit){
 
 			$ok = false;
@@ -55,11 +56,24 @@ function ajouterAuPanier($idProduit,$qte)
 		}
 		$i++;
 	}
+=======
+	{if($unProduit['id'] == $idProduit){
+
+		$ok = false;
+	
+	}
+	$i++;
+	}
+>>>>>>> bdcf40c4a20e83f8804ac828515dad20f9ce9ef9
 	if($ok){
 		$produit = ['id' => $idProduit, 'qte' => $qte];
 		$_SESSION['produits'][$i] = $produit;
 		
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> bdcf40c4a20e83f8804ac828515dad20f9ce9ef9
 	}
 	return $ok;
 }
@@ -224,6 +238,9 @@ function getErreursSaisieCommande($nom,$rue,$ville,$cp,$mail)
 	}
 	return $lesErreurs;
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> bdcf40c4a20e83f8804ac828515dad20f9ce9ef9
 ?>
