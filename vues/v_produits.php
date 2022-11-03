@@ -29,3 +29,16 @@ foreach( $lesProduits as $unProduit)
 } // fin du foreach qui parcourt les produits
 ?>
 </div>
+<?php 
+if(isset($_SESSION['nomAdmin'])){?>
+	<div class=actions>
+<div id="button-modif-prod">
+<a id="link-modif-prod" href="index.php?uc=administrer&action=modifLesProduits">Modifier les produits</a>
+</div>
+<div id="button-ajouter-prod">
+<a id="link-ajouter-prod" href="index.php?uc=administrer&action=ajouterUnProduit">Ajouter les produits</a>
+</div>
+</div>
+<?php
+}
+?>

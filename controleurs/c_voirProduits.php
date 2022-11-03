@@ -17,6 +17,7 @@ switch($action)
 
 
 
+
 	case 'voirCategories':
 	{
   		$lesCategories = getLesCategories();
@@ -24,6 +25,7 @@ switch($action)
 		header('Location:index.php?uc=voirProduits&action=voirProduits&categorie=CH');
   		break;
 	}
+	
 	case 'voirProduits' :
 	{
 		$lesCategories = getLesCategories();

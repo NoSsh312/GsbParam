@@ -20,16 +20,16 @@ include_once 'bd.inc.php';
 	{
 		try 
 		{
-        $monPdo = connexionPDO();
-		$req = 'select id, libelle from categorie';
-		$res = $monPdo->query($req);
-		$lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
-		return $lesLignes;
+			$monPdo = connexionPDO();
+			$req = 'select id, libelle from categorie';
+			$res = $monPdo->query($req);
+			$lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
+			return $lesLignes;
 		} 
 		catch (PDOException $e) 
 		{
-        print "Erreur !: " . $e->getMessage();
-        die();
+			print "Erreur !: " . $e->getMessage();
+			die();
 		}
 	}
 	/**
@@ -42,32 +42,32 @@ include_once 'bd.inc.php';
 	{
 		try 
 		{
-        $monPdo = connexionPDO();
-		$req = 'SELECT id, libelle FROM categorie WHERE id="'.$idCategorie.'"';
-		$res = $monPdo->query($req);
-		$laLigne = $res->fetch(PDO::FETCH_ASSOC);
-		return $laLigne;
+			$monPdo = connexionPDO();
+			$req = 'SELECT id, libelle FROM categorie WHERE id="'.$idCategorie.'"';
+			$res = $monPdo->query($req);
+			$laLigne = $res->fetch(PDO::FETCH_ASSOC);
+			return $laLigne;
 		} 
 		catch (PDOException $e) 
 		{
-        print "Erreur !: " . $e->getMessage();
-        die();
+			print "Erreur !: " . $e->getMessage();
+			die();
 		}
 	}
 	function getLeLibelleCategorie($idCategorie)
 	{
 		try 
 		{
-        $monPdo = connexionPDO();
-		$req = 'SELECT libelle FROM categorie WHERE id="'.$idCategorie.'"';
-		$res = $monPdo->query($req);
-		$laLigne = $res->fetch(PDO::FETCH_ASSOC);
-		return $laLigne['libelle'];
+			$monPdo = connexionPDO();
+			$req = 'SELECT libelle FROM categorie WHERE id="'.$idCategorie.'"';
+			$res = $monPdo->query($req);
+			$laLigne = $res->fetch(PDO::FETCH_ASSOC);
+			return $laLigne['libelle'];
 		} 
 		catch (PDOException $e) 
 		{
-        print "Erreur !: " . $e->getMessage();
-        die();
+			print "Erreur !: " . $e->getMessage();
+			die();
 		}
 	}
 
@@ -77,19 +77,19 @@ include_once 'bd.inc.php';
 		try 
 		{
 			$lesProduits = array();
-        $monPdo = connexionPDO();
-	    $req='select id, description, prix, image, idCategorie from produit';
-		$res = $monPdo->query($req);
-		$lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
+			$monPdo = connexionPDO();
+			$req='select id, description, prix, image, idCategorie from produit';
+			$res = $monPdo->query($req);
+			$lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
 			foreach($lesLignes as $laLigne){
 				$lesProduits[] = $laLigne;
 			}
-		return $lesProduits; 
+			return $lesProduits; 
 		} 
 		catch (PDOException $e) 
 		{
-        print "Erreur !: " . $e->getMessage();
-        die();
+			print "Erreur !: " . $e->getMessage();
+			die();
 		}
 
 	}
@@ -106,16 +106,16 @@ include_once 'bd.inc.php';
 
 		try 
 		{
-        $monPdo = connexionPDO();
-	    $req='select id, description, prix, image, idCategorie from produit where idCategorie ="'.$idCategorie.'"';
-		$res = $monPdo->query($req);
-		$lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
-		return $lesLignes; 
+			$monPdo = connexionPDO();
+			$req='select id, description, prix, image, idCategorie from produit where idCategorie ="'.$idCategorie.'"';
+			$res = $monPdo->query($req);
+			$lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
+			return $lesLignes; 
 		} 
 		catch (PDOException $e) 
 		{
-        print "Erreur !: " . $e->getMessage();
-        die();
+			print "Erreur !: " . $e->getMessage();
+			die();
 		}
 
 	}
@@ -125,11 +125,11 @@ include_once 'bd.inc.php';
  * @param array $desIdProduit tableau d'idProduits
  * @return array $lesProduits un tableau associatif contenant les infos des produits dont les id ont été passé en paramètre
 */
-	function getLesProduitsDuTableau($desIdProduit)
+function getLesProduitsDuTableau($desIdProduit)
+{
+	try 
 	{
-		try 
-		{
-        $monPdo = connexionPDO();
+		$monPdo = connexionPDO();
 		$nbProduits = count($desIdProduit);
 		$lesProduits=array();
 		if($nbProduits != 0)
@@ -140,19 +140,19 @@ include_once 'bd.inc.php';
 				$res = $monPdo->query($req);
 				$unProduit = $res->fetch(PDO::FETCH_ASSOC);
 				$unProduit['qte']= $unIdProduit['qte'];
-			
+
 				$lesProduits[] = $unProduit;
 
 			}
 		}
 		return $lesProduits;
-		}
-		catch (PDOException $e) 
-		{
-        print "Erreur !: " . $e->getMessage();
-        die();
-		}
 	}
+	catch (PDOException $e) 
+	{
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
 	/**
 	 * Crée une commande 
 	 *
@@ -171,11 +171,11 @@ include_once 'bd.inc.php';
 	{
 		try 
 		{
-        $monPdo = connexionPDO();
+			$monPdo = connexionPDO();
 		// on récupère le dernier id de commande
-		$req = 'select max(id) as maxi from commande';
-		$res = $monPdo->query($req);
-		$laLigne = $res->fetch();
+			$req = 'select max(id) as maxi from commande';
+			$res = $monPdo->query($req);
+			$laLigne = $res->fetch();
 		$maxi = $laLigne['maxi'] ;// on place le dernier id de commande dans $maxi
 		$idCommande = $maxi+1; // on augmente le dernier id de commande de 1 pour avoir le nouvel idCommande
 		$date = date('Y/m/d'); // récupération de la date système
@@ -183,90 +183,120 @@ include_once 'bd.inc.php';
 		$res = $monPdo->exec($req);
 		// insertion produits commandés
 		foreach($lesIdProduit as $unIdProduit)
-		{	$idProd=$unIdProduit['id'];
-			$prodQte=$unIdProduit['qte'];
-			$req = "insert into contenir values ('$idCommande','$idProd','$prodQte')";
-			$res = $monPdo->exec($req);
-		}
-		}
-		catch (PDOException $e) 
-		{
-        print "Erreur !: " . $e->getMessage();
-        die();
-		}
+			{	$idProd=$unIdProduit['id'];
+		$prodQte=$unIdProduit['qte'];
+		$req = "insert into contenir values ('$idCommande','$idProd','$prodQte')";
+		$res = $monPdo->exec($req);
 	}
+}
+catch (PDOException $e) 
+{
+	print "Erreur !: " . $e->getMessage();
+	die();
+}
+}
 
-	function ajouterClient($nomUtil,$mdp,$nom,$rue,$cp,$ville,$tel,$mail )
-	{
-		$testDouble =true;
-        $monPdo = connexionPDO();
-        
-	    $reqN=$monPdo -> prepare('select nomUtil from client where nomUtil= :nomUtil1 OR courriel = :mail1');
-	    $reqN -> bindValue(':nomUtil1',$nomUtil,PDO::PARAM_STR);
-	    $reqN -> bindValue(':mail1',$mail,PDO::PARAM_STR);
-	    $reqN->execute();
-		$lesLignesN = $reqN->fetchAll(PDO::FETCH_ASSOC);
-			if(empty($lesLignesN)){
+function ajouterClient($nomUtil,$mdp,$nom,$rue,$cp,$ville,$tel,$mail )
+{
+	$testDouble =true;
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('select nomUtil from client where nomUtil= :nomUtil1 OR courriel = :mail1');
+	$reqN -> bindValue(':nomUtil1',$nomUtil,PDO::PARAM_STR);
+	$reqN -> bindValue(':mail1',$mail,PDO::PARAM_STR);
+	$reqN->execute();
+	$lesLignesN = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	if(empty($lesLignesN)){
 
 		$req = "insert into client (nomUtil, mdp, nom, adresse, ville, cp, tel, courriel) values ('$nomUtil','$mdp','$nom','$rue','$ville','$cp','$tel','$mail')";
 		$res = $monPdo->exec($req);
 		// insertion produits commandés
 		$testDouble =false;
 	}
-		return $testDouble;
-		
-		
+	return $testDouble;
+
+
 }
 
 function seConnecter($nomUtil, $mdp){
 	$testExist =false;
 	try 
-		{
-	
-        $monPdo = connexionPDO();
-	    $reqN1=$monPdo -> prepare('select nomUtil,mdp from client where nomUtil= :nomUtil1 ');
-	    $reqN1 -> bindParam(':nomUtil1',$nomUtil,PDO::PARAM_STR);
-	 
-	    $reqN1->execute();
-	    $lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
+	{
+
+		$monPdo = connexionPDO();
+		$reqN1=$monPdo -> prepare('select nomUtil,mdp from client where nomUtil= :nomUtil1 ');
+		$reqN1 -> bindParam(':nomUtil1',$nomUtil,PDO::PARAM_STR);
+
+		$reqN1->execute();
+		$lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
 		
 
 
-			if(!empty($lesLignesN1) && password_verify($mdp, $lesLignesN1['mdp'])){
+		if(!empty($lesLignesN1) && password_verify($mdp, $lesLignesN1['mdp'])){
 			
-				$testExist =true;
-				$_SESSION['nomUtil'] = $nomUtil;
-				
+			$testExist =true;
+			$_SESSION['nomUtil'] = $nomUtil;
+
 			
-			}
-			return $testExist;
+		}
+		return $testExist;
 	}
-		catch (PDOException $e) 
-		{
-        print "Erreur !: " . $e->getMessage();
-        die();
+	catch (PDOException $e) 
+	{
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function seConnecterPourAdmin($nomAdmin, $mdp){
+	$testExist =false;
+	try 
+	{
+
+		$monPdo = connexionPDO();
+		$reqN1=$monPdo -> prepare('select nom,mdp from administrateur client where nom= :nom');
+		$reqN1 -> bindParam(':nom',$nomAdmin,PDO::PARAM_STR);
+
+		$reqN1->execute();
+		$lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
+		
+
+
+		if(!empty($lesLignesN1) && password_verify($mdp, $lesLignesN1['mdp'])){
+			
+			$testExist =true;
+			$_SESSION['nomAdmin'] = $nomAdmin;
+
+			
 		}
-		}
+		return $testExist;
+	}
+	catch (PDOException $e) 
+	{
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
 
 function getIdCli(){
 	if(isset($_SESSION['nomUtil'])){
-try 
+		try 
 		{
-$monPdo = connexionPDO();
-	    $reqN1=$monPdo -> prepare('select idCli from client where nomUtil= :nomUtil1 ');
-	    $reqN1 -> bindParam(':nomUtil1',$_SESSION['nomUtil'],PDO::PARAM_STR);
-		$reqN1->execute();
-	    $lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
-	    return $lesLignesN1['idCli'];
-		
-	    }
+			$monPdo = connexionPDO();
+			$reqN1=$monPdo -> prepare('select idCli from client where nomUtil= :nomUtil1 ');
+			$reqN1 -> bindParam(':nomUtil1',$_SESSION['nomUtil'],PDO::PARAM_STR);
+			$reqN1->execute();
+			$lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
+			return $lesLignesN1['idCli'];
+
+		}
 		catch (PDOException $e) 
 		{
-        print "Erreur !: " . $e->getMessage();
-        die();
+			print "Erreur !: " . $e->getMessage();
+			die();
 		}
 		
-		}
+	}
 }
 	/**
 	 * Retourne les produits concernés par le tableau des idProduits passée en argument
@@ -279,16 +309,115 @@ $monPdo = connexionPDO();
 	{
 		try 
 		{
-        $monPdo = connexionPDO();
-		$req = 'select id, dateCommande, nomPrenomClient, adresseRueClient, cpClient, villeClient, mailClient from commande where YEAR(dateCommande)= '.$an.' AND MONTH(dateCommande)='.$mois;
-		$res = $monPdo->query($req);
-		$lesCommandes = $res->fetchAll(PDO::FETCH_ASSOC);
-		return $lesCommandes;
+			$monPdo = connexionPDO();
+			$req = 'select id, dateCommande, nomPrenomClient, adresseRueClient, cpClient, villeClient, mailClient from commande where YEAR(dateCommande)= '.$an.' AND MONTH(dateCommande)='.$mois;
+			$res = $monPdo->query($req);
+			$lesCommandes = $res->fetchAll(PDO::FETCH_ASSOC);
+			
 		}
 		catch (PDOException $e) 
 		{
-        print "Erreur !: " . $e->getMessage();
-        die();
+			print "Erreur !: " . $e->getMessage();
+			die();
 		}
+
 	}
-?>
+
+
+	function modifLesProdAdmin1($idProduit,$prix,$desc,$image)
+	{
+		if(isset($_SESSION['nomAdmin'])){
+		try 
+		{
+			$monPdo = connexionPDO();
+				$reqN1=$monPdo -> prepare('UPDATE produit SET description =:desc, prix = :prix, image = "images/":image WHERE produit.id = :id;');
+			$reqN1 -> bindParam(':desc',$desc,PDO::PARAM_STR);
+			$reqN1 -> bindParam(':id',$idProduit,PDO::PARAM_STR);
+			$reqN1 -> bindParam(':prix',$prix,PDO::PARAM_STR);
+			$reqN1 -> bindParam(':image',$image,PDO::PARAM_STR);
+			$reqN1->execute();
+			$lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
+			
+
+		}
+		catch (PDOException $e) 
+		{
+			print "Erreur !: " . $e->getMessage();
+			die();
+		}
+		
+	}
+
+		
+	}
+	function modifLesProdAdmin2($idProduit,$prix,$desc)
+	{
+		if(isset($_SESSION['nomAdmin'])){
+		try 
+		{
+			$monPdo = connexionPDO();
+				$reqN1=$monPdo -> prepare('UPDATE produit SET description =:desc, prix = :prix WHERE produit.id = :id;');
+			$reqN1 -> bindParam(':desc',$desc,PDO::PARAM_STR);
+			$reqN1 -> bindParam(':id',$idProduit,PDO::PARAM_STR);
+			$reqN1 -> bindParam(':prix',$prix,PDO::PARAM_STR);
+			
+			$reqN1->execute();
+			$lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
+			
+
+		}
+		catch (PDOException $e) 
+		{
+			print "Erreur !: " . $e->getMessage();
+			die();
+		}
+		
+	}
+}
+
+	function supprimerArticleAdmin($idProduit){
+
+		if(isset($_SESSION['nomAdmin'])){
+		try 
+		{
+			$monPdo = connexionPDO();
+				$reqN1=$monPdo -> prepare('DELETE FROM produit where id= :id ');
+			
+			$reqN1 -> bindParam(':id',$idProduit,PDO::PARAM_STR);
+			
+			$reqN1->execute();
+			$lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
+			
+
+		}
+		catch (PDOException $e) 
+		{
+			print "Erreur !: " . $e->getMessage();
+			die();
+		}
+		
+	}
+}
+
+function ajoutProduit($idProduit, $desc, $prix, $image, $idCategorie){
+$idCategorie=strtoupper($idCategorie);
+if(isset($_SESSION['nomAdmin'])){
+	$testDouble =true;
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT id FROM produit where id= :id');
+	$reqN -> bindValue(':id',$idProduit,PDO::PARAM_STR);
+	$reqN->execute();
+	$lesLignesN = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	if(empty($lesLignesN) && (strtoupper($idCategorie) == "CH" || strtoupper($idCategorie) == "FO" || strtoupper($idCategorie) =="PS" )){
+//'images/ car j'ai utilisé une image dans le dossier image/ a changer en fonctions du dossier où est l'image//
+		$req = "insert into produit (id, description, prix, image, idCategorie) values ('$idProduit','$desc','$prix','images/$image','$idCategorie');";
+		$res = $monPdo->exec($req);
+		// insertion produits commandés
+		$testDouble =false;
+	}
+	return $testDouble;
+
+}
+}
+?>	

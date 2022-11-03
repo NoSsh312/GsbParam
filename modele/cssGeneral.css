@@ -142,14 +142,17 @@ div.photoCard>img{
 	max-height: 140px;
 
 }
+.photoCard{
+	text-align: center;
+}
 div.descrCard{
 	top:0px;
 	font: .8em "Trebuchet MS",Arial,sans-serif ;
 }
 div.prixCard{
 	text-align:center;
-	position:absolute;
-	bottom:50px;
+	position: absolute;
+    bottom: 20%;
 	background-color :#EFEFEF;
 }
 div.titre{
@@ -238,6 +241,9 @@ div.imgCard{
 #logo-panier{
 	margin-top:40px;
 	width:20%;
+	position: absolute;
+    bottom: 2%;
+    left: 3%;
 }
 #produits{
 	display: flex;
@@ -247,7 +253,7 @@ div.imgCard{
 
 .actions{
 	position: fixed;
-	top: 2%;
+	top: 5%;
 	right: 2%;
 
 	display: flex;
@@ -269,14 +275,21 @@ div.imgCard{
 	padding: 10px;
 	color: white;
 }
+#link-ajouter-prod{
+	text-decoration: blink;
+	background-color: #add8e6;
+	border-radius: 20px;
+	padding: 10px;
+	color: black;
+}
 #total p{
 	text-align: center;
 }
 
 #valide-quantite{
-	    display: flex;
-    justify-content: flex-end;
-    margin-top: 20%;
+	display: flex;
+	justify-content: flex-end;
+	margin-top:3%;
 }
 #input-valide-quantite{
 	width:50%;
@@ -284,5 +297,68 @@ div.imgCard{
 
 #link-modif{
 	width: 50% !important;
-    height: 20px !important;
+	height: 20px !important;
+}
+
+#link-modif-prod{
+	
+	text-decoration: blink;
+	background-color: #add8e6;
+	border-radius: 20px;
+	padding: 10px;
+	color: black;
+}
+#button-ajouter-prod{
+	margin-top:15%;
+	text-align: center;
+
+}
+
+#form-modifAdmin{
+	margin-top: 5%;
+}
+#modifierCardProd{
+	width:100%;
+}
+#photoCardModif{
+	height:100%;
+	width:100%;
+}
+.file-for-photo{
+	display: flex;
+	margin-left: 25%;
+	width: 50%;
+}
+.file-for-photo p{
+	margin: 0;
+}
+#descProdModif{
+    height:35px !important;
+    width:180px !important;
+}
+#final-submit{
+	    width: 100%;
+    text-align: center;
+}
+#supprimerCardProd{
+	width:100%;
+	margin-top:2%;
+}
+.qte{
+	margin-top:5%;
+}
+#div-for-inputModifier{
+	position: absolute;
+    bottom: 3%;
+    left: 5%;
+}
+#div-for-inputSupprimer{
+	position: absolute;
+    bottom: 3%;
+    right: 5%;
+}
+.prixCard2{
+	    text-align: center;
+    bottom: 20%;
+    background-color: #EFEFEF;
 }

@@ -81,6 +81,7 @@ function modifyQty($idProduit,$qte)
 	
 	}
 	
+	
 
 
 /**

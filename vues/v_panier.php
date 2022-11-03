@@ -42,7 +42,7 @@ foreach( $lesProduitsDuPanier as $unProduit)
 </div>
 
 <div class="actions">
-	<?php if(isset($_SESSION['nomUtil'])){
+	<?php if(isset($_SESSION['nomUtil']) || isset($_SESSION['nomAdmin'])){
 
 		?>
 <div class="commande">

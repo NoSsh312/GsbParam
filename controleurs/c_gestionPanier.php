@@ -86,7 +86,6 @@ switch($action)
 		$idProduit=$_REQUEST['produit'];	
 		$desIdProduit = getLesIdProduitsDuPanier();
 		$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
-		
 		include("vues/v_modifierQte.php");
 		break;
 	}
