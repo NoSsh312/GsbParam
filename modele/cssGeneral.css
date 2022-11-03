@@ -152,7 +152,7 @@ div.descrCard{
 div.prixCard{
 	text-align:center;
 	position: absolute;
-    bottom: 20%;
+    bottom: 23%;
 	background-color :#EFEFEF;
 }
 div.titre{
@@ -345,7 +345,7 @@ div.imgCard{
 	margin-top:2%;
 }
 .qte{
-	margin-top:5%;
+	margin-top:14%;
 }
 #div-for-inputModifier{
 	position: absolute;

@@ -33,7 +33,7 @@ if(isset($_SESSION['nomAdmin'])){?>
 <a id="link-modif-prod" href="index.php?uc=administrer&action=modifLesProduits&categorie=<?php echo $categorie ?>">Modifier les produits de catégorie <?php echo $categorie ?></a>
 </div>
 <div id="button-ajouter-prod">
-<a id="link-ajouter-prod" href="index.php?uc=administrer&action=ajouterUnProduit&categorie=<?php echo $categorie ?>">Ajouter les produits de catégorie <?php echo $categorie ?></a>
+<a id="link-ajouter-prod" href="index.php?uc=administrer&action=ajouterUnProduit&categorie=<?php echo $categorie ?>">Ajouter des produits de catégorie <?php echo $categorie ?></a>
 </div>
 </div>
 <?php

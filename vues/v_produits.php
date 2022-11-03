@@ -36,7 +36,7 @@ if(isset($_SESSION['nomAdmin'])){?>
 <a id="link-modif-prod" href="index.php?uc=administrer&action=modifLesProduits">Modifier les produits</a>
 </div>
 <div id="button-ajouter-prod">
-<a id="link-ajouter-prod" href="index.php?uc=administrer&action=ajouterUnProduit">Ajouter les produits</a>
+<a id="link-ajouter-prod" href="index.php?uc=administrer&action=ajouterUnProduit">Ajouter des produits</a>
 </div>
 </div>
 <?php
