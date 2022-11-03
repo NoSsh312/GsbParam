@@ -42,7 +42,7 @@ foreach( $lesProduitsDuPanier as $unProduit)
 </div>
 
 <div class="actions">
-	<?php if(isset($_SESSION['nomUtil']) || isset($_SESSION['nomAdmin'])){
+	<?php if(isset($_SESSION['nomUtil'])){
 
 		?>
 <div class="commande">
@@ -51,7 +51,7 @@ foreach( $lesProduitsDuPanier as $unProduit)
 <div class="viderLaCom">
 <a id='link-vider' href="index.php?uc=gererPanier&action=viderPanier"> Vider Mon Panier</a>
 </div>
-<?php } else echo "Pour commander veuillez vous connecter";?>
+<?php } else echo "Pour commander veuillez vous connecter à un utilisateur CLIENT";?>
 <div id="total">
 	<p>Total : <?php echo $total."€"; ?></p>
 </div>
