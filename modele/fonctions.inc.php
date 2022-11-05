@@ -41,6 +41,7 @@ function supprimerPanier()
  * où l'identifiant du produit n'a pas été trouvé
  
  * @param string $idProduit identifiant de produit
+ * @param int $qte la quantite d'un produit
  * @return boolean $ok vrai si le produit n'était pas dans la variable, faux sinon 
 */
 function ajouterAuPanier($idProduit,$qte)
@@ -63,6 +64,18 @@ function ajouterAuPanier($idProduit,$qte)
 	}
 	return $ok;
 }
+
+
+
+/**
+ * Modifie la quantité d'un produit
+ *
+ * Teste si l'identifiant du produit est déjà dans la variable session 
+ * ajoute l'identifiant  et la quantite à la variable de type session
+ 
+ * @param string $idProduit identifiant de produit
+ * @param int $qte la quantite d'un produit
+*/
 function modifyQty($idProduit,$qte)
 {
 

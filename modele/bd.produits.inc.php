@@ -54,6 +54,13 @@ include_once 'bd.inc.php';
 			die();
 		}
 	}
+
+	/**
+	 * Retourne le libelle de la categorie via son id
+	 *
+	 * @param string $idCategorie l'id de la catégorie
+	 * @return  $laLigne['libelle'] le libelle de la catégorie
+	*/
 	function getLeLibelleCategorie($idCategorie)
 	{
 		try 
@@ -71,6 +78,12 @@ include_once 'bd.inc.php';
 		}
 	}
 
+
+/**
+	 * Retourne tous les produits existants
+	 *
+	 * @return array $lesProduits un tableau associatif  contenant tous les produits existants
+	*/
 	function getTousLesProduits()
 	{
 
@@ -98,7 +111,7 @@ include_once 'bd.inc.php';
  * catégorie passée en argument
  * 
  * @param string $idCategorie  l'id de la catégorie dont on veut les produits
- * @return array $lesLignes un tableau associatif  contenant les produits de la categ passée en paramètre
+ * @return array $lesLignes un tableau associatif  contenant les produits de la categorie passée en paramètre
 */
 
 	function getLesProduitsDeCategorie($idCategorie)
@@ -196,6 +209,23 @@ catch (PDOException $e)
 }
 }
 
+/**
+	 * Ajoute un client 
+	 *
+	 * Ajoute un client à partir des arguments validés passés en paramètre, l'identifiant est
+	 * construit à partir du maximum existant
+	 * @param string $nomUtil le login du client
+	 * @param string $nom nom du client
+	 * @param string $mdp le mot de passe du client
+	 * @param string $rue rue du client
+	 * @param string $cp cp du client
+	 * @param string $ville ville du client
+	 * @param string $tel le numero de telephone du client
+	 * @param string $mail mail du client
+	 * @return booléen $testDouble false s'il existe déja un client qui possède ce nom d'utilisateur ou ce mail
+	 
+	 
+	*/
 function ajouterClient($nomUtil,$mdp,$nom,$rue,$cp,$ville,$tel,$mail )
 {
 	$testDouble =true;
@@ -218,6 +248,15 @@ function ajouterClient($nomUtil,$mdp,$nom,$rue,$cp,$ville,$tel,$mail )
 
 }
 
+/**
+	 * Connexion pour les clients
+	 *
+	 * Permet à un client de se connecter avec un login et un mdp 
+	 * @param string $nomUtil le login du client
+	 * @param string $mdp le mot de passe du client
+	 * @return booléen $testExist false si le login ou le mot de passe ne sont pas bons
+	 
+	*/
 function seConnecter($nomUtil, $mdp){
 	$testExist =false;
 	try 
@@ -248,6 +287,16 @@ function seConnecter($nomUtil, $mdp){
 	}
 }
 
+
+/**
+	 * Connexion pour les Admins 
+	 *
+	 * Permet à un Admin de se connecter avec un login et un mdp 
+	 * @param string $nomAdmin le login de l'admin
+	 * @param string $mdp le mot de passe de l'admin
+	 * @return booléen $testExist false si le login ou le mot de passe ne sont pas bons
+	 
+	*/
 function seConnecterPourAdmin($nomAdmin, $mdp){
 	$testExist =false;
 	try 
@@ -278,6 +327,13 @@ function seConnecterPourAdmin($nomAdmin, $mdp){
 	}
 }
 
+
+/**
+	 *Donne l'id du client 
+	 *
+	 *Cherche l'id du client via sa connexion avec un nom d'utilisateur
+	 * @return $lesLignesN1['idCli'] l'id du client 
+	*/
 function getIdCli(){
 	if(isset($_SESSION['nomUtil'])){
 		try 
@@ -324,6 +380,16 @@ function getIdCli(){
 	}
 
 
+/**
+	 * Modifie le produit si image modifiée
+	 *
+	 * Modifie le produit à partir des arguments validés passés en paramètre, 
+	 * @param string $idProduit id du produit
+	 * @param float $prix prix du produit
+	 * @param string $desc description du produit
+	 * @param string $image l'image modifiée du produit
+	 
+	*/
 	function modifLesProdAdmin1($idProduit,$prix,$desc,$image)
 	{
 		if(isset($_SESSION['nomAdmin'])){
@@ -350,6 +416,17 @@ function getIdCli(){
 
 		
 	}
+
+
+	/**
+	 * Modifie le produit si pas d'image modifiée
+	 *
+	 * Modifie le produit à partir des arguments validés passés en paramètre, 
+	 * @param string $idProduit id du produit
+	 * @param float $prix prix du produit
+	 * @param string $desc description du produit
+	 
+	*/
 	function modifLesProdAdmin2($idProduit,$prix,$desc)
 	{
 		if(isset($_SESSION['nomAdmin'])){
@@ -375,6 +452,14 @@ function getIdCli(){
 	}
 }
 
+
+/**
+	 * Supprime un article
+	 *
+	 * Supprime l'article sélectionné grâce à son id
+	 * @param string $idProduit l'id du produit
+	 
+	*/
 	function supprimerArticleAdmin($idProduit){
 
 		if(isset($_SESSION['nomAdmin'])){
@@ -399,6 +484,20 @@ function getIdCli(){
 	}
 }
 
+
+/**
+	 * Ajoute un produit
+	 *
+	 * Crée un produit à partir des arguments validés passés en paramètre
+	 * @param string $idProduit idProduit du produit donné via le formulaire
+	 * @param string $desc description du produit donnée via le formulaire
+	 * @param float $prix prix du produit donné via le formulaire
+	 * @param string $image image du produit donnée via le formulaire
+	 * @param string $idCategorie idCategorie donné dans le formulaire ou à partir de la categorie dans laquelle on veut ajouter un Produit
+	 * @return booléen $testDouble permet de savoir si tous les paramètres sont corrects et que si l'ajout est réussi ou non
+	
+	 
+	*/
 function ajoutProduit($idProduit, $desc, $prix, $image, $idCategorie){
 $idCategorie=strtoupper($idCategorie);
 if(isset($_SESSION['nomAdmin'])){
