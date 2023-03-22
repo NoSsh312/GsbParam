@@ -8,21 +8,24 @@ foreach( $lesProduits as $unProduit)
 	$description = $unProduit['description'];
 	$prix=$unProduit['prix'];
 	$image = $unProduit['image'];
+	$detail = $unProduit['desc_detail'];
+
 	// affichage d'un produit avec ses informations
 	?>	
 	<div class="card">
+		<div class="descrCard"><?php echo $description ?></div>
 			<div class="photoCard"><img src="<?php echo $image ?>" alt=image /></div>
-			<div class="descrCard"><?php echo $description ?></div>
-			<div class="prixCard"><?php echo $prix."€" ?></div>
+			<div class="desc_detail"><?php echo $detail ?></div>
+			
+			
 	
-			<form method="POST" id="form-id-qte" action="index.php?uc=voirProduits&produit=<?php echo $id ?>&action=ajouterAuPanier">
-				<div id="">
-			<label id="label-quantite" for="quantiteNum" >Quantité : </label>
-         		<input id="quantiteNum" type="number" name="quantiteNum" value="1" min=1 max=20 >
+			
+		<div class="info-card">
+			<div class="prixCard">A partir de <?php echo $prix."€" ?></div>
+			<div class="stock">En Stock</div>
+			<div class="voirProd"><a href="#">Voir</a></div>
+        </div>
          	
-         	<input id="logo-panier" type="image" name="submit" TITLE="Ajouter au panier" alt="Mettre au panier" src="images/mettrepanier.png" />
-         </div>
-         	</form>
 			
 	</div>
 <?php			

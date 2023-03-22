@@ -3,15 +3,32 @@ html {
 }
 body{
 	padding : 0% 5%;
+	background-color: #dcedff;
 }
 #accueil{
 	width=60%;
 	text-align: center;
 	padding-top: 7%;
-	color: #33d64c ;
+	color: #217f64 ;
 }
+#logo{
+	width: 7em !important;
+    height: 4em;
+
+}
+.nav-item{
+	font-weight: 700;
+}
+.separation-cat{
+	margin-top:0 !important;
 
 
+height: 3px !important;
+    width: 90%;
+}
+#title-filtre{
+	font-size: 19px;
+}
 fieldset {
 	display:block;
 	width:50%;
@@ -58,20 +75,48 @@ input[type="submit"]
 	width:95%;
 }
 
-#bandeau {
-
+.nav-link:hover{
+	text-decoration: underline !important;
+	text-underline-offset:8px;
 }
-
-#menu{
-	height: 1.8em ;
+#navigation{
+	width:100%;
+}
+#group-nav{
 	display: flex;
-	justify-content: center;
 }
+.navbar-expand-lg .navbar-collapse{
+	justify-content: flex-end;
+}
+.navbar-nav{
+	margin-right:3em;
+}
+.desc_detail{
+	text-align: justify;
+	display: block;
+     max-width: 200px;
+    max-height: 70px;
+  overflow: hidden;
 
+  text-overflow: ellipsis;
+}
 #categories{
 	float:left;
+	box-shadow: 1px 1px 4px #bbb;
+	  width: 200px;
+    display: flex;
+ flex-wrap: wrap;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+ align-content: center;
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
 }
-
+.form-select{
+	width : 90%;
+}
 #produits{
 	padding:0 150px;
 }
@@ -79,20 +124,14 @@ input[type="submit"]
 #contenu{
 
 }
-
-#menu li {
-	list-style-type: none;
-	list-style-image:none;
-	float : left;
-	text-align: center;
-	width: 240px ; 
-	border: 1px solid #600 ; 
-	margin-right: 2px ; 
-	color: #fff ; 
-	background: #ccff11 ;
+.bg-light{
+	background-color: #dcedff !important;
 }
 
 #menu li a , #categories li a {
+	color:black;
+	font-family:sans-serif;
+	font-size: 19px;
 	text-decoration:none;
 }
 
@@ -129,13 +168,14 @@ input[type="submit"]
 
 div.card{
 	position : relative;
-	width:180px;
-	height : 250px;
+	width:220px;
+	height : 320px;
 	float:left;
-	padding:10px;
+
 	margin : 10px;
-	background-color : var(--fondC);
+	background-color : white;
 	box-shadow: 1px 1px 4px #bbb;
+	border-radius: 5px;
 }
 div.photoCard>img{
 	max-width : 200px;
@@ -148,25 +188,34 @@ div.photoCard>img{
 div.descrCard{
 	top:0px;
 	font: .8em "Trebuchet MS",Arial,sans-serif ;
+	text-align:center;
+	height:30px;
+}
+.info-card{
+	border-top:1px solid grey;
+	border-width: thin;
+	display: flex;
+	background-color: #dcedff;
 }
 div.prixCard{
 	text-align:center;
-	position: absolute;
-    bottom: 23%;
-	background-color :#EFEFEF;
+   
+}
+.descrCard, .photoCard, .desc_detail, .prixCard, .stock, .voirProd{
+	padding:10px;
 }
 div.titre{
 	text-align: center;
-	margin-right:10%;
-	margin-bottom:5%;
+
+	margin-bottom:1em;
 }
 div.titre span{
 	font-size : 25px;
-	border: 2px solid;
-	padding: 7px;
-	border-radius: 20px;
-	border-color: green;
-	color: green;
+	font-weight: 600;
+	color: #217f64;
+}
+#libelle-cat{
+	color: black;
 }
 div.imgCard{
 	position:absolute;

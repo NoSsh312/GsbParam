@@ -29,15 +29,25 @@ switch($action)
 	case 'voirProduits' :
 	{
 		$lesCategories = getLesCategories();
-		include("vues/v_categories.php");
-  		$categorie = $_REQUEST['categorie'];
+	
+		if(isset($_GET['categorie'])){
+			$categorie=$_GET['categorie'];
+		}
+		if(isset($_POST['categorie'])){
+
+ 		$categorie = $_POST['categorie'];
+ 			header('Location:index.php?uc=voirProduits&action=voirProduits&categorie='. $categorie);
+ 	}
+
   		?>
   			<div class="titre">
-  				<span>
-  					<?php echo 'Produits de la catégorie '. getLeLibelleCategorie($categorie);?>
+  				<span id="title-spl-text">
+  					<?php echo 'Produits de la catégorie :'; ?>
+  						<span id="libelle-cat"> <?php echo  getLeLibelleCategorie($categorie);?></span>
   				</span>
   			</div>
   		<?php
+  			include("vues/v_categories.php");
 		$lesProduits = getLesProduitsDeCategorie($categorie);
 		include("vues/v_produitsDeCategorie.php");
 		
