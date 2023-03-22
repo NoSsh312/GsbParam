@@ -479,17 +479,9 @@ div.imgCard {
 
 }
 
-body {
-	min-height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: rgb(186, 216, 125);
-	font-size: 0.8rem;
-	font-family: 'Work Sans'
-}
 
-.card {
+
+.cardInfoDuProd {
 	max-width: 1000px;
 	width: 100%;
 	padding: 4rem;
@@ -499,7 +491,7 @@ body {
 }
 
 @media(max-width:768px) {
-	.card {
+	.cardInfoDuProd {
 		width: 100%;
 		padding: 1.5rem
 	}

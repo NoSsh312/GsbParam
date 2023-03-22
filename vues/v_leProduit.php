@@ -1,9 +1,9 @@
-<div class="cardProdInfo">
+
     <div class="container">
         <div id="demo" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <div class="card">
+                    <div class="cardInfoDuProd">
                         <div class="path">HOME / FACE
                             <a>/ CLEANSERS</a>
                         </div>
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="card">
+                    <div class="cardInfoDuProd">
                         <div class="path">HOME / FACE <a>/ CLEANSERS</a> </div>
                         <div class="row">
                             <div class="col-md-6 text-center align-self-center"> <img class="img-fluid"
@@ -109,4 +109,3 @@
         </div>
     </div>
 
-</div>
