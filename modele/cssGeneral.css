@@ -1,44 +1,51 @@
 html {
-	font:normal 100%/1.2em "Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;
+	font: normal 100%/1.2em "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
 }
-body{
-	padding : 0% 5%;
+
+body {
+	padding: 0% 5%;
 	background-color: #dcedff;
 }
-#accueil{
+
+#accueil {
 	width=60%;
 	text-align: center;
 	padding-top: 7%;
-	color: #217f64 ;
+	color: #217f64;
 }
-#logo{
+
+#logo {
 	width: 7em !important;
-    height: 4em;
+	height: 4em;
 
 }
-.nav-item{
+
+.nav-item {
 	font-weight: 700;
 }
-.separation-cat{
-	margin-top:0 !important;
+
+.separation-cat {
+	margin-top: 0 !important;
 
 
-height: 3px !important;
-    width: 90%;
+	height: 3px !important;
+	width: 90%;
 }
-#title-filtre{
+
+#title-filtre {
 	font-size: 19px;
 }
+
 fieldset {
-	display:block;
-	width:50%;
+	display: block;
+	width: 50%;
 	border: 1px solid #353535;
-	padding:2px;
-	overflow:hidden;                   
+	padding: 2px;
+	overflow: hidden;
 }
 
 label {
-	background:transparent none;
+	background: transparent none;
 	display: block;
 	width: 32%;
 	float: left;
@@ -52,111 +59,122 @@ input {
 	border: #CCC 1px solid;
 }
 
-input:hover, #ent input:focus {
+input:hover,
+#ent input:focus {
 	border: #999 1px solid;
 	background-color: #DDEEFF;
 }
 
-input[type="submit"]
-{
+input[type="submit"] {
 	border: #DDEEFF 1px solid;
 	width: 30%;
 }
-.erreur{ 
-	background-color:rgb(237,210,229);
-	color:rgb(203,28,128);
-	font-size:1.1em;
-	width:95%;
-}
-.message{ 
-	background-color:rgb(99, 184, 255);
-	color:rgb(0,0,205);
-	font-size:1.1em;
-	width:95%;
+
+.erreur {
+	background-color: rgb(237, 210, 229);
+	color: rgb(203, 28, 128);
+	font-size: 1.1em;
+	width: 95%;
 }
 
-.nav-link:hover{
+.message {
+	background-color: rgb(99, 184, 255);
+	color: rgb(0, 0, 205);
+	font-size: 1.1em;
+	width: 95%;
+}
+
+.nav-link:hover {
 	text-decoration: underline !important;
-	text-underline-offset:8px;
+	text-underline-offset: 8px;
 }
-#navigation{
-	width:100%;
+
+#navigation {
+	width: 100%;
 }
-#group-nav{
+
+#group-nav {
 	display: flex;
 }
-.navbar-expand-lg .navbar-collapse{
+
+.navbar-expand-lg .navbar-collapse {
 	justify-content: flex-end;
 }
-.navbar-nav{
-	margin-right:3em;
+
+.navbar-nav {
+	margin-right: 3em;
 }
-.desc_detail{
+
+.desc_detail {
 	text-align: justify;
 	display: block;
-     max-width: 200px;
-    max-height: 70px;
-  overflow: hidden;
+	max-width: 200px;
+	max-height: 70px;
+	overflow: hidden;
 
-  text-overflow: ellipsis;
+	text-overflow: ellipsis;
 }
-#categories{
-	float:left;
+
+#categories {
+	float: left;
 	box-shadow: 1px 1px 4px #bbb;
-	  width: 200px;
-    display: flex;
- flex-wrap: wrap;
-    height: 200px;
-    align-items: center;
-    justify-content: center;
- align-content: center;
-    background-color: white;
-    border-radius: 5px;
-    position: absolute;
-}
-.form-select{
-	width : 90%;
-}
-#produits{
-	padding:0 150px;
+	width: 200px;
+	display: flex;
+	flex-wrap: wrap;
+	height: 200px;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+	background-color: white;
+	border-radius: 5px;
+	position: absolute;
 }
 
-#contenu{
-
+.form-select {
+	width: 90%;
 }
-.bg-light{
+
+#produits {
+	padding: 0 150px;
+}
+
+#contenu {}
+
+.bg-light {
 	background-color: #dcedff !important;
 }
 
-#menu li a , #categories li a {
-	color:black;
-	font-family:sans-serif;
+#menu li a,
+#categories li a {
+	color: black;
+	font-family: sans-serif;
 	font-size: 19px;
-	text-decoration:none;
+	text-decoration: none;
 }
 
 #categories li {
 	list-style-type: none;
-	list-style-image:none;
+	list-style-image: none;
 	/*float:left; */
-	margin-right: 1px ;
-	border:1px solid #600;
-	width:100px;
-	text-align:center;
-	background:#ccff11;
+	margin-right: 1px;
+	border: 1px solid #600;
+	width: 100px;
+	text-align: center;
+	background: #ccff11;
 }
 
 
 #produits a {
 	list-style-type: none;
-	list-style-image:none;
-	display:inline; 
-	width:175px;
-	text-align:center;
-	height:205px;
-	font: 1em "Trebuchet MS",Arial,sans-serif ;
+	list-style-image: none;
+	display: inline;
+	width: 175px;
+	text-align: center;
+	height: 205px;
+	font: 1em "Trebuchet MS", Arial, sans-serif;
 }
-.commande{
+
+.commande {
 	text-align: center;
 	position: relative;
 	width: 180px;
@@ -166,109 +184,132 @@ input[type="submit"]
 	margin: 10px;
 }
 
-div.card{
-	position : relative;
-	width:220px;
-	height : 320px;
-	float:left;
+div.card {
+	position: relative;
+	width: 220px;
+	height: 320px;
+	float: left;
 
-	margin : 10px;
-	background-color : white;
+	margin: 10px;
+	background-color: white;
 	box-shadow: 1px 1px 4px #bbb;
 	border-radius: 5px;
 }
-div.photoCard>img{
-	max-width : 200px;
+
+div.photoCard>img {
+	max-width: 200px;
 	max-height: 140px;
 
 }
-.photoCard{
+
+.photoCard {
 	text-align: center;
 }
-div.descrCard{
-	top:0px;
-	font: .8em "Trebuchet MS",Arial,sans-serif ;
-	text-align:center;
-	height:30px;
+
+div.descrCard {
+	top: 0px;
+	font: .8em "Trebuchet MS", Arial, sans-serif;
+	text-align: center;
+	height: 30px;
 }
-.info-card{
-	border-top:1px solid grey;
+
+.info-card {
+	border-top: 1px solid grey;
 	border-width: thin;
 	display: flex;
 	background-color: #dcedff;
 }
-div.prixCard{
-	text-align:center;
-   
-}
-.descrCard, .photoCard, .desc_detail, .prixCard, .stock, .voirProd{
-	padding:10px;
-}
-div.titre{
+
+div.prixCard {
 	text-align: center;
 
-	margin-bottom:1em;
 }
-div.titre span{
-	font-size : 25px;
+
+.descrCard,
+.photoCard,
+.desc_detail,
+.prixCard,
+.stock,
+.voirProd {
+	padding: 10px;
+}
+
+div.titre {
+	text-align: center;
+
+	margin-bottom: 1em;
+}
+
+div.titre span {
+	font-size: 25px;
 	font-weight: 600;
 	color: #217f64;
 }
-#libelle-cat{
+
+#libelle-cat {
 	color: black;
 }
-div.imgCard{
-	position:absolute;
-	bottom:5px;
+
+div.imgCard {
+	position: absolute;
+	bottom: 5px;
 }
 
 
-#connexion{
-	margin-left:40px;
+#connexion {
+	margin-left: 40px;
 	width: 100%;
 
 }
-#connexion fieldset{
+
+#connexion fieldset {
 	width: 94%;
 
 
 }
-#connexion label{
+
+#connexion label {
 	margin-left: 2%;
-	width:20%;
-	
-}
-#nomUtil, #mdp{
-	width:50%;
+	width: 20%;
+
 }
 
-.envoyer{
+#nomUtil,
+#mdp {
+	width: 50%;
+}
+
+.envoyer {
 	text-align: center;
 }
-#inscription{
+
+#inscription {
 	margin-left: 3%;
 }
 
-#inscription input{
-	width : 45%;
+#inscription input {
+	width: 45%;
 }
-#inscription .response{
+
+#inscription .response {
 	margin-left: 2%;
-	width:20%;
+	width: 20%;
 }
 
-#inscription fieldset{
-	width : 97.5%;
+#inscription fieldset {
+	width: 97.5%;
 }
 
-#link-insc{
+#link-insc {
 	margin-top: 1%;
 	margin-left: 3%;
 }
-.message-form{
+
+.message-form {
 	margin-left: 3%;
-	margin-top:2%;
+	margin-top: 2%;
 }
+
 .quantite {
 	position: absolute;
 	bottom: 20px;
@@ -276,31 +317,34 @@ div.imgCard{
 }
 
 
-#label-quantite{
-	width:39%;
+#label-quantite {
+	width: 39%;
 	position: absolute;
 	bottom: 10px;
 	right: 33%;
 }
-#quantiteNum{
+
+#quantiteNum {
 	position: absolute;
 	right: 5px;
 	bottom: 10px;
 }
-#logo-panier{
-	margin-top:40px;
-	width:20%;
+
+#logo-panier {
+	margin-top: 40px;
+	width: 20%;
 	position: absolute;
-    bottom: 2%;
-    left: 3%;
+	bottom: 2%;
+	left: 3%;
 }
-#produits{
+
+#produits {
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
 }
 
-.actions{
+.actions {
 	position: fixed;
 	top: 5%;
 	right: 2%;
@@ -308,7 +352,8 @@ div.imgCard{
 	display: flex;
 	flex-direction: column;
 }
-.viderLaCom{
+
+.viderLaCom {
 	position: relative;
 	width: 180px;
 	height: 50%;
@@ -317,97 +362,316 @@ div.imgCard{
 	margin: 10px;
 	text-align: center;
 }
-#link-vider{
+
+#link-vider {
 	text-decoration: blink;
 	background-color: green;
 	border-radius: 20px;
 	padding: 10px;
 	color: white;
 }
-#link-ajouter-prod{
+
+#link-ajouter-prod {
 	text-decoration: blink;
 	background-color: #add8e6;
 	border-radius: 20px;
 	padding: 10px;
 	color: black;
 }
-#total p{
+
+#total p {
 	text-align: center;
 }
 
-#valide-quantite{
+#valide-quantite {
 	display: flex;
 	justify-content: flex-end;
-	margin-top:3%;
-}
-#input-valide-quantite{
-	width:50%;
+	margin-top: 3%;
 }
 
-#link-modif{
+#input-valide-quantite {
+	width: 50%;
+}
+
+#link-modif {
 	width: 50% !important;
 	height: 20px !important;
 }
 
-#link-modif-prod{
-	
+#link-modif-prod {
+
 	text-decoration: blink;
 	background-color: #add8e6;
 	border-radius: 20px;
 	padding: 10px;
 	color: black;
 }
-#button-ajouter-prod{
-	margin-top:15%;
+
+#button-ajouter-prod {
+	margin-top: 15%;
 	text-align: center;
 
 }
 
-#form-modifAdmin{
+#form-modifAdmin {
 	margin-top: 5%;
 }
-#modifierCardProd{
-	width:100%;
+
+#modifierCardProd {
+	width: 100%;
 }
-#photoCardModif{
-	height:100%;
-	width:100%;
+
+#photoCardModif {
+	height: 100%;
+	width: 100%;
 }
-.file-for-photo{
+
+.file-for-photo {
 	display: flex;
 	margin-left: 25%;
 	width: 50%;
 }
-.file-for-photo p{
+
+.file-for-photo p {
 	margin: 0;
 }
-#descProdModif{
-    height:35px !important;
-    width:180px !important;
+
+#descProdModif {
+	height: 35px !important;
+	width: 180px !important;
 }
-#final-submit{
-	    width: 100%;
-    text-align: center;
+
+#final-submit {
+	width: 100%;
+	text-align: center;
 }
-#supprimerCardProd{
-	width:100%;
-	margin-top:2%;
+
+#supprimerCardProd {
+	width: 100%;
+	margin-top: 2%;
 }
-.qte{
-	margin-top:14%;
+
+.qte {
+	margin-top: 14%;
 }
-#div-for-inputModifier{
+
+#div-for-inputModifier {
 	position: absolute;
-    bottom: 3%;
-    left: 5%;
+	bottom: 3%;
+	left: 5%;
 }
-#div-for-inputSupprimer{
+
+#div-for-inputSupprimer {
 	position: absolute;
-    bottom: 3%;
-    right: 5%;
+	bottom: 3%;
+	right: 5%;
 }
-.prixCard2{
-	    text-align: center;
-    bottom: 20%;
-    background-color: #EFEFEF;
+
+.prixCard2 {
+	text-align: center;
+	bottom: 20%;
+	background-color: #EFEFEF;
 }
+
+/*CSS POUR LA PAGE v_leProduit.php */
+.cardProdInfo {
+	background-color: white;
+
+}
+
+body {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgb(186, 216, 125);
+	font-size: 0.8rem;
+	font-family: 'Work Sans'
+}
+
+.card {
+	max-width: 1000px;
+	width: 100%;
+	padding: 4rem;
+	background-color: rgb(46, 45, 45);
+	color: white;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+@media(max-width:768px) {
+	.card {
+		width: 100%;
+		padding: 1.5rem
+	}
+}
+
+.row {
+	margin: 0
+}
+
+.path {
+	color: grey;
+	margin-bottom: 1rem
+}
+
+.path a {
+	color: #ffffff
+}
+
+.info {
+	padding: 6vh 0vh
+}
+
+@media(max-width:768px) {
+	.info {
+		padding: 0
+	}
+}
+
+.checked {
+	color: rgb(255, 217, 0);
+	margin-right: 1vh
+}
+
+.fa-star-half-full {
+	color: rgb(255, 217, 0)
+}
+
+img {
+	height: fit-content;
+	width: 75%;
+	padding: 1rem
+}
+
+@media(max-width:768px) {
+	img {
+		padding: 2.5rem 0
+	}
+}
+
+.title .col {
+	padding: 0
+}
+
+.fa-heart-o {
+	font-size: 2rem;
+	color: #ffffffaf;
+	font-weight: lighter
+}
+
+#reviews {
+	margin-left: 3vh;
+	color: grey
+}
+
+.price {
+	margin-top: 2rem
+}
+
+label.radio span {
+	padding: 1vh 4vh;
+	background-color: rgb(54, 54, 54);
+	color: grey;
+	display: inline-block;
+	margin-right: 2vh
+}
+
+label.radio input:checked+span {
+	border: 1px solid white;
+	padding: 1vh 4vh;
+	background-color: rgb(54, 54, 54);
+	margin-right: 2vh;
+	color: #ffffff;
+	display: inline-block
+}
+
+.carousel-control-prev {
+	width: unset
+}
+
+.carousel-control-next {
+	left: 8vh;
+	right: unset;
+	width: unset
+}
+
+.lower {
+	margin-top: 3rem
+}
+
+.lower i {
+	padding: 2.5vh;
+	margin-right: 1vh;
+	color: grey;
+	border: 1px solid rgb(85, 85, 85)
+}
+
+.lower .col {
+	padding: 0
+}
+
+@media(max-width:768px) {
+	.lower i {
+		padding: 2vh;
+		margin-right: 1vh;
+		color: grey;
+		border: 1px solid rgb(85, 85, 85)
+	}
+}
+
+.btn {
+	background-color: transparent;
+	border-color: rgba(186, 216, 125, 0.863);
+	color: rgba(186, 216, 125, 0.863);
+	padding: 1.8vh 4.5vh;
+	height: fit-content;
+	border-radius: 3px
+}
+
+.btn:focus {
+	box-shadow: none;
+	outline: none;
+	box-shadow: none;
+	color: white;
+	-webkit-box-shadow: none;
+	-webkit-user-select: none;
+	transition: none
+}
+
+.btn:hover {
+	color: white
+}
+
+@media(max-width:768px) {
+	.btn {
+		background-color: transparent;
+		border-color: rgba(186, 216, 125, 0.863);
+		color: rgba(186, 216, 125, 0.863);
+		padding: 1vh;
+		font-size: 0.9rem;
+		height: fit-content;
+		border-radius: 3px
+	}
+}
+
+a {
+	color: unset
+}
+
+a:hover {
+	color: unset;
+	text-decoration: none
+}
+
+label.radio input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	visibility: hidden;
+	pointer-events: none
+}
+
+label.radio {
+	cursor: pointer
+}
+/*FIN DU CSS POUR V_leProd

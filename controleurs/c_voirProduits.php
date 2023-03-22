@@ -25,6 +25,14 @@ switch($action)
 		header('Location:index.php?uc=voirProduits&action=voirProduits&categorie=CH');
   		break;
 	}
+	case 'voirLeProduit' :
+		{
+			
+				include("vues/v_leProduit.php");
+
+			
+			break;
+		}
 	
 	case 'voirProduits' :
 	{

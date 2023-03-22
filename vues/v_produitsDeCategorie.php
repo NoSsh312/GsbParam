@@ -22,7 +22,7 @@ foreach( $lesProduits as $unProduit)
 		<div class="info-card">
 			<div class="prixCard"> A partir de <?php echo $prix."€" ?></div>
 			<div class="stock">En Stock</div>
-			<div class="voirProd"><a href="#">Voir</a></div>
+			<div class="voirProd"><a href="index.php?uc=voirPoduits&action=voirLeProduit&leProd=<?php echo $id ?>">Voir</a></div>
         </div>
 	</div>
 <?php			
