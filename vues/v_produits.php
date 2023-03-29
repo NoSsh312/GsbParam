@@ -58,7 +58,7 @@
          <div class="photoCard"><img src="<?php echo $image ?>" alt=image /></div>
          <div class="desc_detail"><?php echo $detail ?></div>
          <div class="info-card">
-            <div class="prixCard">A partir de <br><?php echo $prix."€" ?></div>
+            <div class="prixCard">A partir de<?php echo $prix."€" ?></div>
             <div class="stock">En Stock</div>
             <div class="buttonVoir" ><button type="button" class="btn btn-outline-success">Voir</button></div>
          </div>

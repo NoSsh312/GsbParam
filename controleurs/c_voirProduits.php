@@ -25,6 +25,15 @@ switch($action)
 		header('Location:index.php?uc=voirProduits&action=voirProduits&categorie=CH');
   		break;
 	}
+	case 'voirInfoProduit' :
+		{
+			$idProduit =$_REQUEST['leProd'];
+			$lesProduits = getTousLesProduits();
+				include("vues/v_leProduit.php");
+
+			
+			break;
+		}
 	
 	case 'voirProduits' :
 	{
