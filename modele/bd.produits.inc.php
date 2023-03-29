@@ -519,4 +519,21 @@ if(isset($_SESSION['nomAdmin'])){
 
 }
 }
+/**
+ * recherhce le produit en fonction de la fourchette de prix
+ * 
+ * @param prixMin représente le prix minimum accépté dans la recherche
+ * @param prixMax représente le prix maximum accépté dans la recherche
+ */
+function searchProductByPrice($prixMin, $prixMax){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT `id`, `description`, `prix`, `image`, `idCategorie`, `desc_detail` FROM produit WHERE prix BETWEEN :min AND :max');
+	$reqN -> bindValue(':min',$prixMin,PDO::PARAM_STR);
+	$reqN -> bindValue(':max',$prixMax,PDO::PARAM_STR);
+	$reqN->execute();
+	$lesLignesN = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $lesLignesN;
+}
 ?>	
