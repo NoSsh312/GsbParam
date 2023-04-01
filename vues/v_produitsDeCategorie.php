@@ -1,32 +1,79 @@
+<div class="tabs">
+	
+		<button class="tablinks" onclick="openTab(event, 'tab1')" id="defaultOpen">Cheveux</button>
+		<?php 
+		$i=2;
+		foreach($lesCatSansCH as $cat){
+			?>
+			<button class="tablinks" onclick="openTab(event, 'tab<?php echo $i?>')"><?php echo $cat['libelle'] ?></button>
+			<?php
+			$i++;
+		}
+		?>
+		
+	</div>
+	<?php
+	$i=1;
+foreach($lesCategories as $uneCategorie){
+	
+	?>
+
+
+	<div id="tab<?php echo $i?>" class="tabcontent bis2">
+	<h2 >Produit de la Catégorie: <span class="color-green"><?php echo $uneCategorie['libelle'] ?></span></h2>
+	</br>	
+	<div class="avis-wrapper">	
+	<?php
+
+	$lesProduitsDeCat = getLesProduitsDeCategorie($uneCategorie['id']);
+
+	// parcours du tableau contenant les produits à afficher
+		foreach( $lesProduitsDeCat as $unProduit) 
+		{ 	// récupération des informations du produit
+			$id = $unProduit['id'];
+			$categorie = $unProduit['idCategorie'];
+			$description = $unProduit['description'];
+			$prix=$unProduit['prix'];
+			$image = $unProduit['image'];
+			$detail = $unProduit['desc_detail'];
+
+			// affichage d'un produit avec ses informations
+			?>	
+			<div class="card">
+				<div class="descrCard"><?php echo $description ?></div>
+					<div class="photoCard"><img src="<?php echo $image ?>" alt=image /></div>
+					<div class="desc_detail"><?php echo $detail ?></div>
+				
+					<div class="imgCard"><a href="index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $id ?>&action=ajouterAuPanier"> 
+					<img src="images/mettrepanier.png" TITLE="Ajouter au panier" alt="Mettre au panier"> </a></div> 
+				<div class="info-card">
+					<div class="prixCard"> A partir de <?php echo $prix."€" ?></div>
+					<div class="stock">En Stock</div>
+					<div class="voirProd"><a href="index.php?uc=voirProduits&action=voirInfoProduit&leProd=<?php echo $id ?>">Voir</a></div>
+				</div>
+			</div>
+
+<?php			
+} // fin du foreach qui parcourt les produits
+?>
+
+	</div>
+</div>
+<?php
+$i++;
+}
+?>
+	
+
+
+
+	
+
+	
+
 <div id="produits">
 
 <?php
-// parcours du tableau contenant les produits à afficher
-foreach( $lesProduits as $unProduit) 
-{ 	// récupération des informations du produit
-	$id = $unProduit['id'];
-	$description = $unProduit['description'];
-	$prix=$unProduit['prix'];
-	$image = $unProduit['image'];
-	$detail = $unProduit['desc_detail'];
-
-	// affichage d'un produit avec ses informations
-	?>	
-	<div class="card">
-		<div class="descrCard"><?php echo $description ?></div>
-			<div class="photoCard"><img src="<?php echo $image ?>" alt=image /></div>
-			<div class="desc_detail"><?php echo $detail ?></div>
-		
-			<!-- <div class="imgCard"><a href="index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $id ?>&action=ajouterAuPanier"> 
-			<img src="images/mettrepanier.png" TITLE="Ajouter au panier" alt="Mettre au panier"> </a></div> -->
-		<div class="info-card">
-			<div class="prixCard"> A partir de <?php echo $prix."€" ?></div>
-			<div class="stock">En Stock</div>
-			<div class="voirProd"><a href="index.php?uc=voirProduits&action=voirInfoProduit&leProd=<?php echo $id ?>">Voir</a></div>
-        </div>
-	</div>
-<?php			
-} // fin du foreach qui parcourt les produits
 if(isset($_SESSION['nomAdmin'])){?>
 	<div class=actions>
 <div id="button-modif-prod">
@@ -41,3 +88,5 @@ if(isset($_SESSION['nomAdmin'])){?>
 ?>
 
 </div>
+
+<script src="modele/script.js"></script>

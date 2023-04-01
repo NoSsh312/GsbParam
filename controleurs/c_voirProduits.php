@@ -22,7 +22,7 @@ switch($action)
 	{
   		$lesCategories = getLesCategories();
 		
-		header('Location:index.php?uc=voirProduits&action=voirProduits&categorie=CH');
+		header('Location:index.php?uc=voirProduits&action=voirProduits');
   		break;
 	}
 	case 'voirInfoProduit' :
@@ -38,26 +38,8 @@ switch($action)
 	case 'voirProduits' :
 	{
 		$lesCategories = getLesCategories();
-	
-		if(isset($_GET['categorie'])){
-			$categorie=$_GET['categorie'];
-		}
-		if(isset($_POST['categorie'])){
-
- 		$categorie = $_POST['categorie'];
- 			header('Location:index.php?uc=voirProduits&action=voirProduits&categorie='. $categorie);
- 	}
-
-  		?>
-  			<div class="titre">
-  				<span id="title-spl-text">
-  					<?php echo 'Produits de la catégorie :'; ?>
-  						<span id="libelle-cat"> <?php echo  getLeLibelleCategorie($categorie);?></span>
-  				</span>
-  			</div>
-  		<?php
-  			include("vues/v_categories.php");
-		$lesProduits = getLesProduitsDeCategorie($categorie);
+		$lesCatSansCH = getLesCatSansCH();
+		
 		include("vues/v_produitsDeCategorie.php");
 		
 		break;

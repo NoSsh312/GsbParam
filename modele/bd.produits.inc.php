@@ -32,6 +32,28 @@ include_once 'bd.inc.php';
 			die();
 		}
 	}
+
+	function getLesCatSansCH()
+	{
+		try 
+		{
+			$monPdo = connexionPDO();
+			$req = 'select id, libelle from categorie WHERE id != "CH"';
+			$res = $monPdo->query($req);
+			$lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
+			return $lesLignes;
+		} 
+		catch (PDOException $e) 
+		{
+			print "Erreur !: " . $e->getMessage();
+			die();
+		}
+	}
+
+
+
+
+
 	/**
 	 * Retourne toutes les informations d'une catégorie passée en paramètre
 	 *

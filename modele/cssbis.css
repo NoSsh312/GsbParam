@@ -33,3 +33,139 @@
   .tabcontent h2{
     text-align: center;
   }
+
+
+
+  .user-info {
+    word-break: break-word;
+    margin: auto;
+    max-height: 518px;
+    overflow-y: scroll;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+}
+
+
+.user-info::-webkit-scrollbar {
+    width:5px;
+
+}
+.user-info::-webkit-scrollbar-track {
+    background-color: #f2f2f2;
+  }
+.user-info::-webkit-scrollbar-thumb {
+    background: #4e4e4e;
+    border-radius: 10px;
+  }
+
+
+.user-info h2 {
+    margin-top: 0;
+}
+
+.user-info ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-info ul li {
+    margin-bottom: 10px;
+}
+
+.user-info ul li strong {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+}
+
+
+
+.tabcontent.bis{
+    display: none;
+    padding: 6px 12px;
+    
+    
+  }
+  .tabcontent.bis h2{
+    text-align: center;
+  }
+  .user-info.bis {
+    width: 100%;
+    margin:5px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+}
+
+.user-info.bis h2 {
+    margin-top: 0;
+}
+
+.user-info.bis ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-info.bis ul li {
+    margin-bottom: 10px;
+}
+
+.user-info.bis ul li strong {
+    display: inline-block;
+    width: 100%;
+    font-weight: bold;
+}
+
+
+
+.avis-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+.color-green{
+    color:#217f64;
+}
+
+.tabcontent.bis2{
+    display: none;
+    padding: 6px 12px;
+    
+    
+  }
+  .tabcontent.bis2 h2{
+    text-align: center;
+  }
+  .user-info.bis2 {
+    width: 100%;
+    margin:5px;
+    max-height: 686px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+}
+
+.user-info.bis2 h2 {
+    margin-top: 0;
+}
+
+.user-info.bis2 ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-info.bis2 ul li {
+    margin-bottom: 10px;
+}
+
+.user-info.bis2 ul li strong {
+    display: inline-block;
+    width: 100%;
+    font-weight: bold;
+}
