@@ -21,7 +21,7 @@ switch($action)
 	case 'voirCategories':
 	{
   		$lesCategories = getLesCategories();
-		include("vues/v_categories.php");
+		
 		header('Location:index.php?uc=voirProduits&action=voirProduits&categorie=CH');
   		break;
 	}

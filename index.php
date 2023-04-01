@@ -3,7 +3,7 @@ session_start();
 include("vues/v_entete.html") ;
 require_once("modele/fonctions.inc.php");
 require_once("modele/bd.produits.inc.php");
-
+require_once("modele/bd.profil.php");
 include("vues/v_bandeau.php") ;
 
 if(!isset($_REQUEST['uc']))
@@ -44,6 +44,10 @@ case 'seConnecter' :
 { include("controleurs/c_gestionConnexion.php");
 break;  
 }
+case 'monProfil' :
+	{ include("controleurs/c_gestionProfil.php");
+	break;  
+	}
 }
 include("vues/v_pied.html") ;
 ?>

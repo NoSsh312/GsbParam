@@ -36,7 +36,7 @@
       </li>
       <?php if(isset($_SESSION['nomUtil']) || isset($_SESSION['nomAdmin'])){ ?>
       	  <li class="nav-item">
-        <a class="nav-link" href="index.php?uc=seDeconnecter&action=deconnexion">Mon profil</a>
+        <a class="nav-link" href="index.php?uc=monProfil&action=voirMonProfil">Mon profil</a>
       </li>
        <li class="nav-item">
         <a class="nav-link" href="index.php?uc=seDeconnecter&action=deconnexion">Se Déconnecter</a>
