@@ -28,7 +28,9 @@ switch($action)
 	case 'voirInfoProduit' :
 		{
 			$idProduit =$_REQUEST['leProd'];
+			$categorie =$_REQUEST['categorie'];
 			$lesProduits = getTousLesProduits();
+			$leProd= getInfoLeProd($idProduit);
 				include("vues/v_leProduit.php");
 
 			

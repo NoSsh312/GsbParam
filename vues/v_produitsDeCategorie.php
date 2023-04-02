@@ -43,13 +43,10 @@ foreach($lesCategories as $uneCategorie){
 				<div class="descrCard"><?php echo $description ?></div>
 					<div class="photoCard"><img src="<?php echo $image ?>" alt=image /></div>
 					<div class="desc_detail"><?php echo $detail ?></div>
-				
-					<div class="imgCard"><a href="index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $id ?>&action=ajouterAuPanier"> 
-					<img src="images/mettrepanier.png" TITLE="Ajouter au panier" alt="Mettre au panier"> </a></div> 
 				<div class="info-card">
 					<div class="prixCard"> A partir de <?php echo $prix."€" ?></div>
 					<div class="stock">En Stock</div>
-					<div class="voirProd"><a href="index.php?uc=voirProduits&action=voirInfoProduit&leProd=<?php echo $id ?>">Voir</a></div>
+					<div class="voirProd"><button type="button" class="btn btn-outline-success" onclick="window.location.href = 'index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&action=voirInfoProduit&leProd=<?php echo $id ?>';">Voir</button></div>
 				</div>
 			</div>
 

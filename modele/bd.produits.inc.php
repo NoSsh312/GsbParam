@@ -558,4 +558,19 @@ function searchProductByPrice($prixMin, $prixMax){
 	
 	return $lesLignesN;
 }
+
+
+
+
+function getInfoLeProd($id){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT `id`, `description`, `prix`, `image`, `idCategorie`, `desc_detail` FROM produit WHERE id=:id');
+	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	$lesLignesN = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $lesLignesN;
+}
 ?>	
