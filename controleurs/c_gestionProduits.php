@@ -100,6 +100,24 @@ switch($action)
 			}
 		break;
 	}	
+
+	case 'gererProduitPrix' :
+	{
+		$prixMin = $_REQUEST['prixmin'];
+		$prixMax = $_REQUEST['prixmax'];
+
+		if($prixMin > $prixMax){
+			echo '<script>alert("Le prix minimum doit être inférieur au prix maximum")</script>';
+			$lesProduits = getTousLesProduits();
+			include('vues/v_produits.php');
+		}else{
+			$lesProduits = searchProductByPrice($prixMin,$prixMax);
+			include('vues/v_produits.php');
+		}
+
+		
+
+	}
 }
 
 

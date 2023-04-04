@@ -586,3 +586,7 @@ img {
 .prixCard .stock{
 	font-size: 10px;
 }
+.powered{
+	color: red;
+	font-size: 10px;
+}
