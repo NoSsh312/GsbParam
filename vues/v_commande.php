@@ -4,7 +4,7 @@
      <legend>Commande</legend>
 		<p>
 			<label for="nom">Nom*</label>
-			<input id="nom" type="text" name="nom"  size="30" maxlength="32" required>
+			<input id="nom" type="text" name="nom"  size="30" maxlength="32" value="<?php echo $_SESSION['nomUtil'] ?>" readonly required>
 		</p>
 		<p>
 			<label for="rue">rue*</label>

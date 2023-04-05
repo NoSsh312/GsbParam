@@ -31,7 +31,7 @@ foreach($lesCategories as $uneCategorie){
 		foreach( $lesProduitsDeCat as $unProduit) 
 		{ 	// récupération des informations du produit
 			$id = $unProduit['id'];
-			$categorie = $unProduit['idCategorie'];
+			$categorie = $unProduit['id_categorie'];
 			$description = $unProduit['description'];
 			$prix=$unProduit['prix'];
 			$image = $unProduit['image'];

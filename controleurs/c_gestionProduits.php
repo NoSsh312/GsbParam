@@ -28,6 +28,7 @@ switch($action)
 
 		$idProduit =$_REQUEST['produit'];
 		$lesProduits = getTousLesProduits();
+		$leProd=getInfoLeProd($idProduit);
 		include("vues/v_modifLeProdAdmin.php");
 		break;
 	}

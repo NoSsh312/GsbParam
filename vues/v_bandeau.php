@@ -36,17 +36,17 @@
       </li>
       <?php if(isset($_SESSION['nomUtil']) || isset($_SESSION['nomAdmin'])){ ?>
       	  <li class="nav-item">
-        <a class="nav-link" href="index.php?uc=monProfil&action=voirMonProfil">Mon profil</a>
+        <a class=" btn btn-outline-success" href="index.php?uc=monProfil&action=voirMonProfil">Mon profil</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="index.php?uc=seDeconnecter&action=deconnexion">Se Déconnecter</a>
+        <a class=" btn btn-outline-success" href="index.php?uc=seDeconnecter&action=deconnexion">Se Déconnecter</a>
       </li>
       <?php }else{?>
       <li class="nav-item">
-        <a class="nav-link" href="index.php?uc=seConnecter&action=voirForm">Se connecter</a>
+        <a class=" btn btn-outline-success" href="index.php?uc=seConnecter&action=voirForm">Se connecter</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="index.php?uc=seConnecter&action=inscription">S'inscrire</a>
+        <a class=" btn btn-outline-success" href="index.php?uc=seConnecter&action=inscription">S'inscrire</a>
       </li>
       <?php
 }?>

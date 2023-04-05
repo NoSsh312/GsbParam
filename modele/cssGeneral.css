@@ -15,12 +15,13 @@ body {
 }
 
 #logo {
-	width: 7em !important;
-	height: 4em;
+
+	height: 5em;
 
 }
 
 .nav-item {
+	margin-right: 1vw;
 	font-weight: 700;
 }
 
@@ -135,7 +136,7 @@ input[type="submit"] {
 }
 
 #produits {
-	padding: 0 150px;
+	padding: 0 ;
 }
 
 #contenu {}
@@ -165,12 +166,7 @@ input[type="submit"] {
 
 
 #produits a {
-	list-style-type: none;
-	list-style-image: none;
-	display: inline;
-	width: 175px;
-	text-align: center;
-	height: 205px;
+	margin-right: 1vw;
 	font: 1em "Trebuchet MS", Arial, sans-serif;
 }
 

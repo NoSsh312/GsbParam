@@ -23,7 +23,7 @@ function getLesCommandesUtil($id){
    
 	$monPdo = connexionPDO();
 
-	$reqN=$monPdo -> prepare('select id, id_cli, dateCommande, nomPrenomClient, adresseRueClient, cpClient, villeClient, mailClient from commande where idCli= :id ');
+	$reqN=$monPdo -> prepare('select id, idCli, dateCommande, nomPrenomClient, adresseRueClient, cpClient, villeClient, mailClient from commande where idCli= :id ');
 	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
 	
 	$reqN->execute();
@@ -53,7 +53,7 @@ function getLesAvisUtil($id){
    
 	$monPdo = connexionPDO();
 
-	$reqN=$monPdo -> prepare('select  id,id_produit,titre_commentaire, commentaire,note,idCli, date_avis from avis INNER JOIN possede ON possede.id=avis.idProduit where idCli= :id ');
+	$reqN=$monPdo -> prepare('select  avis.id,avis.id_produit,titre_commentaire, commentaire,avis.idCli, date_avis ,note, description from avis inner join possede on avis.id=possede.id_avis INNER JOIN produit on produit.id = avis.id_produit WHERE avis.idCli= :id ');
 	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
 	
 	$reqN->execute();

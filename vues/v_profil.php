@@ -101,14 +101,16 @@ foreach($lesCommandesUtil as $uneCommande){
 <?php
 		foreach($lesAvisUtil as $unAvis){?>
 			<div class="user-info bis">
-				<?php
+	<?php
 			// commentaire,note,description
-	$commentaire =$unAvis['commentaire'];
-	$note = $unAvis['note'];
-	$description = $unAvis['description'];
-	$date = $unAvis['date_avis'];
-?>
+			$titre_com =$unAvis['titre_commentaire'];
+			$commentaire =$unAvis['commentaire'];
+			$note = $unAvis['note'];
+			$description = $unAvis['description'];
+			$date = $unAvis['date_avis'];
+	?>
 		<ul>
+		<li><strong>Titre du commentaire :</strong> <?php echo $titre_com;?></li>
 		<li><strong>Produit :</strong> <?php echo $description;?></li>
         <li><strong>Commentaire:</strong> <?php echo $commentaire;?></li>
 		<li><strong>Note:</strong> <?php echo $note;?></li>

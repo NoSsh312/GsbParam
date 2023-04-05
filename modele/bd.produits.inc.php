@@ -220,7 +220,7 @@ function getLesProduitsDuTableau($desIdProduit)
 		foreach($lesIdProduit as $unIdProduit)
 			{	$idProd=$unIdProduit['id'];
 		$prodQte=$unIdProduit['qte'];
-		$req = "insert into detail_cmd values ('$idProd','$id_unite','$idCommande','$prodQte','$qteAch')";
+		$req = "insert into detail_cmd values ('$idProd','$id_unite','$prodQte','$idCommande','$qteAch')";
 		$res = $monPdo->exec($req);
 	}
 }

@@ -36,7 +36,7 @@ foreach( $lesProduitsDuPanier as $unProduit)
 	<div class="imgCard"><a href="index.php?uc=gererPanier&produit=<?php echo $id ?>&action=supprimerUnProduit" onclick="return confirm('Voulez-vous vraiment retirer cet article ?');">
 	<img src="images/retirerpanier.png" TITLE="Retirer du panier" alt="retirer du panier"></a></div>
 	<div id=valide-quantite>
-		<a id="link-modif" href="index.php?uc=gererPanier&produit=<?php echo $id ?>&action=modifierQte" onclick="return confirm('Voulez-vous modifier sa quantité ?');">Modifier</a>
+		<a class="btn btn-outline-success" href="index.php?uc=gererPanier&produit=<?php echo $id ?>&action=modifierQte" onclick="return confirm('Voulez-vous modifier sa quantité ?');">Modifier</a>
 	
 </div>
 	
@@ -60,10 +60,10 @@ foreach( $lesProduitsDuPanier as $unProduit)
     flex-direction: column;
     align-items: center;">
 <div class="commande">
-<a href="index.php?uc=gererPanier&action=passerCommande"><img src="images/commander.jpg" title="Passer commande" alt="Commander"></a></div>
+<a href="index.php?uc=gererPanier&action=passerCommande"><p class="btn btn-outline-success">Je Commande !</p></a></div>
 
 <div class="viderLaCom">
-<a id='link-vider' href="index.php?uc=gererPanier&action=viderPanier"> Vider Mon Panier</a>
+<a class="btn btn-outline-success" href="index.php?uc=gererPanier&action=viderPanier"> Vider Mon Panier</a>
 </div>
 	</div>
 <?php } else echo "Pour commander veuillez vous connecter à un utilisateur CLIENT";?>
