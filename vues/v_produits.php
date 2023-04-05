@@ -1,5 +1,4 @@
 <h1 class="center">Tous les produits</h1>
-<p>test pour savoi si je suis e cakajefjzbfjbfhszdyfzbef</p>
 <div id="divGlobal">
 <div id="divSeachProducts">
    <div id="searchproduct">
@@ -59,7 +58,7 @@
          	$prix=$unProduit['prix'];
          	$image = $unProduit['image'];
          	$detail = $unProduit['desc_detail'];
-            $categorie = $unProduit['idCategorie'];
+            $categorie = $unProduit['id_categorie'];
          
          	// affichage d'un produit avec ses informations
          	?>	

@@ -573,4 +573,20 @@ function getInfoLeProd($id){
 	
 	return $lesLignesN;
 }
+
+/**
+ * function qui récupère les produits suggérer en fonction de celui regardé
+ * @param id qui correspond à l'id du produit regardé 
+ */
+function getProductsYouMayAlsoLike($id){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT id, id_produit FROM suggestion WHERE id = :id');
+	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	$lesProduitsSuggerés = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $lesProduitsSuggerés;
+}
 ?>	
