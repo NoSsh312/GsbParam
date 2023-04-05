@@ -17,7 +17,8 @@
   </svg>
   Retour
 </a>
-
+<div class="wrapper-leProd">
+<div class="wrapper-infoAvisProd">
 <div class="card-container">
 <div class="card3">
   <div class="card-header">
@@ -34,6 +35,30 @@
 </br>
     <input type="submit"  class="card-button" value="Acheter maintenant"></a>
 </form>
+</div>
+</div>
+</div>
+<div class="card-container">
+  <div class="card3">
+    <div class="card-header">
+      <div class="card-body">
+      <h2 class="card-title">Avis</h2>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="related-product">
+<div class="card-container">
+  <div class="card3">
+    <div class="card-header">
+      <div class="card-body">
+      <h2 class="card-title">Produits liés</h2>
+
+      </div>
+    </div>
+  </div>
 </div>
 </div>
 </div>

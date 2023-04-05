@@ -113,7 +113,7 @@ include_once 'bd.inc.php';
 		{
 			$lesProduits = array();
 			$monPdo = connexionPDO();
-			$req='select id, description, prix, image, idCategorie, desc_detail from produit';
+			$req='select id, description, prix, image, 	id_categorie,id_marque , desc_detail,	id_unite ,	qte  from produit INNER JOIN produitcontenance p on produit.id = p.id_produit';
 			$res = $monPdo->query($req);
 			$lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
 			foreach($lesLignes as $laLigne){
@@ -142,7 +142,7 @@ include_once 'bd.inc.php';
 		try 
 		{
 			$monPdo = connexionPDO();
-			$req='select id, description, prix, image, idCategorie, desc_detail from produit where idCategorie ="'.$idCategorie.'"';
+			$req='select id, description, prix, image, 	id_categorie,id_marque , desc_detail,	id_unite ,	qte  from produit INNER JOIN produitcontenance p on produit.id = p.id_produit where id_categorie ="'.$idCategorie.'"';
 			$res = $monPdo->query($req);
 			$lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
 			return $lesLignes; 
@@ -171,7 +171,7 @@ function getLesProduitsDuTableau($desIdProduit)
 		{
 			foreach($desIdProduit as $unIdProduit)
 			{
-				$req = 'select id, description, prix, image, idCategorie, desc_detail from produit where id = "'.$unIdProduit['id'].'"';
+				$req = 'select id, description, prix, image, 	id_categorie,id_marque , desc_detail,	id_unite ,	qte  from produit INNER JOIN produitcontenance p on produit.id = p.id_produit where id = "'.$unIdProduit['id'].'"';
 				$res = $monPdo->query($req);
 				$unProduit = $res->fetch(PDO::FETCH_ASSOC);
 				$unProduit['qte']= $unIdProduit['qte'];
@@ -202,7 +202,7 @@ function getLesProduitsDuTableau($desIdProduit)
 	 * @param array $lesIdProduit tableau associatif contenant les id des produits commandés
 	 
 	*/
-	function creerCommande($idCli,$nom,$rue,$cp,$ville,$mail, $lesIdProduit )
+	function creerCommande($idCli,$nom,$rue,$cp,$ville,$mail, $lesIdProduit ,$id_unite,$qteAch)
 	{
 		try 
 		{
@@ -220,7 +220,7 @@ function getLesProduitsDuTableau($desIdProduit)
 		foreach($lesIdProduit as $unIdProduit)
 			{	$idProd=$unIdProduit['id'];
 		$prodQte=$unIdProduit['qte'];
-		$req = "insert into contenir values ('$idCommande','$idProd','$prodQte')";
+		$req = "insert into detail_cmd values ('$idProd','$id_unite','$idCommande','$prodQte','$qteAch')";
 		$res = $monPdo->exec($req);
 	}
 }
@@ -412,16 +412,16 @@ function getIdCli(){
 	 * @param string $image l'image modifiée du produit
 	 
 	*/
-	function modifLesProdAdmin1($idProduit,$prix,$desc,$image)
+	function modifLesProdAdmin1($idProduit,$prix,$desc,$descdetail,$image)
 	{
 		if(isset($_SESSION['nomAdmin'])){
 		try 
 		{
 			$monPdo = connexionPDO();
-				$reqN1=$monPdo -> prepare('UPDATE produit SET description =:desc, prix = :prix, image = "images/":image WHERE produit.id = :id;');
-			$reqN1 -> bindParam(':desc',$desc,PDO::PARAM_STR);
+				$reqN1=$monPdo -> prepare('UPDATE produit SET description =:desc ,desc_detail =:descdetail, image = "images/":image WHERE produit.id = :id;');
+			$reqN1 -> bindParam(':description',$desc,PDO::PARAM_STR);
 			$reqN1 -> bindParam(':id',$idProduit,PDO::PARAM_STR);
-			$reqN1 -> bindParam(':prix',$prix,PDO::PARAM_STR);
+			$reqN1 -> bindParam(':descdetail',$descdetail,PDO::PARAM_STR);
 			$reqN1 -> bindParam(':image',$image,PDO::PARAM_STR);
 			$reqN1->execute();
 			$lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
@@ -449,16 +449,16 @@ function getIdCli(){
 	 * @param string $desc description du produit
 	 
 	*/
-	function modifLesProdAdmin2($idProduit,$prix,$desc)
+	function modifLesProdAdmin2($idProduit,$desc)
 	{
 		if(isset($_SESSION['nomAdmin'])){
 		try 
 		{
 			$monPdo = connexionPDO();
-				$reqN1=$monPdo -> prepare('UPDATE produit SET description =:desc, prix = :prix WHERE produit.id = :id;');
+				$reqN1=$monPdo -> prepare('UPDATE produit SET description =:desc WHERE produit.id = :id;');
 			$reqN1 -> bindParam(':desc',$desc,PDO::PARAM_STR);
 			$reqN1 -> bindParam(':id',$idProduit,PDO::PARAM_STR);
-			$reqN1 -> bindParam(':prix',$prix,PDO::PARAM_STR);
+		
 			
 			$reqN1->execute();
 			$lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
@@ -516,11 +516,11 @@ function getIdCli(){
 	 * @param float $prix prix du produit donné via le formulaire
 	 * @param string $image image du produit donnée via le formulaire
 	 * @param string $idCategorie idCategorie donné dans le formulaire ou à partir de la categorie dans laquelle on veut ajouter un Produit
-	 * @return booléen $testDouble permet de savoir si tous les paramètres sont corrects et que si l'ajout est réussi ou non
+	 * @return boolean $testDouble permet de savoir si tous les paramètres sont corrects et que si l'ajout est réussi ou non
 	
 	 
 	*/
-function ajoutProduit($idProduit, $desc, $prix, $image, $idCategorie){
+function ajoutProduit($idProduit, $desc, $desc_detail, $image, $idCategorie, $idmarque){
 $idCategorie=strtoupper($idCategorie);
 if(isset($_SESSION['nomAdmin'])){
 	$testDouble =true;
@@ -532,7 +532,7 @@ if(isset($_SESSION['nomAdmin'])){
 	$lesLignesN = $reqN->fetchAll(PDO::FETCH_ASSOC);
 	if(empty($lesLignesN) && (strtoupper($idCategorie) == "CH" || strtoupper($idCategorie) == "FO" || strtoupper($idCategorie) =="PS" )){
 //'images/ car j'ai utilisé une image dans le dossier image/ a changer en fonctions du dossier où est l'image//
-		$req = "insert into produit (id, description, prix, image, idCategorie) values ('$idProduit','$desc','$prix','images/$image','$idCategorie');";
+		$req = "insert into produit (id, description,  desc_detail, image, id_categorie,id_marque) values ('$idProduit','$desc','$desc_detail','images/$image','$idCategorie','$idmarque');";
 		$res = $monPdo->exec($req);
 		// insertion produits commandés
 		$testDouble =false;
@@ -565,7 +565,7 @@ function searchProductByPrice($prixMin, $prixMax){
 function getInfoLeProd($id){
 	$monPdo = connexionPDO();
 
-	$reqN=$monPdo -> prepare('SELECT `id`, `description`, `prix`, `image`, `idCategorie`, `desc_detail` FROM produit WHERE id=:id');
+	$reqN=$monPdo -> prepare('SELECT `id`, `description`, `prix`, `image`, `id_categorie`, `desc_detail`,id_marque FROM produit INNER JOIN produitcontenance on produitcontenance.id_produit=produit.id WHERE id=:id');
 	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
 	
 	$reqN->execute();
