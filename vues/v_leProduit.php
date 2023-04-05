@@ -2,7 +2,7 @@
     $description = $uneInfo['description'];
     $prix = $uneInfo['prix'];
     $image = $uneInfo['image'];
-    $idCategorie = $uneInfo['idCategorie'];
+    $idCategorie = $uneInfo['id_categorie'];
     $desc_detail = $uneInfo['desc_detail'];
 }
 ?>
@@ -20,20 +20,50 @@
 <div class="wrapper-leProd">
 <div class="wrapper-infoAvisProd">
 <div class="card-container">
-<div class="card3">
-  <div class="card-header">
-    <img class="img-vleprod" src="<?php echo $image ?>" alt="<?php echo $description ?>">
+<div class="card3 card-bis">
+  <div class="card-header card-header-bis">
+    <img class="img-vleprod img-product" src="<?php echo $image ?>" alt="<?php echo $description ?>" >
   </div>
-  <div class="card-body">
-    <h2 class="card-title"><?php echo $description ?></h2>
+  <div class="card-body card-body-bis">
+    <h2 class="card-title title-product"><?php echo $description ?></h2>
+    <p class="text-product">Produit de la marque "" et de la catégorie ""</p>
+    <h5 class="underline">Description:</h5>
     <p class="card-description"><?php echo $desc_detail ?></p>
-    <p class="card-price">Prix: <?php echo $prix ?>€</p>
+   
+    <p class="center">2 avis pour ce produit</p>
+    <a href="#" class="center">Donner un avis</a>
+    <hr>
     <form action="index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $idProduit ?>&action=ajouterAuPanier" method="POST">
-        <label class="for-qte" for="quantiteNum">Quantité :</label>
-        <input type="number" id="quantiteNum" name="quantiteNum" min="1" value="1">
-</br>
-</br>
-    <input type="submit"  class="card-button" value="Acheter maintenant"></a>
+    <div id="forSelect">
+      <div id="nameSelect">
+        <p>Contenance : </p>
+      </div>
+      <div id="select-list">
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Choisir la contenance</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+    <div class="info-prix-etc">
+      <p class="card-price">Prix: <?php echo $prix ?>€ &nbsp </p>
+      <p>En Stock &nbsp</p> <!-- condition reste du stock ou pas  -->
+      <p class="exemplaire">(5 exemplaire restants) </p>
+    </div>
+
+    <div class="input-group div-qte">
+      <select class="custom-select select-qte" id="inputGroupSelect04">
+       <option selected>Choose...</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    <div class="input-group-append div-send">
+    <button class="btn btn-outline-success btn-send" type="button">Ajouter au panier</button>
+  </div>
+</div>
 </form>
 </div>
 </div>
@@ -49,12 +79,36 @@
   </div>
 </div>
 </div>
-<div class="related-product">
-<div class="card-container">
+
+
+         <h2 class="card-title">vous aimeriez peut-être</h2>
+        <hr>
+      <?php foreach($lesProduitsSuggérés as $unProdSug){
+              $InfoProd= getInfoLeProd($unProdSug['id_produit']);
+                foreach($InfoProd as $uneInfo2){
+                  $description2 = $uneInfo2['description'];
+                  $prix2 = $uneInfo2['prix'];
+                  $image2 = $uneInfo2['image'];
+                  $idCategorie2 = $uneInfo2['id_categorie'];
+                  $desc_detail2 = $uneInfo2['desc_detail'];
+
+                }?>
+     <div class="card-container">
   <div class="card3">
     <div class="card-header">
       <div class="card-body">
-      <h2 class="card-title">Produits liés</h2>
+      <h2 class="card-title"><?php echo $description2 ?></h2>
+      <img class="img-vleprod img-product" src="<?php echo $image ?>" alt="<?php echo $description ?>" >
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+                
+                        
+<?php 
+      } ?>
 
       </div>
     </div>

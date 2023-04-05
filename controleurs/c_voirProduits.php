@@ -31,6 +31,8 @@ switch($action)
 			$categorie =$_REQUEST['categorie'];
 			$lesProduits = getTousLesProduits();
 			$leProd= getInfoLeProd($idProduit);
+			$lesProduitsSuggérés = getProductsYouMayAlsoLike($idProduit);
+			
 				include("vues/v_leProduit.php");
 
 			
