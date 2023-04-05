@@ -93,18 +93,8 @@
                   $desc_detail2 = $uneInfo2['desc_detail'];
 
                 }?>
-     <div class="card-container">
-  <div class="card3">
-    <div class="card-header">
-      <div class="card-body">
-      <h2 class="card-title"><?php echo $description2 ?></h2>
-      <img class="img-vleprod img-product" src="<?php echo $image ?>" alt="<?php echo $description ?>" >
-
       </div>
-    </div>
-  </div>
-</div>
-</div>
+     
                 
                         
 <?php 
