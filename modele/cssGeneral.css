@@ -586,3 +586,41 @@ img {
 	color: red;
 	font-size: 10px;
 }
+.displayflex{
+	display: flex;
+
+}
+.divleft{
+  display: flex;
+  float: left;
+}
+.divSuggestItems{
+	margin: 20px;
+border: 1px solid #ccc;
+box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+background-color: #fff;
+border-radius: 4px;
+overflow: hidden;
+font-family: 'Helvetica Neue', sans-serif;
+}
+.divRight{
+	display: flex;
+  float: right;
+  flex-direction: column;
+  height: 700px;
+  overflow-y: auto;
+}
+.nom-prod{
+	font-size: small;
+    text-align: center;
+    word-break: break-all;
+}
+
+.container:hover .image {
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+.prodSugg{
+	overflow-y: auto;
+}

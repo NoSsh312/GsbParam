@@ -17,6 +17,9 @@
   </svg>
   Retour
 </a>
+<div class="displayflex">
+  <div class="divleft">
+
 <div class="wrapper-leProd">
 <div class="wrapper-infoAvisProd">
 <div class="card-container">
@@ -68,6 +71,7 @@
 </div>
 </div>
 </div>
+
 <div class="card-container">
   <div class="card3">
     <div class="card-header">
@@ -79,13 +83,17 @@
   </div>
 </div>
 </div>
-
-
-         <h2 class="card-title">vous aimeriez peut-être</h2>
-        <hr>
-      <?php foreach($lesProduitsSuggérés as $unProdSug){
-              $InfoProd= getInfoLeProd($unProdSug['id_produit']);
+</div>
+</div>
+          <div class="divRight card3">
+            <div class="prodSugg">
+              <h2 class="title-product">produits suggérés</h2>
+                <hr>
+         
+                 <?php foreach($lesProduitsSuggérés as $unProdSug){
+                  $InfoProd= getInfoLeProd($unProdSug['id_produit']);
                 foreach($InfoProd as $uneInfo2){
+                  $id2 = $uneInfo2['id'];
                   $description2 = $uneInfo2['description'];
                   $prix2 = $uneInfo2['prix'];
                   $image2 = $uneInfo2['image'];
@@ -93,13 +101,24 @@
                   $desc_detail2 = $uneInfo2['desc_detail'];
 
                 }?>
-      </div>
-     
-                
-                        
-<?php 
-      } ?>
+         
+         <div class="container">
+              <img src="<?php echo $image2 ?>" class="image" onclick="window.location.href = 'index.php?uc=voirProduits&categorie=<?php echo $idCategorie2 ?>&action=voirInfoProduit&leProd=<?php echo $id2 ?>';">
+              <p class="nom-prod"><?php echo $description2 ?></p>
+         </div>
+       
 
+
+
+        
+
+      
+     
+          <?php 
+      }?>      
+                        
+
+    </div>
       </div>
     </div>
   </div>
