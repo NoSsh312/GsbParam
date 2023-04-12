@@ -35,7 +35,8 @@ switch($action)
 			$leStock = getStockProducts($idProduit);
 			$contenance = getContenanceProd($idProduit);
 			$lesAvis=getLesAvisProd($idProduit);
-			
+			$stock = null;
+			$prix = null;
 				include("vues/v_leProduit.php");
 
 			

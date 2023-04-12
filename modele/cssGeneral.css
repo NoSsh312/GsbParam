@@ -440,9 +440,73 @@ div.imgCard {
 
 /*CSS POUR LA PAGE v_leProduit.php */
 
+
+/*étoiles*/
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+/* */
+.open-button{
+	border: none;
+    background-color: white;
+    color: blue;
+}
+.open-button:hover{
+text-decoration: underline;
+text-underline-offset: 5px;
+
+}
+.input-avis{
+	width:100%
+}
+.form-container{
+	display: grid;
+}
+
+.card3Avis{
+	width:50vw; 
+	height:30vw;
+}
+.avisPart{
+	display: grid;
+    justify-content: center;
+}
 .form-popup{
 	position: absolute;
-	z-index: 0;
+	z-index: 15;
 }
 #myForm{
 	display:none;

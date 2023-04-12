@@ -35,25 +35,40 @@
     <p class="card-description"><?php echo $desc_detail ?></p>
    
     <p class="center">2 avis pour ce produit</p>
-    <div style="text-align:center;">
+    <div class="avisPart"style="text-align:center;">
     <button class="center open-button"  onclick="openForm()">Donner un avis</button>
 </div>
     <div style="position:absolute;">
-    <div class="card-container form-popup" style="position:absolute;z-index:15;" id="myForm">
-  <div class="card3" style="width:50vw; height:50vw;">
+    <div class="card-container form-popup"  id="myForm">
+  <div class="card3 card3Avis" >
     <div class="card-header avis-header" >
       <div class="card-body">
   <form action="/action_page.php" class="form-container">
    
 
     <label for="title"><b>Sujet</b></label>
-    <input type="text" placeholder="Titre du Commentaire" name="title" required>
+    <input type="text" class="input-avis" placeholder="Titre du Commentaire" name="title" min=1 max=25 required>
 
     <label for="descriptionC"><b>Description</b></label>
-    <input type="textarea" placeholder="Description" name="descriptionC" required>
+   
+    <input type="text" class="input-avis" placeholder="Description" name="descriptionC" min=1 max=100 required>
+    <div class="rate">
+    <input type="radio" id="star5" name="rate" value="5" />
+    <label for="star5" >5 stars</label>
+    <input type="radio" id="star4" name="rate" value="4" />
+    <label for="star4" >4 stars</label>
+    <input type="radio" id="star3" name="rate" value="3" />
+    <label for="star3" >3 stars</label>
+    <input type="radio" id="star2" name="rate" value="2" />
+    <label for="star2" >2 stars</label>
+    <input type="radio" id="star1" name="rate" value="1" />
+    <label for="star1" >1 star</label>
+  </div>
 
-    <button type="submit" class="btn">Envoyer</button>
-    <button type="button" class="btn cancel" onclick="closeForm()">Fermer</button>
+    <hr>
+    <button type="submit" class="btn btn-outline-success form_action_avis">Envoyer</button>
+</br>
+    <button type="button" class="btn betn-outline-success cancel form_action_avis" onclick="closeForm()">Fermer</button>
   </form>
 </div>
 </div>
@@ -61,13 +76,15 @@
 </div>
 </div>
     <hr>
-    <form action="index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $idProduit ?>&action=ajouterAuPanier" method="POST">
+    <!-- action="index.php?uc=voirProduits&categorie= echo $categorie ?>&produit= echo $idProduit ?>&action=ajouterAuPanier" -->
+    <form  method="POST">
     <div id="forSelect">
       <div id="nameSelect">
         <p>Contenance : </p>
       </div>
       <div id="select-list">
         <select id="select-contenance" class="form-select" aria-label="Default select example" onchange="myFunction()">
+        
           <option selected>Choisir la contenance</option>
           <?php 
           foreach($contenance as $uneContenance){
@@ -77,12 +94,20 @@
           ?>
         
         </select>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit">o</button>
+        </div>
       </div>
     </div>
+        </form>
     <div class="info-prix-etc">
-      <p class="card-price" id="priceproduct">Prix: <?php echo $prix ?>€ &nbsp </p>
+      <p class="card-price" id="priceproduct">
+        <?php if($stock != null){
+          echo $stock;
+        } ?>
+      </p>
       <p id="stockproduct">En Stock &nbsp</p> <!-- condition reste du stock ou pas  -->
-      <p class="exemplaire" id="exemplaire">( exemplaire restants) </p>
+      <p class="exemplaire" id="exemplaire"></p>
     </div>
 
     <div class="input-group div-qte">
@@ -96,7 +121,7 @@
     <button class="btn btn-outline-success btn-send" type="button">Ajouter au panier</button>
   </div>
 </div>
-</form>
+
 </div>
 </div>
 </div>
@@ -191,25 +216,42 @@
     var qte = myArray[0];
     var unite = myArray[1];
     var id = myText[1];
-    document.cookie="profile_viewer_uid=1" 
+    document.cookie="idProd=" + id;
+    document.cookie="qteProd=" + qte;
+    document.cookie='uniteProd=' + unite; 
+    console.log(document.cookie);
      
   
   }
 </script>
 <?php 
-$unite="<script>document.writeln(id);</script>";
-$qte="<script>document.writeln(unite);</script>";
-$id="<script>document.writeln(qte);</script>";
+
+$id = $_COOKIE['idProd'];
+echo $id;
+$qte = $_COOKIE['qteProd'];
 echo $qte;
-echo $qte;
+$unite = $_COOKIE['uniteProd'];
+echo $unite;
 
 $test = getPriceAndStock($id, $unite , $qte);
 foreach($test as $untest){
   $stock = $untest['stock'];
   $prix = $untest['prix'];
+
   var_dump($stock);
+  var_dump($prix);
+
+  //  echo "<script> document.getElementById('exemplaire').innerHTML = '$stock' </script>";
+  //  echo "<script> document.getElementById('priceproduct').innerHTML = Prix:'$prix' </script>";
 }
- echo '<script> document.getElementById("exemplaire").innerHTML = '.$stock.' </script>';
- echo '<script> document.getElementById("priceproduct").innerHTML = Prix:'.$prix.' </script>';
+
+
+
 ?>
+<script>
+  let prix = <?= json_encode($prix) ?>
+  let stock = <?= json_encode($stock) ?>
+  document.getElementById('exemplaire').innerHTML = stock;
+  document.getElementById('priceproduct').innerHTML = Prix: + prix;
+</script>
 

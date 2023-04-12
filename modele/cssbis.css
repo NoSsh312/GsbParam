@@ -316,6 +316,7 @@ width: 30%;
   width: 40%;
 }
 #select-list{
+  display: flex;
   width: 70%;
 }
 .info-prix-etc{
