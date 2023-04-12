@@ -87,7 +87,7 @@
 </div>
           <div class="divRight card3">
             <div class="prodSugg">
-              <h2 class="title-product">produits suggérés</h2>
+              <h2 class="title-product">Produits suggérés</h2>
                 <hr>
          
                  <?php foreach($lesProduitsSuggérés as $unProdSug){

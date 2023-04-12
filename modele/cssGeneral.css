@@ -601,6 +601,7 @@ box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 background-color: #fff;
 border-radius: 4px;
 overflow: hidden;
+overflow-y: scroll;
 font-family: 'Helvetica Neue', sans-serif;
 }
 .divRight{
@@ -608,7 +609,6 @@ font-family: 'Helvetica Neue', sans-serif;
   float: right;
   flex-direction: column;
   height: 700px;
-  overflow-y: auto;
 }
 .nom-prod{
 	font-size: small;
