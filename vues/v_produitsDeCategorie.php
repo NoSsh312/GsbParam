@@ -86,4 +86,3 @@ if(isset($_SESSION['nomAdmin'])){?>
 
 </div>
 
-<script src="modele/script.js"></script>

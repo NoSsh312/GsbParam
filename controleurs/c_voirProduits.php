@@ -32,6 +32,9 @@ switch($action)
 			$lesProduits = getTousLesProduits();
 			$leProd= getInfoLeProd($idProduit);
 			$lesProduitsSuggérés = getProductsYouMayAlsoLike($idProduit);
+			$leStock = getStockProducts($idProduit);
+			$contenance = getContenanceProd($idProduit);
+			$lesAvis=getLesAvisProd($idProduit);
 			
 				include("vues/v_leProduit.php");
 

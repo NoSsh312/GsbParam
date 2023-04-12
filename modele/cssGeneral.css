@@ -439,6 +439,27 @@ div.imgCard {
 }
 
 /*CSS POUR LA PAGE v_leProduit.php */
+
+.form-popup{
+	position: absolute;
+	z-index: 0;
+}
+#myForm{
+	display:none;
+}
+.unAvis-wrapper{
+	display: flex;
+	flex-wrap: nowrap;
+}
+.left-avis{
+	width: 20%;
+}
+.right-avis{
+	width: 80%;
+}
+.avis-header{
+	height: 100% !important;
+}
 .cardProdInfo {
 	background-color: white;
 

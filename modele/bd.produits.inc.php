@@ -113,7 +113,7 @@ include_once 'bd.inc.php';
 		{
 			$lesProduits = array();
 			$monPdo = connexionPDO();
-			$req='select id, description, prix, image, 	id_categorie,id_marque , desc_detail,	id_unite ,	qte  from produit INNER JOIN produitcontenance p on produit.id = p.id_produit';
+			$req='select id, description, prix, image, 	id_categorie,id_marque , desc_detail,	id_unite ,	qte  from produit INNER JOIN produitcontenance p on produit.id = p.id_produit group by id';
 			$res = $monPdo->query($req);
 			$lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
 			foreach($lesLignes as $laLigne){
@@ -142,7 +142,7 @@ include_once 'bd.inc.php';
 		try 
 		{
 			$monPdo = connexionPDO();
-			$req='select id, description, prix, image, 	id_categorie,id_marque , desc_detail,	id_unite ,	qte  from produit INNER JOIN produitcontenance p on produit.id = p.id_produit where id_categorie ="'.$idCategorie.'"';
+			$req='select id, description, prix, image, 	id_categorie,id_marque , desc_detail,	id_unite ,	qte  from produit INNER JOIN produitcontenance p on produit.id = p.id_produit where id_categorie ="'.$idCategorie.'" group by id';
 			$res = $monPdo->query($req);
 			$lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
 			return $lesLignes; 
@@ -589,4 +589,59 @@ function getProductsYouMayAlsoLike($id){
 	
 	return $lesProduitsSuggerés;
 }
+
+function getStockProducts($id){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT stock from produitcontenance where id_produit = :id');
+	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	$lesStocks = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $lesStocks;
+	
+}
+
+
+function getLesAvisProd($idProd){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT id, titre_commentaire, commentaire, date_avis, avis.idCli as "idClient", nomUtil from avis INNER JOIN client on avis.idCli=client.idCli where id_produit = :idProd');
+	$reqN -> bindValue(':idProd',$idProd,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	$lesAvis = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $lesAvis;
+	
+}
+
+function getContenanceProd($idProd){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT produitcontenance.id_produit, produitcontenance.id_unite, unite.label_unite, produitcontenance.qte, produitcontenance.prix FROM produitcontenance INNER JOIN unite ON produitcontenance.id_unite = unite.id WHERE id_produit = :idProd');
+	$reqN -> bindValue(':idProd',$idProd,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	$lesAvis = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $lesAvis;
+	
+}
+function getPriceAndStock($id, $unite, $qte){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT prix, stock from produitcontenance inner join unite on unite.id = produitcontenance.id_unite where id_produit = :id And label_unite = :unite and qte = :qte ;');
+	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
+	$reqN -> bindValue(':unite',$unite,PDO::PARAM_STR);
+	$reqN -> bindValue(':qte',$qte,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	$lePrixEtQte = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $lePrixEtQte;
+	
+}
+
 ?>	
