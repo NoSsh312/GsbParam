@@ -479,6 +479,11 @@ div.imgCard {
 }
 
 /* */
+
+#totalProduct{
+	text-align: center;
+	margin-top:1rem;
+}
 .open-button{
 	border: none;
     background-color: white;
@@ -493,6 +498,7 @@ text-underline-offset: 5px;
 	width:100%
 }
 .form-container{
+	height:100%;
 	display: grid;
 }
 

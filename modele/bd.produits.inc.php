@@ -550,7 +550,8 @@ if(isset($_SESSION['nomAdmin'])){
 function searchProductByPrice($prixMin, $prixMax){
 	$monPdo = connexionPDO();
 
-	$reqN=$monPdo -> prepare('SELECT `id`, `description`, `prix`, `image`, `idCategorie`, `desc_detail` FROM produit WHERE prix BETWEEN :min AND :max');
+	$reqN=$monPdo -> prepare('SELECT id,`id_produit`, `description`, `prix`, `image`, `id_categorie`, `desc_detail` FROM produitcontenance INNER JOIN produit ON produitcontenance.id_produit = produit.id 
+	WHERE prix BETWEEN :min AND :max order by prix ASC; ');
 	$reqN -> bindValue(':min',$prixMin,PDO::PARAM_STR);
 	$reqN -> bindValue(':max',$prixMax,PDO::PARAM_STR);
 	$reqN->execute();
@@ -643,5 +644,117 @@ function getPriceAndStock($id, $unite, $qte){
 	return $lePrixEtQte;
 	
 }
+
+function ajoutAvis($titre_commentaire, $commentaire, $idProduit,$idCli){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('INSERT INTO avis (`id`, `titre_commentaire`, `commentaire`, `date_avis`, `id_produit`, `idCli`) VALUES (NULL,:titre_commentaire, :commentaire,current_timestamp(), :idProduit, :idCli)');
+	$reqN -> bindValue(':titre_commentaire',$titre_commentaire,PDO::PARAM_STR);
+	$reqN -> bindValue(':commentaire',$commentaire,PDO::PARAM_STR);
+	$reqN -> bindValue(':idProduit',$idProduit,PDO::PARAM_STR);
+	$reqN -> bindValue(':idCli',$idCli,PDO::PARAM_STR);
+	
+	
+	$reqN->execute();
+	$avisAjout = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $avisAjout;
+	
+}
+function getIdAvisNote($id_produit, $idCli){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT id FROM avis WHERE id_produit = :id_produit AND idCli=:idCli');
+	$reqN -> bindValue(':id_produit',$id_produit,PDO::PARAM_STR);
+	$reqN -> bindValue(':idCli',$idCli,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	$lavis = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $lavis;
+}
+
+function ajoutNote($id_avis, $idCli,$_idProd,$note){
+	$monPdo = connexionPDO();
+	$reqN=$monPdo -> prepare('INSERT INTO possede (`idCli`,`id`,`note`,`id_avis`) VALUES (:idCli,:_idProd,:note,:id_avis)');
+	$reqN -> bindValue(':_idProd',$_idProd,PDO::PARAM_STR);
+	$reqN -> bindValue(':id_avis',$id_avis,PDO::PARAM_STR);
+	$reqN -> bindValue(':idCli',$idCli,PDO::PARAM_STR);
+	$reqN -> bindValue(':note',$note,PDO::PARAM_STR);
+	
+	
+	$reqN->execute();
+	$noteAjout = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $noteAjout;
+	
+}
+function getCatById($id){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT id_categorie FROM produit WHERE produit.id = :id');
+	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	$laCategorie = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $laCategorie;
+}
+
+function getIfDejaAvis($idProd,$idCli){
+	$monPdo = connexionPDO();
+$ok=true;
+	$reqN=$monPdo -> prepare('SELECT id FROM avis WHERE id_produit = :idProd AND idCli=:idCli');
+	$reqN -> bindValue(':idProd',$idProd,PDO::PARAM_STR);
+	$reqN -> bindValue(':idCli',$idCli,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	$laCategorie = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	if(empty($laCategorie)){
+		$ok=false;
+	}
+	return $ok;
+}
+
+function getNoteAvis($id_avis){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT note FROM possede WHERE id_avis = :id_avis');
+	$reqN -> bindValue(':id_avis',$id_avis,PDO::PARAM_STR);
+	
+	
+	$reqN->execute();
+	$laCategorie = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $laCategorie;
+}
+
+function getNoteMoy($idProd){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT ROUND(AVG(note),2) as "Moy" FROM `possede` WHERE id=:idProd;');
+	$reqN -> bindValue(':idProd',$idProd,PDO::PARAM_STR);
+	
+	
+	$reqN->execute();
+	$laCategorie = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $laCategorie;
+}
+
+function getNbAvis($idProd){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT COUNT(*) as "nbAvis" FROM `avis` WHERE id_produit=:idProd;');
+	$reqN -> bindValue(':idProd',$idProd,PDO::PARAM_STR);
+	
+	
+	$reqN->execute();
+	$laCategorie = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $laCategorie;
+}
+
+
 
 ?>	

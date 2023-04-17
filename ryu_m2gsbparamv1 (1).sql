@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3307
--- Généré le : lun. 17 avr. 2023 à 12:40
+-- Généré le : lun. 17 avr. 2023 à 16:07
 -- Version du serveur : 10.6.5-MariaDB
 -- Version de PHP : 7.4.26
 
@@ -40,7 +40,6 @@ CREATE TABLE IF NOT EXISTS `administrateur` (
 --
 
 INSERT INTO `administrateur` (`id`, `nom`, `mdp`) VALUES
-(0, 'Ryu', 'lemdp'),
 (1, 'LeBoss', '$2y$10$bFgb1XanKXBGUznpmEPdZe.2rjpt.ub6dLZfNFMiUf.h/o.FKX3Rq'),
 (2, 'LeChefProjet', '$2y$10$6E1TzKDFKn0F/alWffPgg.DosEd661AAoxDk6qJLSetD/qwAVnT9.');
 
@@ -55,20 +54,26 @@ CREATE TABLE IF NOT EXISTS `avis` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titre_commentaire` varchar(200) DEFAULT NULL,
   `commentaire` varchar(250) DEFAULT NULL,
-  `date_avis` date DEFAULT NULL,
+  `date_avis` date DEFAULT current_timestamp(),
   `id_produit` char(32) NOT NULL,
   `idCli` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `avis_produit_FK` (`id_produit`),
   KEY `avis_client0_FK` (`idCli`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `avis`
 --
 
 INSERT INTO `avis` (`id`, `titre_commentaire`, `commentaire`, `date_avis`, `id_produit`, `idCli`) VALUES
-(2, 'dsdsd', 'dsdsd', '2023-04-01', 'c01', 29);
+(1, 'Le premier Avis', 'Ceci est le commentaire du premier avis', '2023-04-17', 'c01', 29),
+(2, 'Deuxieme  commentaire', 'Ceci est le deuxieme commentaire', '2023-04-17', 'c02', 29),
+(3, 'Ici test 3 allo', 'test', '2023-04-17', 'c01', 30),
+(4, 'teeeet', 'ttttttttt', '2023-04-17', 'c02', 30),
+(5, 'gklbjwhlkgfqdggqdg', 'fdqgfqgdfgqg', '2023-04-17', 'c04', 29),
+(6, 'dsdsqfdsfd', 'fdqsfdfqssf', '2023-04-17', 'c05', 29),
+(7, 'dgdsgsg', 'rfesqgfdsgsd', '2023-04-17', 'c06', 29);
 
 -- --------------------------------------------------------
 
@@ -110,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `client` (
   `tel` char(10) NOT NULL,
   `courriel` char(50) NOT NULL,
   PRIMARY KEY (`idCli`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `client`
@@ -131,7 +136,8 @@ INSERT INTO `client` (`idCli`, `nomUtil`, `mdp`, `nom`, `adresse`, `ville`, `cp`
 (24, '111', '$2y$10$AQ9kFwszyWlMnxRptlqSdO0XuDs/01WEJxJwChJJTfYX4cX57RUKq', '111', '111', '111', '11111', '1111111111', '111@1111.11'),
 (25, '222', '$2y$10$G1xfl6Mle1nGCYKu/gV5N.PhCezJRSMj19f8PkvI9BC2SHEaID1lq', '222', '222', '222', '22222', '2222222222', '222@222.22'),
 (28, 'Ryu', '$2y$10$bQv9qafeFpKDE5wT9.RgSuBvOIff5Q4n3JkopuOdGOXfz6m6OVHJG', 'vang', 'adresse', 'test', '45545', '0645645121', 'test@test.fr'),
-(29, 'test', '$2y$10$V.b1d/76Gpg3ngXB2m3Jxuw4apfVjUkmMFCsVrHSourt3tPISY5C.', 'test', 'test', 'test', '11111', '1111111111', 'test@test.test');
+(29, 'test', '$2y$10$V.b1d/76Gpg3ngXB2m3Jxuw4apfVjUkmMFCsVrHSourt3tPISY5C.', 'test', 'test', 'test', '11111', '1111111111', 'test@test.test'),
+(30, 'test3', '$2y$10$b2PCt/HoRuAAoemt.OIZtuaGaxHuT7k55si3NBDU2D6p35m.eWKVC', 'test3', 'test3', 'test3', '22222', '3333333333', 'test3@test3.test3');
 
 -- --------------------------------------------------------
 
@@ -217,7 +223,13 @@ CREATE TABLE IF NOT EXISTS `possede` (
 --
 
 INSERT INTO `possede` (`idCli`, `id`, `note`, `id_avis`) VALUES
-(29, 'c01', 5, 2);
+(29, 'c01', 1, 1),
+(29, 'c02', 4, 2),
+(29, 'c04', 3, 5),
+(29, 'c05', 1, 6),
+(29, 'c06', 3, 7),
+(30, 'c01', 5, 3),
+(30, 'c02', 2, 4);
 
 -- --------------------------------------------------------
 

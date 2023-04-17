@@ -43,7 +43,7 @@
                <option value="3">Three</option>
             </select>
             </div>
-			<button id="buttonSearchPrice" type="submit" class="btn btn-success" onclick="verifPrixBienInferieurACeQueLonSouhaiteSinonCaMarchePas()">Filtrer</button>
+			<button id="buttonSearchPrice" type="submit" class="btn btn-success">Filtrer</button>
          </div>
       </div>
    </form>

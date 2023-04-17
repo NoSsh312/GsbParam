@@ -1,3 +1,4 @@
+<!-- ('1', 'LeBoss', 'TheBest$147#') -->
 <?php
 session_start();
 include("vues/v_entete.html") ;

@@ -37,6 +37,14 @@ switch($action)
 			$lesAvis=getLesAvisProd($idProduit);
 			$stock = null;
 			$prix = null;
+			$noteMoy= getNoteMoy($idProduit);
+			$lesInfoUtil= getLesInfoUtil($_SESSION['nomUtil']);
+			foreach($lesInfoUtil as $uneInfo){
+			$idClient= $uneInfo['idCli'];
+			}
+			$avisOuPas= getIfDejaAvis($idProduit,$idClient);
+			$nbAvis=getNbAvis($idProduit);
+		
 				include("vues/v_leProduit.php");
 
 			
@@ -73,6 +81,67 @@ switch($action)
 		}
 		break;
 	}
+	case 'voirPrixDuProduit' :
+		{
+			$idProduit =$_REQUEST['leProd'];
+				$categorie =$_REQUEST['categorie'];	
+			
+				$lesProduits = getTousLesProduits();
+				$leProd= getInfoLeProd($idProduit);
+				$lesProduitsSuggérés = getProductsYouMayAlsoLike($idProduit);
+				$leStock = getStockProducts($idProduit);
+				$contenance = getContenanceProd($idProduit);
+				$lesAvis=getLesAvisProd($idProduit);
+			$idProd =$_REQUEST['leProd'];
+			$categorie=getCatById($idProd);
+			foreach($categorie as $cat){
+				$idCat = $cat['id_categorie'];
+			}
+			$result = $_POST['select-contenance'];
+			 
+			$result_explode = explode('-', $result);
+			$resultat = getPriceAndStock($idProd, $result_explode[1] , $result_explode[0]);
+			$noteMoy= getNoteMoy($idProduit);
+			$nbAvis=getNbAvis($idProduit);
+			include("vues/v_leProduit.php");
+			//header('Location:index.php?uc=voirProduits&categorie='.$idCat.'&action=voirInfoProduit&leProd='.$idProd);
+			break;
+		}
+		case 'gererAvis' :
+			{
+				$idProduit =$_REQUEST['leProd'];
+				$categorie =$_REQUEST['categorie'];	
+			
+				$lesProduits = getTousLesProduits();
+				$leProd= getInfoLeProd($idProduit);
+				$lesProduitsSuggérés = getProductsYouMayAlsoLike($idProduit);
+				$leStock = getStockProducts($idProduit);
+				$contenance = getContenanceProd($idProduit);
+				$lesAvis=getLesAvisProd($idProduit);
+			$idProd =$_REQUEST['leProd'];
+
+			$lesInfoUtil= getLesInfoUtil($_SESSION['nomUtil']);
+			foreach($lesInfoUtil as $uneInfo){
+			$idClient= $uneInfo['idCli'];
+			}
+			$avisOuPas= getIfDejaAvis($idProduit, $idClient);
+if($avisOuPas == false){
+			ajoutAvis($_POST['title'],$_POST['descriptionC'],$idProduit, $idClient);
+			$lavis=getIdAvisNote($idProduit,$idClient);
+			foreach($lavis as $infoAvis){
+				$idAvis =  $infoAvis['id'];
+			}
+			ajoutNote($idAvis,$idClient,$idProduit,$_POST['rate']);
+			
+}
+$nbAvis=getNbAvis($idProduit);
+	$noteMoy= getNoteMoy($idProduit);
+			include("vues/v_leProduit.php");
+			//header('Location:index.php?uc=voirProduits&categorie='.$idCat.'&action=voirInfoProduit&leProd='.$idProd);
+		
+				break;
+		
+			}
 }
 ?>
 
