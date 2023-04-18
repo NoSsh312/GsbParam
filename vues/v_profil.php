@@ -44,7 +44,7 @@ foreach($lesCommandesUtil as $uneCommande){
 					$produit =$unContenuProduit['idProduit'];
 					$description =$unContenuProduit['description'];
 					$prix =$unContenuProduit['prix'];
-					$idCategorie =$unContenuProduit['idCategorie'];
+					$idCategorie =$unContenuProduit['id_categorie'];
 				
 				
 				?>
@@ -113,7 +113,7 @@ foreach($lesCommandesUtil as $uneCommande){
 		<li><strong>Titre du commentaire :</strong> <?php echo $titre_com;?></li>
 		<li><strong>Produit :</strong> <?php echo $description;?></li>
         <li><strong>Commentaire:</strong> <?php echo $commentaire;?></li>
-		<li><strong>Note:</strong> <?php echo $note;?></li>
+		<li><strong>Note:</strong> <?php echo $note;?>/5</li>
 		<li><strong>Date de l'avis:</strong> <?php echo $date;?></li>
 	 </ul>
 	</div>

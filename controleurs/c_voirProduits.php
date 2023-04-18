@@ -29,6 +29,7 @@ switch($action)
 		{
 			$idProduit =$_REQUEST['leProd'];
 			$categorie =$_REQUEST['categorie'];
+			$libelleCat=getLeLibelleCategorie($categorie);
 			$lesProduits = getTousLesProduits();
 			$leProd= getInfoLeProd($idProduit);
 			$lesProduitsSuggérés = getProductsYouMayAlsoLike($idProduit);
@@ -37,12 +38,16 @@ switch($action)
 			$lesAvis=getLesAvisProd($idProduit);
 			$stock = null;
 			$prix = null;
+
+			$laMarque=getMarque($idProduit);
 			$noteMoy= getNoteMoy($idProduit);
+			if(isset($_SESSION['nomUtil'])){
 			$lesInfoUtil= getLesInfoUtil($_SESSION['nomUtil']);
 			foreach($lesInfoUtil as $uneInfo){
 			$idClient= $uneInfo['idCli'];
 			}
 			$avisOuPas= getIfDejaAvis($idProduit,$idClient);
+		}
 			$nbAvis=getNbAvis($idProduit);
 		
 				include("vues/v_leProduit.php");
@@ -64,7 +69,14 @@ switch($action)
 	{
 		$idProduit=$_REQUEST['produit'];
 		$qte = $_REQUEST['quantiteNum'];
-		$ok = ajouterAuPanier($idProduit,$qte);
+
+		$qteUnite =$_REQUEST['qteUnite'];
+		$idUnite=getIdByLabelUnite($qteUnite);
+		foreach($idUnite as $unlibelle){
+			$lelibelleUnite=$unlibelle['id'];
+		}
+		$prixUnite = $_REQUEST['prixViaContenance'];
+		$ok = ajouterAuPanier($idProduit,$qte,$lelibelleUnite,$prixUnite);
 		if(!$ok)
 		{
 			$message = "Cet article est déjà dans le panier !!";
@@ -85,7 +97,7 @@ switch($action)
 		{
 			$idProduit =$_REQUEST['leProd'];
 				$categorie =$_REQUEST['categorie'];	
-			
+				$libelleCat=getLeLibelleCategorie($categorie);
 				$lesProduits = getTousLesProduits();
 				$leProd= getInfoLeProd($idProduit);
 				$lesProduitsSuggérés = getProductsYouMayAlsoLike($idProduit);
@@ -98,9 +110,12 @@ switch($action)
 				$idCat = $cat['id_categorie'];
 			}
 			$result = $_POST['select-contenance'];
-			 
+		
 			$result_explode = explode('-', $result);
+			$resultQteUnite = $result_explode[1];
 			$resultat = getPriceAndStock($idProd, $result_explode[1] , $result_explode[0]);
+
+			$laMarque=getMarque($idProduit);
 			$noteMoy= getNoteMoy($idProduit);
 			$nbAvis=getNbAvis($idProduit);
 			include("vues/v_leProduit.php");
@@ -111,7 +126,7 @@ switch($action)
 			{
 				$idProduit =$_REQUEST['leProd'];
 				$categorie =$_REQUEST['categorie'];	
-			
+				$laMarque=getMarque($idProduit);
 				$lesProduits = getTousLesProduits();
 				$leProd= getInfoLeProd($idProduit);
 				$lesProduitsSuggérés = getProductsYouMayAlsoLike($idProduit);

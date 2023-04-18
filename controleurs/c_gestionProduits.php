@@ -106,16 +106,42 @@ switch($action)
 	{
 		$prixMin = $_REQUEST['prixmin'];
 		$prixMax = $_REQUEST['prixmax'];
+		$marque = $_REQUEST['MarqueDuProd'];
+		$libelleMarque = getMarqueById($marque);
 
-		if($prixMin > $prixMax){
-			echo '<script>alert("Le prix minimum doit être inférieur au prix maximum")</script>';
-			$lesProduits = getTousLesProduits();
-			include('vues/v_produits.php');
-		}else{
-			$lesProduits = searchProductByPrice($prixMin,$prixMax);
-			include('vues/v_produits.php');
+
+		if($prixMin != '' && $prixMax != ''){ // si toute les valeurs sont rentrées
+			if($prixMin > $prixMax){ //verif que prixMin est vien inférieur à prixMax    						
+				echo '<script>alert("Le prix minimum doit être inférieur au prix maximum")</script>';
+				$lesProduits = getTousLesProduits();
+				
+			}else{
+				if($marque != '0'){//si la marque est choisie																							
+					$lesProduits = searchProductByPriceAndBrand($prixMin, $prixMax, $marque);
+					
+				}
+				else{ // que le prix 																				
+					$lesProduits = searchProductByPrice($prixMin, $prixMax);											
+					
+				}
+			}
+		}else{ //prix pas renseigné 
+			if($marque == '0'){ //pas de marque renseignée
+			
+				$lesProduits = getTousLesProduits();
+		
+			}
+			else{ //que la marque
+				$lesProduits = searchProductByBrand($marque);
+			
+			}
+
 		}
 
+		$lesMarques = getAllBrand();
+		include('vues/v_produits.php');
+
+	
 		
 
 	}

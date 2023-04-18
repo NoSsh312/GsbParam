@@ -171,7 +171,8 @@ function getLesProduitsDuTableau($desIdProduit)
 		{
 			foreach($desIdProduit as $unIdProduit)
 			{
-				$req = 'select id, description, prix, image, 	id_categorie,id_marque , desc_detail,	id_unite ,	qte  from produit INNER JOIN produitcontenance p on produit.id = p.id_produit where id = "'.$unIdProduit['id'].'"';
+				$idUnite=$unIdProduit['idUnite'];
+				$req = 'select id, description, prix, image, id_categorie,id_marque , desc_detail,	id_unite ,	qte,stock  from produit INNER JOIN produitcontenance p on produit.id = p.id_produit where id = "'.$unIdProduit['id'].'"AND id_unite='.$idUnite;
 				$res = $monPdo->query($req);
 				$unProduit = $res->fetch(PDO::FETCH_ASSOC);
 				$unProduit['qte']= $unIdProduit['qte'];
@@ -202,7 +203,7 @@ function getLesProduitsDuTableau($desIdProduit)
 	 * @param array $lesIdProduit tableau associatif contenant les id des produits commandés
 	 
 	*/
-	function creerCommande($idCli,$nom,$rue,$cp,$ville,$mail, $lesIdProduit ,$id_unite,$qteAch)
+	function creerCommande($idCli,$nom,$rue,$cp,$ville,$mail, $lesIdProduit)
 	{
 		try 
 		{
@@ -219,7 +220,12 @@ function getLesProduitsDuTableau($desIdProduit)
 		// insertion produits commandés
 		foreach($lesIdProduit as $unIdProduit)
 			{	$idProd=$unIdProduit['id'];
-		$prodQte=$unIdProduit['qte'];
+			
+		$qteAch=$unIdProduit['qte'];
+		
+		$id_unite = $unIdProduit['idUnite'];
+		$prodQte =getQteContenance($idProd,$id_unite);
+		$prodQte= $prodQte['qte'];
 		$req = "insert into detail_cmd values ('$idProd','$id_unite','$prodQte','$idCommande','$qteAch')";
 		$res = $monPdo->exec($req);
 	}
@@ -229,6 +235,19 @@ catch (PDOException $e)
 	print "Erreur !: " . $e->getMessage();
 	die();
 }
+}
+
+function getQteContenance($idProd,$id_unite){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT qte  FROM `produitcontenance` WHERE id_produit=:idProd AND id_unite = :id_unite;');
+	$reqN -> bindValue(':idProd',$idProd,PDO::PARAM_STR);
+	$reqN -> bindValue(':id_unite',$id_unite,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	$laCategorie = $reqN->fetch(PDO::FETCH_ASSOC);
+	
+	return $laCategorie;
 }
 
 /**
@@ -756,5 +775,103 @@ function getNbAvis($idProd){
 }
 
 
+function getMarque($idProd){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT id_marque, label_marque  FROM `produit` inner join marque on marque.id = produit.id_marque WHERE produit.id=:idProd;');
+	$reqN -> bindValue(':idProd',$idProd,PDO::PARAM_STR);
+	
+	
+	$reqN->execute();
+	$laCategorie = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $laCategorie;
+}
+function getIdByLabelUnite($label){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT id  FROM `unite` WHERE label_unite=:label;');
+	$reqN -> bindValue(':label',$label,PDO::PARAM_STR);
+	
+	
+	$reqN->execute();
+	$laCategorie = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $laCategorie;
+}
+function getPrixByProdUnite($idProd,$id_unite){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT prix  FROM `produitcontenance` WHERE id_produit=:idProd AND id_unite = :id_unite;');
+	$reqN -> bindValue(':idProd',$idProd,PDO::PARAM_STR);
+	$reqN -> bindValue(':id_unite',$id_unite,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	$laCategorie = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $laCategorie;
+}
+
+
+/**
+ * recherche le produit en fonction des prix et de la marque
+ * 
+ * @param prixMin représente le prix minimum accépté dans la recherche
+ * @param prixMax représente le prix maximum accépté dans la recherche
+ * @param marque représente la marque du produit rechercher
+ */
+function searchProductByPriceAndBrand($prixMin, $prixMax, $marque){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT produit.id, description, desc_detail, image, prix, produit.id_marque,id_categorie, label_marque from produit inner join marque on produit.id_marque = marque.id inner join produitcontenance on produit.id = produitcontenance.id_produit where marque.id = :marque and produitcontenance.prix BETWEEN :min and :max;  GROUP BY produit.id');
+	$reqN -> bindValue(':marque',$marque,PDO::PARAM_STR);
+	$reqN -> bindValue(':min',$prixMin,PDO::PARAM_STR);
+	$reqN -> bindValue(':max',$prixMax,PDO::PARAM_STR);
+	$reqN->execute();
+	$lesLignesN = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $lesLignesN;
+}
+/**
+ * recherche le produit en fonction de la marque
+ * 
+ * @param marque représente la marque du produit rechercher
+ */
+function searchProductByBrand($marque){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT produit.id, label_marque,description, desc_detail, id_categorie,id_marque, image, prix from produit inner join marque on marque.id = produit.id_marque inner join produitcontenance on produitcontenance.id_produit = produit.id where id_marque = :marque GROUP BY produit.id;');
+	$reqN -> bindValue(':marque',$marque,PDO::PARAM_STR);
+	$reqN->execute();
+	$lesProduits = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $lesProduits;
+}
+
+/**
+ * function qui va chercher toutes les marques disponibles
+ * 
+ */
+function getAllBrand(){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT id, label_marque from marque order by id asc; ');
+	$reqN->execute();
+	$lesMarques = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $lesMarques;
+}
+function getMarqueById($idmarque){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT id, label_marque from marque where id = :id');
+	$reqN -> bindValue(':id',$idmarque,PDO::PARAM_STR);
+	
+	
+	$reqN->execute();
+	$laMarque = $reqN->fetch(PDO::FETCH_ASSOC);
+	
+	return $laMarque;
+}
 
 ?>	

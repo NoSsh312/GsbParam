@@ -44,7 +44,7 @@ function supprimerPanier()
  * @param int $qte la quantite d'un produit
  * @return boolean $ok vrai si le produit n'était pas dans la variable, faux sinon 
 */
-function ajouterAuPanier($idProduit,$qte)
+function ajouterAuPanier($idProduit,$qte,$idUnite,$prixUnite)
 {
 	$i =0;
 	$ok = true;
@@ -57,7 +57,7 @@ function ajouterAuPanier($idProduit,$qte)
 		$i++;
 	}
 	if($ok){
-		$produit = ['id' => $idProduit, 'qte' => $qte];
+		$produit = ['id' => $idProduit, 'qte' => $qte, 'idUnite' => $idUnite, 'prixContenance' => $prixUnite];
 		$_SESSION['produits'][$i] = $produit;
 		
 
@@ -76,7 +76,7 @@ function ajouterAuPanier($idProduit,$qte)
  * @param string $idProduit identifiant de produit
  * @param int $qte la quantite d'un produit
 */
-function modifyQty($idProduit,$qte)
+function modifyQty($idProduit,$qte,$idUnite,$prixUnite)
 {
 
 	$i =0;
@@ -85,7 +85,7 @@ function modifyQty($idProduit,$qte)
 		{
 			if($unProduit['id'] == $idProduit){
 
-			$produit = ['id' => $idProduit, 'qte' => $qte];
+			$produit = ['id' => $idProduit, 'qte' => $qte,'idUnite' => $idUnite, 'prixContenance' => $prixUnite];
 			$_SESSION['produits'][$i] = $produit;
 
 		}

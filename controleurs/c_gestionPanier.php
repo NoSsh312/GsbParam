@@ -33,6 +33,7 @@ switch($action)
 		break;
 	}
 	case 'passerCommande' :
+		{
 	    $n= nbProduitsDuPanier();
 		if($n>0)
 		{   // les variables suivantes servent à l'affectation des attributs value du formulaire
@@ -46,6 +47,7 @@ switch($action)
 			include ("vues/v_message.php");
 		}
 		break;
+	}
 	case 'confirmerCommande'	:
 	{
 		$nom =$_REQUEST['nom'];
@@ -86,6 +88,8 @@ switch($action)
 		$idProduit=$_REQUEST['produit'];	
 		$desIdProduit = getLesIdProduitsDuPanier();
 		$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
+		$idUnite=$_REQUEST['idUnite'];
+		$stock=$_REQUEST['stock'];
 		include("vues/v_modifierQte.php");
 		break;
 	}
@@ -94,7 +98,11 @@ switch($action)
 	{
 		$idProduit=$_REQUEST['produit'];
 		$qte = $_POST['quantiteModif'];
-		modifyQty($idProduit,$qte);
+		$qteUnite =$_REQUEST['idUnite'];
+	
+		$stock=$_REQUEST['stock'];
+		$prixContenance = getPrixByProdUnite($idProduit,$qteUnite);
+		modifyQty($idProduit,$qte,$qteUnite,$prixContenance);
 		header("Location:index.php?uc=gererPanier&action=voirPanier");
 		break;
 	}

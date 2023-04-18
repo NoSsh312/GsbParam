@@ -6,6 +6,10 @@
   $idCategorie = $uneInfo['id_categorie'];
   $desc_detail = $uneInfo['desc_detail'];
 }
+
+foreach($laMarque as $uneMarque){
+  $libelleMarque=$uneMarque['label_marque'];
+}
 ?>
 
 <!-- <div class="imgCard">
@@ -31,7 +35,7 @@
               </div>
               <div class="card-body card-body-bis">
                 <h2 class="card-title title-product"><?php echo $description ?></h2>
-                <p class="text-product">Produit de la marque "" et de la catégorie ""</p>
+                <p class="text-product">Produit de la marque <?php echo $libelleMarque ?> et de la catégorie <?php echo $libelleCat ?></p>
                 <h5 class="underline">Description:</h5>
                 <p class="card-description"><?php echo $desc_detail ?></p>
                 <?php 
@@ -91,7 +95,7 @@
                     <p>Contenance : </p>
                   </div>
                   <div id="select-list">
-                    <select id="select-contenance" name="select-contenance" class="form-select" aria-label="Default select example" onchange="myFunction()">
+                    <select id="select-contenance" name="select-contenance" class="form-select" aria-label="Default select example" onchange="myFunction()" required>
                       
                       <option selected>Choisir la contenance</option>
                       <?php 
@@ -150,8 +154,13 @@
             echo "";
           } 
           else{
-          ?><div class="input-group div-qte">
-            <select class="custom-select select-qte" id="inputGroupSelect04" onchange="getTotal()">
+            
+          ?><form action="index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&produit=<?php echo $idProduit ?>&action=ajouterAuPanier" method="POST">
+          <div class="input-group div-qte">
+            <input name="prixViaContenance" value="<?php echo $prixContenance?>" hidden >
+            <input name="qteUnite" value="<?php echo $resultQteUnite?>" hidden >
+            
+            <select class="custom-select select-qte" id="inputGroupSelect04" name="quantiteNum" onchange="getTotal()" required>
              <option disabled selected>Combien en voulez-vous?</option>
              <?php 
              for($i=1; $i<=$stockContenance; $i++){
@@ -161,7 +170,9 @@
             ?>
            </select>
            <div class="input-group-append div-send">
-            <button class="btn btn-outline-success btn-send" type="button">Ajouter au panier</button>
+            
+            <button class="btn btn-outline-success btn-send" type="submit">Ajouter au panier</button>
+          </form>
           </div>
         </div>
         <?php

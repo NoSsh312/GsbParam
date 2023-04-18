@@ -28,20 +28,41 @@
             </div>
          </div> 
          <br>
-         <?php if(isset($prixMin) && isset($prixMax)){
-            ?><p class="powered">Produit entre <?php echo $prixMin; ?> € et <?php  echo $prixMax; ?> €</p><?php
-         } 
-         ?>
+         <?php 
+            $result = "";
+            if(isset($prixMin)&&isset($prixMax)&&isset($marque)){
+               if($prixMin != "" && $prixMax != "" && $marque != '0'){ //toutes options
+                $result = "Produit entre ".$prixMin."€ et ".$prixMax." € de la marque ".$libelleMarque['label_marque'];
+             } 
+             else{
+                  if($prixMin =='' && $prixMax =='' && $marque != '0'){ // juste la marque
+                     $result = "Produit de la marque ".$libelleMarque['label_marque'];
+                  }
+                  else{
+                     if($prixMin !='' && $prixMax != '' && $marque == '0') //juste le prix{
+                        $result = "Produit entre ".$prixMin."€ et ".$prixMax." €";
+                     }
+                  }
+               }
+               ?><p class="powered"><?php echo $result ?></p><?php
+               ?>
+
          
         
          <hr>
          <div class="selectMarque">
-            <select class="form-select" aria-label="Default select example">
-               <option selected>- Choisissez une marque -</option>
-               <option value="1">One</option>
-               <option value="2">Two</option>
-               <option value="3">Three</option>
-            </select>
+         <select id="MarqueDuProd" name="MarqueDuProd" class="form-select" aria-label="Default select example">
+                     <option value="0" selected>- Choisissez une marque -</option>
+                     <?php 
+                     foreach($lesMarques as $uneMarque){
+                        $idmarque = $uneMarque['id'];
+                        $libelleMarque = $uneMarque['label_marque'];
+                        ?> 
+                        <option value="<?php echo $idmarque ?>"><?php echo $libelleMarque  ?></option>
+                        <?php
+                     }
+                     ?>
+                  </select>
             </div>
 			<button id="buttonSearchPrice" type="submit" class="btn btn-success">Filtrer</button>
          </div>

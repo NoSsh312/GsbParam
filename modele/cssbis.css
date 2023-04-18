@@ -290,6 +290,7 @@ width: 30%;
   width: 70%;
 }
 .title-product{
+  margin:0.3em;
   text-align: center;
   color: rgb(41, 158, 41);
 }
