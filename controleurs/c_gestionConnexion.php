@@ -73,7 +73,7 @@ switch($action)
 	{
 		$nomUtilisateur = $_POST['nomUtil'];
 		$mdpUtil=$_POST['mdp'];
-
+		$_SESSION['admin'] = $nomUtilisateur;
 		
 		$testConnexion = seConnecterPourAdmin($nomUtilisateur,$mdpUtil);
 	

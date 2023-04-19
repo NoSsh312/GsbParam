@@ -1,4 +1,11 @@
 <h1 class="center">Tous les produits</h1>
+<?php if(isset($_SESSION['nomAdmin'])){ 
+?><div class="center">
+   <button type="button" class="btn btn-success"  onclick="window.location.href='index.php?uc=administrer&action=ajouterUnProduit';">Ajouter un produit</button>
+   <button type="button" class="btn btn-warning"  onclick="window.location.href='index.php?uc=administrer&action=modifLesProduits';">Modifier un produit</button>
+</div>
+<?php }
+?>
 <div id="divGlobal">
 <div id="divSeachProducts">
    <div id="searchproduct">
@@ -98,16 +105,3 @@
          ?>
    </div>
 </div>
-<?php 
-   if(isset($_SESSION['nomAdmin'])){?>
-<div class=actions>
-   <div id="button-modif-prod">
-      <a id="link-modif-prod" href="index.php?uc=administrer&action=modifLesProduits">Modifier les produits</a>
-   </div>
-   <div id="button-ajouter-prod">
-      <a id="link-ajouter-prod" href="index.php?uc=administrer&action=ajouterUnProduit">Ajouter des produits</a>
-   </div>
-</div>
-<?php
-   }
-   ?>

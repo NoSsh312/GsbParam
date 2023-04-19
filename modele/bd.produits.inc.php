@@ -224,9 +224,11 @@ function getLesProduitsDuTableau($desIdProduit)
 		$qteAch=$unIdProduit['qte'];
 		
 		$id_unite = $unIdProduit['idUnite'];
+		$prixCumul = $unIdProduit['prixContenance']*$qteAch;
+
 		$prodQte =getQteContenance($idProd,$id_unite);
 		$prodQte= $prodQte['qte'];
-		$req = "insert into detail_cmd values ('$idProd','$id_unite','$prodQte','$idCommande','$qteAch')";
+		$req = "insert into detail_cmd values ('$idProd','$id_unite','$prodQte','$idCommande','$qteAch','$prixCumul')";
 		$res = $monPdo->exec($req);
 	}
 }
@@ -580,7 +582,10 @@ function searchProductByPrice($prixMin, $prixMax){
 }
 
 
-
+/**
+ * function qui récupère les infos d'un produit
+ * @param id qui correspond à l'id du produit regardé 
+ */
 
 function getInfoLeProd($id){
 	$monPdo = connexionPDO();
@@ -610,6 +615,12 @@ function getProductsYouMayAlsoLike($id){
 	return $lesProduitsSuggerés;
 }
 
+/**
+ * cherche le stock du produit
+ *
+ * @param id représente l'id du produit
+ *	
+ */
 function getStockProducts($id){
 	$monPdo = connexionPDO();
 
@@ -623,7 +634,12 @@ function getStockProducts($id){
 	
 }
 
-
+/**
+ * cherche les avis du produit en fonction de son id
+ *
+ * @param idProd représente l'id du produit
+ *	
+ */
 function getLesAvisProd($idProd){
 	$monPdo = connexionPDO();
 
@@ -637,6 +653,12 @@ function getLesAvisProd($idProd){
 	
 }
 
+/**
+ * cherche la contenance du produit
+ *
+ * @param idProd représente l'id du produit
+ *	
+ */
 function getContenanceProd($idProd){
 	$monPdo = connexionPDO();
 
@@ -649,6 +671,15 @@ function getContenanceProd($idProd){
 	return $lesAvis;
 	
 }
+/**
+ * cherche le prix et le stock du produit
+ *
+ * @param id représente l'id du produit
+ *  @param unite représente le label de l'unite du produit
+  * @param qte représente la quantite de la contenance du produit
+
+ *	
+ */
 function getPriceAndStock($id, $unite, $qte){
 	$monPdo = connexionPDO();
 
@@ -664,6 +695,16 @@ function getPriceAndStock($id, $unite, $qte){
 	
 }
 
+
+/**
+ * Ajoute un avis à un produit
+ *
+ * @param idProduit représente l'id du produit
+ *  @param idCli représente l'id du client
+  * @param titre_commentaire représente le titre du commentaire
+ *  @param commentaire représente le commentaire
+ *	
+ */
 function ajoutAvis($titre_commentaire, $commentaire, $idProduit,$idCli){
 	$monPdo = connexionPDO();
 
@@ -680,6 +721,16 @@ function ajoutAvis($titre_commentaire, $commentaire, $idProduit,$idCli){
 	return $avisAjout;
 	
 }
+
+
+/**
+ * Cherche l'id de l'avis
+ *
+ * @param id_produit représente l'id du produit
+ *  @param idCli représente l'id du client
+ 
+ *	
+ */
 function getIdAvisNote($id_produit, $idCli){
 	$monPdo = connexionPDO();
 
@@ -693,6 +744,16 @@ function getIdAvisNote($id_produit, $idCli){
 	return $lavis;
 }
 
+
+/**
+ * Ajout d'une note  à un produit
+ *
+ * @param idProd représente l'id du produit
+ *  @param idCli représente l'id du client
+ *  @param id_avis représente l'id de l'avis
+ *  @param note représente la note attribuée au produit
+ *	
+ */
 function ajoutNote($id_avis, $idCli,$_idProd,$note){
 	$monPdo = connexionPDO();
 	$reqN=$monPdo -> prepare('INSERT INTO possede (`idCli`,`id`,`note`,`id_avis`) VALUES (:idCli,:_idProd,:note,:id_avis)');
@@ -708,6 +769,13 @@ function ajoutNote($id_avis, $idCli,$_idProd,$note){
 	return $noteAjout;
 	
 }
+
+/**
+ * Cherche l'id de la cat du produit
+ *
+ * @param idProd représente l'id du produit
+ *	
+ */
 function getCatById($id){
 	$monPdo = connexionPDO();
 
@@ -720,6 +788,14 @@ function getCatById($id){
 	return $laCategorie;
 }
 
+/**
+ * Cherche si il y a deja un avis de l'utilisateur connecté sur le produit
+ * 
+ * @param idCli représente l'id de l'utilisateur connecté
+ * @param idProd représente l'id du produit
+ * @return ok retourne true si il y a deja un avis de l'utilisateur connecté sur le produit
+
+ */
 function getIfDejaAvis($idProd,$idCli){
 	$monPdo = connexionPDO();
 $ok=true;
@@ -735,6 +811,12 @@ $ok=true;
 	return $ok;
 }
 
+/**
+ * recherche la note d'avis sur le produit en fonction de l'id de l'avis
+ * 
+ * 
+ * @param id_avis représente l'id de l'avis
+ */
 function getNoteAvis($id_avis){
 	$monPdo = connexionPDO();
 
@@ -748,6 +830,12 @@ function getNoteAvis($id_avis){
 	return $laCategorie;
 }
 
+/**
+ * recherche la note moyenne d'avis sur le produit en fonction de son id
+ * 
+ * 
+ * @param idProd représente l'id du produit
+ */
 function getNoteMoy($idProd){
 	$monPdo = connexionPDO();
 
@@ -761,6 +849,12 @@ function getNoteMoy($idProd){
 	return $laCategorie;
 }
 
+/**
+ * recherche le nb d'avis sur le produit en fonction de son id
+ * 
+ * 
+ * @param idProd représente l'id du produit
+ */
 function getNbAvis($idProd){
 	$monPdo = connexionPDO();
 
@@ -774,7 +868,12 @@ function getNbAvis($idProd){
 	return $laCategorie;
 }
 
-
+/**
+ * recherche la marque du produit en fonction de son id
+ * 
+ * 
+ * @param idProd représente l'id du produit
+ */
 function getMarque($idProd){
 	$monPdo = connexionPDO();
 
@@ -787,6 +886,13 @@ function getMarque($idProd){
 	
 	return $laCategorie;
 }
+
+/**
+ * recherche l'id de l'unite en fonction de son label
+ * 
+ * 
+ * @param label représente le label du produit rechercher
+ */
 function getIdByLabelUnite($label){
 	$monPdo = connexionPDO();
 
@@ -799,6 +905,13 @@ function getIdByLabelUnite($label){
 	
 	return $laCategorie;
 }
+
+/**
+ * recherche le prix en fonction du produit et de l'unite
+ * 
+ * @param idProd l'id du produit 
+ * @param id_unite représente l'unite du produit rechercher
+ */
 function getPrixByProdUnite($idProd,$id_unite){
 	$monPdo = connexionPDO();
 
@@ -872,6 +985,67 @@ function getMarqueById($idmarque){
 	$laMarque = $reqN->fetch(PDO::FETCH_ASSOC);
 	
 	return $laMarque;
+}
+/**
+ * function qui va chercher toutes les unités de la base
+ * 
+ */
+function getAllUnite(){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT id, label_unite FROM unite;');
+	$reqN->execute();
+	$lesUnites = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $lesUnites;
+}
+
+/**
+ *function qui insert dans la BDD le nouveau produit
+ *  
+ * @param $idProduit fait ref a id
+ * @param $desc fait ref a description
+ * @param $image fait ref a image
+ * @param $desc_detail fait ref a desc_detail
+ * @param $idCategorie fait ref a id_categorie
+ * @param $idmarque fait ref a id_marque
+ * 
+ * de la table produit 
+**/
+function addNewProducts($idProduit, $desc, $image, $desc_detail,  $idCategorie, $idmarque){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('INSERT INTO `produit`(`id`, `description`, `image`, `desc_detail`, `id_categorie`, `id_marque`) VALUES (:idprod,:des,:img,:detaildesc,:idcat,:idmarque)');
+	$reqN -> bindValue(':idprod',$idProduit,PDO::PARAM_STR);
+	$reqN -> bindValue(':des',$desc,PDO::PARAM_STR);
+	$reqN -> bindValue(':img',$image,PDO::PARAM_STR);
+	$reqN -> bindValue(':detaildesc',$desc_detail,PDO::PARAM_STR);
+	$reqN -> bindValue(':idcat',$idCategorie,PDO::PARAM_STR);
+	$reqN -> bindValue(':idmarque',$idmarque,PDO::PARAM_STR);
+	$reqN->execute();
+}
+/**
+ *function qui insert le nouveau produit dans la table produitcontenance
+ *  
+ * @param $idprod fait ref a id_produit
+ * @param $idunite fait ref a id_unite
+ * @param $qte fait ref a qte
+ * @param $stock fait ref a stock
+ * @param $prix fait ref a prix
+ * 
+ * 
+**/
+function addProductInProduitContenance($idprod, $idunite, $qte, $stock, $prix){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('INSERT INTO `produitcontenance`(`id_produit`, `id_unite`, `qte`, `stock`, `prix`) VALUES 
+		(:id,:unite,:qte,:stock,:prix)');
+	$reqN -> bindValue(':id',$idprod,PDO::PARAM_STR);
+	$reqN -> bindValue(':unite',$idunite,PDO::PARAM_STR);
+	$reqN -> bindValue(':qte',$qte,PDO::PARAM_STR);
+	$reqN -> bindValue(':stock',$stock,PDO::PARAM_STR);
+	$reqN -> bindValue(':prix',$prix,PDO::PARAM_STR);
+	$reqN->execute();
 }
 
 ?>	

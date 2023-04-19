@@ -5,7 +5,7 @@ switch($action)
     case 'voirMonProfil' :
         {
 
-
+if(isset($_SESSION['nomUtil'])){
         $lesInfoUtil= getLesInfoUtil($_SESSION['nomUtil']);
         foreach($lesInfoUtil as $uneInfo){
         $idClient= $uneInfo['idCli'];
@@ -15,6 +15,7 @@ switch($action)
 
       
         $lesAvisUtil = getLesAvisUtil($idClient);
+    }
             include('vues/v_profil.php');
             break;
         }

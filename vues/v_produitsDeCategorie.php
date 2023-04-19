@@ -22,6 +22,13 @@ foreach($lesCategories as $uneCategorie){
 	<div id="tab<?php echo $i?>" class="tabcontent bis2">
 	<h2 >Produit de la Catégorie: <span class="color-green"><?php echo $uneCategorie['libelle'] ?></span></h2>
 	</br>	
+	<?php if(isset($_SESSION['nomAdmin'])){ 
+	?><div class="center">
+		<button type="button" class="btn btn-success"  onclick="window.location.href='index.php?uc=administrer&action=ajouterUnProduit';">Ajouter un produit</button>
+		<button type="button" class="btn btn-warning"  onclick="window.location.href='index.php?uc=administrer&action=modifLesProduits';">Modifier un produit</button>
+	</div>
+<?php }
+?>
 	<div class="avis-wrapper">	
 	<?php
 
@@ -60,29 +67,3 @@ foreach($lesCategories as $uneCategorie){
 $i++;
 }
 ?>
-	
-
-
-
-	
-
-	
-
-<div id="produits">
-
-<?php
-if(isset($_SESSION['nomAdmin'])){?>
-	<div class=actions>
-<div id="button-modif-prod">
-<a id="link-modif-prod" href="index.php?uc=administrer&action=modifLesProduits&categorie=<?php echo $categorie ?>">Modifier les produits de catégorie <?php echo $categorie ?></a>
-</div>
-<div id="button-ajouter-prod">
-<a id="link-ajouter-prod" href="index.php?uc=administrer&action=ajouterUnProduit&categorie=<?php echo $categorie ?>">Ajouter des produits de catégorie <?php echo $categorie ?></a>
-</div>
-</div>
-<?php
-}
-?>
-
-</div>
-

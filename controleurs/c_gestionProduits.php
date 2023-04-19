@@ -29,6 +29,7 @@ switch($action)
 		$idProduit =$_REQUEST['produit'];
 		$lesProduits = getTousLesProduits();
 		$leProd=getInfoLeProd($idProduit);
+		$categorie = getCatById($idProduit);
 		include("vues/v_modifLeProdAdmin.php");
 		break;
 	}
@@ -68,39 +69,41 @@ switch($action)
 
 
 	case 'ajouterUnProduit' :
-	{
-		if(isset($_REQUEST['categorie'])){
-		
-			$categorie = $_REQUEST['categorie'];
-			}
-		include("vues/v_ajouterUnProduit.php");
-		break;
-	}
+		{
+			$lesUnites = getAllUnite();
+			$lesMarques = getAllBrand();
+			include("vues/v_ajouterUnProduit.php");
+			break;
+		}
 
 	case 'ajouterUnProduitR' :
-	{
-		
-		if(isset($_REQUEST['categorie'])){
-			$categorie=$_REQUEST['categorie'];
-		$testDouble =ajoutProduit($_POST['ajoutIdProd'],$_POST['ajoutDescription'],$_POST['ajoutPrix'],$_POST['ajoutPhoto'], $categorie);	
-		}else{
-		$testDouble =ajoutProduit($_POST['ajoutIdProd'],$_POST['ajoutDescription'],$_POST['ajoutPrix'],$_POST['ajoutPhoto'], $_POST['ajoutIdCategorie']);
-	}
+		{
+			$id=$_REQUEST['ajoutIdProd'];
+			$desc=$_REQUEST['ajoutDescription'];
+			$prix=$_REQUEST['ajoutPrix'];
+			$desc_detail=$_REQUEST['desc_detail'];
+			$photo=$_REQUEST['ajoutPhoto'];
+			$categorie=$_REQUEST['ajoutIdCategorie'];
+			$qte=$_REQUEST['ajoutQte'];
+			$unite=$_REQUEST['select-unite'];
+			$marque=$_REQUEST['select-marque'];
+			$stock=$_REQUEST['stockdispo'];
 			
-
-
-			include('vues/v_ajouterUnProduit.php');?>
-
-			<div class = "message-form"><?php
-			if($testDouble){
-			?>
-				<p id = "message-failed">  Ajout du Produit échoué</p><?php
+			if($categorie == 'CH' || $categorie == 'FO' || $categorie == 'PS'){
+				addNewProducts($id, $desc, $photo, $desc_detail, $categorie, $marque);
+				addProductInProduitContenance($id, $unite, $qte, $stock, $prix);
+				echo '<script>alert("Produit bien enregistré dans la BDD")</script>';
+			}else{
+				echo '<script>alert("Nom de categorie incorrect")</script>';
+				$lesUnites = getAllUnite();
+				$lesMarques = getAllBrand();
+				include("vues/v_ajouterUnProduit.php");
 			}
-			else{?>
-				<p id = "message-reussi">  Ajout du Produit réussi</p><?php
-			}
-		break;
-	}	
+	
+	
+	
+			break;
+		}	
 
 	case 'gererProduitPrix' :
 	{

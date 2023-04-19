@@ -1,5 +1,6 @@
 <?php 
-
+if (!isset($_SESSION['admin'])){
+	
 foreach($lesInfoUtil as $uneInfo){
 	$nomUtil = $uneInfo['nomUtil'];
 	$mdp = $uneInfo['mdp'];
@@ -28,10 +29,13 @@ foreach($lesInfoUtil as $uneInfo){
 foreach($lesCommandesUtil as $uneCommande){
 	$idCommande =$uneCommande['id'];
 	$date = $uneCommande['dateCommande'];
+	$prixtotal = $uneCommande['prixtotal'];
 
 ?>
 		<div class="user-info bis2">
 		<h2>Commande N° <span class="color-green"><?php echo $idCommande;?></span> </h2>
+</br>
+<h2>Prix total <span class="color-green"><?php echo $prixtotal;?>€</span> </h2>
 </br>
  <ul>
  <li><strong>Date de commande:</strong> <?php echo $date;?></li>
@@ -40,19 +44,26 @@ foreach($lesCommandesUtil as $uneCommande){
  <?php
 		$lesContenusCommande = getLesContenusCommandesUtil($idCommande);
 
+		
+
 				foreach($lesContenusCommande as $unContenuProduit){
 					$produit =$unContenuProduit['idProduit'];
 					$description =$unContenuProduit['description'];
 					$prix =$unContenuProduit['prix'];
+					$qteAch =$unContenuProduit['qteAch'];
 					$idCategorie =$unContenuProduit['id_categorie'];
-				
+
+					$prixQte=$prix * $qteAch;
+					
 				
 				?>
 			<HR NOSHADE class="separation">
-				<li><strong>Produit:</strong> <?php echo $produit;?></li>
-				<li><strong>Description:</strong> <?php echo $description;?></li>
-				<li><strong>Prix Unitaire:</strong> <?php echo $prix;?>€</li>
-				<li><strong>Catégorie:</strong> <?php echo $idCategorie;?></li>
+				<li><strong>Produit :</strong> <?php echo $produit;?></li>
+				<li><strong>Nom :</strong> <?php echo $description;?></li>
+				<li><strong>Prix Unitaire :</strong> <?php echo $prix;?>€</li>
+				<li><strong>Quantité achetée :</strong> <?php echo $qteAch;?></li>
+				<li><strong>Prix * Quantite :</strong> <?php echo $prixQte;?>€</li>
+				<li><strong>Catégorie :</strong> <?php echo $idCategorie;?></li>
 				
 				
 <?php 
@@ -119,7 +130,34 @@ foreach($lesCommandesUtil as $uneCommande){
 	</div>
 	
 
-<?php } ?>
+<?php } }else{
+	
+		?>
+	<div class="tabs">
+	
+		<button class="tablinks" onclick="openTab(event, 'tab2')" id="defaultOpen">Mes Informations</button>
+	
+	</div>
+	<div id="tab2" class="tabcontent">
+	<h2 class="color-green">Mes Informations</h2>
+	</br>
+	
+	<div class="user-info">
+
+<ul>
+	<li><strong>Nom Administrateur:</strong> <?php echo $_SESSION['admin'];?></li>
+	
+	
+</ul>
+</div>
+</div>
+<?php
+
+
+
+	}
+	
+	?>
 		</div>
 		</div>
 	<script src="modele/script.js">

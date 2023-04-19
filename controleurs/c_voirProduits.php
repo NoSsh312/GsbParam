@@ -10,6 +10,7 @@ switch($action)
 	case 'nosProduits':
 	{
 		$lesProduits = getTousLesProduits();
+		$lesMarques = getAllBrand();
 		include("vues/v_produits.php");
 		break;
 

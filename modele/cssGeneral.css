@@ -1,7 +1,11 @@
 html {
 	font: normal 100%/1.2em "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+	
+	
 }
-
+html::-webkit-scrollbar{
+	width: 0 !important
+}
 body {
 	padding: 0% 5%;
 	background-color: #dcedff;
