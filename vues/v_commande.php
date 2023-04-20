@@ -23,7 +23,7 @@
          <input id="mail" type="email"  name="mail"  maxlength="50" required>
       </p> 
 	  	<p>
-         <input type="submit" value="Valider" name="valider">
+         <input onclick="return confirm('Commander ces produits ?');" type="submit" value="Valider" name="valider">
          <input type="reset" value="Annuler" name="annuler"> 
       </p>
 	  </fieldset>

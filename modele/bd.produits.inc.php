@@ -224,7 +224,8 @@ function getLesProduitsDuTableau($desIdProduit)
 		$qteAch=$unIdProduit['qte'];
 		
 		$id_unite = $unIdProduit['idUnite'];
-		$prixCumul = $unIdProduit['prixContenance']*$qteAch;
+		$prixdelacontenance=$unIdProduit['prixContenance'];
+		$prixCumul = $prixdelacontenance[0][0]*$qteAch;
 
 		$prodQte =getQteContenance($idProd,$id_unite);
 		$prodQte= $prodQte['qte'];
@@ -1047,5 +1048,55 @@ function addProductInProduitContenance($idprod, $idunite, $qte, $stock, $prix){
 	$reqN -> bindValue(':prix',$prix,PDO::PARAM_STR);
 	$reqN->execute();
 }
+function getInfoProdInProduitcontenance($idprod,$unite,$qte){
+	$monPdo = connexionPDO();
 
+	$reqN=$monPdo -> prepare('SELECT `id_produit`, `id_unite`, `qte`, `stock`, `prix` FROM `produitcontenance` WHERE id_produit = :id AND  
+		id_unite = :unite AND qte = :qte');
+	$reqN -> bindValue(':id',$idprod,PDO::PARAM_STR);
+	$reqN -> bindValue(':unite',$unite,PDO::PARAM_STR);
+	$reqN -> bindValue(':qte',$qte,PDO::PARAM_STR);
+	$reqN->execute();
+	$lesInfosProd = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	
+	return $lesInfosProd;
+}
+
+function updateProductInProduitcontenance($idprod,$idunite,$qte,$stock,$prix){
+	
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('UPDATE `produitcontenance` SET `id_produit`= :id ,`id_unite`= :unite,`qte`= :qte,`stock`= :stock,`prix`= :prix WHERE id_produit= :id AND id_unite = :unite AND qte=:qte');
+	$reqN -> bindValue(':id',$idprod,PDO::PARAM_STR);
+	$reqN -> bindValue(':unite',$idunite,PDO::PARAM_STR);
+	$reqN -> bindValue(':qte',$qte,PDO::PARAM_STR);
+	$reqN -> bindValue(':stock',$stock,PDO::PARAM_STR);
+	$reqN -> bindValue(':prix',$prix,PDO::PARAM_STR);
+	$reqN->execute();
+}
+
+function updateProductInProduit($idprod,$desc,$image,$descdetail,$idcat,$idmarque){
+	
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('UPDATE `produit` SET `description`= :descs,`image`=:img,`desc_detail`=:descdetail,`id_categorie`=:idcat,`id_marque`= :idmarque WHERE id = :id');
+	$reqN -> bindValue(':id',$idprod,PDO::PARAM_STR);
+	$reqN -> bindValue(':descs',$desc,PDO::PARAM_STR);
+	$reqN -> bindValue(':img',$image,PDO::PARAM_STR);
+	$reqN -> bindValue(':descdetail',$descdetail,PDO::PARAM_STR);
+	$reqN -> bindValue(':idcat',$idcat,PDO::PARAM_STR);
+	$reqN -> bindValue(':idmarque',$idmarque,PDO::PARAM_STR);
+	$reqN->execute();
+}
+
+
+function getImageLinkFromProduct($idProd){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT image FROM produit WHERE id = :id');
+	$reqN -> bindValue(':id',$idProd,PDO::PARAM_STR);
+	$reqN->execute();
+	$image = $reqN->fetch(PDO::FETCH_ASSOC);
+	return $image;
+}
 ?>	

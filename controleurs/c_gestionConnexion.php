@@ -73,13 +73,14 @@ switch($action)
 	{
 		$nomUtilisateur = $_POST['nomUtil'];
 		$mdpUtil=$_POST['mdp'];
-		$_SESSION['admin'] = $nomUtilisateur;
+		
 		
 		$testConnexion = seConnecterPourAdmin($nomUtilisateur,$mdpUtil);
+		
 	
 
 		
-		include('vues/v_seConnecter.php');?>
+		include('vues/v_seConnecterAdmin.php');?>
 	<div class = "message-form"><?php
 
 			if($testConnexion){ 

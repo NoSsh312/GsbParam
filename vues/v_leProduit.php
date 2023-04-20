@@ -1,4 +1,7 @@
-<?php foreach($leProd as $uneInfo){
+
+<?php
+
+foreach($leProd as $uneInfo){
   $id = $uneInfo['id'];
   $description = $uneInfo['description'];
   $prix = $uneInfo['prix'];
@@ -10,6 +13,7 @@
 foreach($laMarque as $uneMarque){
   $libelleMarque=$uneMarque['label_marque'];
 }
+
 ?>
 
 <!-- <div class="imgCard">
@@ -46,7 +50,7 @@ foreach($laMarque as $uneMarque){
                 <?php if(isset($avisOuPas) && $avisOuPas == false){
                   
                               ?>
-                <div class="avisPart"style="text-align:center;">
+                <div class="avisPart" id="avisPart" style="text-align:center;<?php if(isset($_POST['title'])) echo 'display:none;' ?>">
                   <button class="center open-button"  onclick="openForm()">Donner un avis</button>
                 </div>
                 <?php }?>
@@ -55,7 +59,7 @@ foreach($laMarque as $uneMarque){
                     <div class="card3 card3Avis" >
                       <div class="card-header avis-header" >
                         <div class="card-body">
-                          <form action="index.php?uc=voirProduits&action=gererAvis&leProd=<?php echo $_GET['leProd'] ?>&categorie=<?php echo $_GET['categorie'] ?>" method="POST" class="form-container">
+                          <form action="index.php?uc=voirProduits&action=gererAvis&leProd=<?php echo $_GET['leProd'] ?>&categorie=<?php echo $_GET['categorie'] ?>" id="formavis" method="POST" class="form-container">
                            
 
                             <label for="title"><b>Sujet</b></label>
@@ -97,7 +101,7 @@ foreach($laMarque as $uneMarque){
                   <div id="select-list">
                     <select id="select-contenance" name="select-contenance" class="form-select" aria-label="Default select example" onchange="myFunction()" required>
                       
-                      <option selected>Choisir la contenance</option>
+                      <option value="">Choisir la contenance</option>
                       <?php 
                       foreach($contenance as $uneContenance){
                        
@@ -107,7 +111,7 @@ foreach($laMarque as $uneMarque){
                       
                     </select>
                     <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="submit">✔</button>
+                      <input class="btn btn-outline-secondary btn-contenance" type="submit" value="✔">
                     </div>
                   </div>
                 </div>
@@ -161,7 +165,7 @@ foreach($laMarque as $uneMarque){
             <input name="qteUnite" value="<?php echo $resultQteUnite?>" hidden >
             
             <select class="custom-select select-qte" id="inputGroupSelect04" name="quantiteNum" onchange="getTotal()" required>
-             <option disabled selected>Combien en voulez-vous?</option>
+             <option value="">Combien en voulez-vous?</option>
              <?php 
              for($i=1; $i<=$stockContenance; $i++){
               ?>
@@ -298,6 +302,8 @@ foreach($laMarque as $uneMarque){
 
 
   }
+
+ 
 
 </script>
 <?php 

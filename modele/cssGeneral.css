@@ -444,6 +444,9 @@ div.imgCard {
 
 /*CSS POUR LA PAGE v_leProduit.php */
 
+.btn-contenance{
+	width: 100% !important;
+}
 
 /*étoiles*/
 .rate {

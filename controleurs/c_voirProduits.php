@@ -127,6 +127,7 @@ switch($action)
 			{
 				$idProduit =$_REQUEST['leProd'];
 				$categorie =$_REQUEST['categorie'];	
+				$libelleCat=getLeLibelleCategorie($categorie);
 				$laMarque=getMarque($idProduit);
 				$lesProduits = getTousLesProduits();
 				$leProd= getInfoLeProd($idProduit);

@@ -24,33 +24,59 @@ switch($action)
 	}
 
 	case 'modifLeProduit' :
-	{
-
-		$idProduit =$_REQUEST['produit'];
-		$lesProduits = getTousLesProduits();
-		$leProd=getInfoLeProd($idProduit);
-		$categorie = getCatById($idProduit);
-		include("vues/v_modifLeProdAdmin.php");
-		break;
-	}
-
-	case 'modifValide' :
-	{
-		$idProduit =$_REQUEST['produit'];
-		$prix = $_POST['modifPrix'];
-		$desc = $_POST['descProdModif'];
-		if(!empty($_POST['photoCardModif'])){
-			$image = $_POST['photoCardModif'];
-			modifLesProdAdmin1($idProduit,$prix,$desc,$image);
-			echo $image;
+		{
+	
+			$idProduit =$_REQUEST['produit'];
+			$infoleprod=getInfoLeProd($idProduit);
+			$contenance = getContenanceProd($idProduit);
+	
+			include("vues/v_modifLeProdAdmin.php");
+			break;
 		}
-		else{
-		modifLesProdAdmin2($idProduit,$prix,$desc);
+	
+		case 'modifValideContenance':
+		{
+			$idProduit = $_REQUEST['produit'];
+			$valueSelect = $_POST['categorie'];
+			$pieces = explode("-", $valueSelect);
+			$qte =  $pieces[0]; // piece1
+			$unite =  $pieces[1]; // piece2
+			$uniteV2 = getIdByLabelUnite($unite);
+			foreach($uniteV2 as $laUnite){
+				$uneUnite = $laUnite['id'];
+			}
+			$infoleprod=getInfoLeProd($idProduit);
+			$leproduitaveccontenance=getInfoProdInProduitcontenance($idProduit,$uneUnite,$qte);
+			include("vues/v_modifLeProdAdmin.php");
+			break;
 		}
-		
-		header("Location:index.php?uc=administrer&action=modifLesProduits");
-		break;
-	}
+	
+		case 'modifValide' :
+		{
+			$id=$_REQUEST['inputId'];
+			$desc=$_REQUEST['inputDesc'];
+			$prix=$_REQUEST['inputPrix'];
+			$desc_detail=$_REQUEST['inputDescDetail'];
+			$categorie=$_REQUEST['inputIdCategorie'];
+			$qte=$_REQUEST['inputQte'];
+			$unite=$_REQUEST['inputIdUnite'];
+			$marque=$_REQUEST['inputIdMarque'];
+			$stock=$_REQUEST['inputStock'];
+	
+			if($_POST['inputImage']==null){ // verif que l'image a pas changé
+				$image = getImageLinkFromProduct($id);
+				$image = $image['image'];
+			}else{
+				$image = $_REQUEST['inputImage'];
+			}
+	
+			updateProductInProduitcontenance($id,$unite,$qte,$stock,$prix);
+			updateProductInProduit($id,$desc,$image,$desc_detail,$categorie,$marque);
+	
+			header("Location:index.php?uc=administrer&action=modifLesProduits");
+			break;
+		}
+	
 
 
 

@@ -1,5 +1,5 @@
 <?php 
-if (!isset($_SESSION['admin'])){
+if (!isset($_SESSION['nomAdmin'])){
 	
 foreach($lesInfoUtil as $uneInfo){
 	$nomUtil = $uneInfo['nomUtil'];
@@ -145,7 +145,7 @@ foreach($lesCommandesUtil as $uneCommande){
 	<div class="user-info">
 
 <ul>
-	<li><strong>Nom Administrateur:</strong> <?php echo $_SESSION['admin'];?></li>
+	<li><strong>Nom Administrateur:</strong> <?php echo $_SESSION['nomAdmin'];?></li>
 	
 	
 </ul>

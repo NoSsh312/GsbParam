@@ -65,10 +65,10 @@ foreach( $lesProduitsDuPanier as $unProduit)
     flex-direction: column;
     align-items: center;">
 <div class="commande">
-<a href="index.php?uc=gererPanier&action=passerCommande"><p class="btn btn-outline-success">Je Commande !</p></a></div>
+<a href="index.php?uc=gererPanier&action=passerCommande" onclick="return confirm('Commander ces produits ?');"><p class="btn btn-outline-success">Je Commande !</p></a></div>
 
 <div class="viderLaCom">
-<a class="btn btn-outline-success" href="index.php?uc=gererPanier&action=viderPanier"> Vider Mon Panier</a>
+<a class="btn btn-outline-success" onclick="return confirm('Voulez-vous vraiment vider le panier ?');" href="index.php?uc=gererPanier&action=viderPanier"> Vider Mon Panier</a>
 </div>
 	</div>
 <?php } else echo "Pour commander veuillez vous connecter à un utilisateur CLIENT";?>
