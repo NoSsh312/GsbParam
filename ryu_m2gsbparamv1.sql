@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3307
--- Généré le : lun. 17 avr. 2023 à 12:40
+-- Généré le : jeu. 20 avr. 2023 à 13:09
 -- Version du serveur : 10.6.5-MariaDB
 -- Version de PHP : 7.4.26
 
@@ -40,7 +40,6 @@ CREATE TABLE IF NOT EXISTS `administrateur` (
 --
 
 INSERT INTO `administrateur` (`id`, `nom`, `mdp`) VALUES
-(0, 'Ryu', 'lemdp'),
 (1, 'LeBoss', '$2y$10$bFgb1XanKXBGUznpmEPdZe.2rjpt.ub6dLZfNFMiUf.h/o.FKX3Rq'),
 (2, 'LeChefProjet', '$2y$10$6E1TzKDFKn0F/alWffPgg.DosEd661AAoxDk6qJLSetD/qwAVnT9.');
 
@@ -55,20 +54,26 @@ CREATE TABLE IF NOT EXISTS `avis` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titre_commentaire` varchar(200) DEFAULT NULL,
   `commentaire` varchar(250) DEFAULT NULL,
-  `date_avis` date DEFAULT NULL,
+  `date_avis` date DEFAULT current_timestamp(),
   `id_produit` char(32) NOT NULL,
   `idCli` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `avis_produit_FK` (`id_produit`),
   KEY `avis_client0_FK` (`idCli`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `avis`
 --
 
 INSERT INTO `avis` (`id`, `titre_commentaire`, `commentaire`, `date_avis`, `id_produit`, `idCli`) VALUES
-(2, 'dsdsd', 'dsdsd', '2023-04-01', 'c01', 29);
+(1, 'Le premier Avis', 'Ceci est le commentaire du premier avis', '2023-04-17', 'c01', 29),
+(2, 'Deuxieme  commentaire', 'Ceci est le deuxieme commentaire', '2023-04-17', 'c02', 29),
+(3, 'Ici test 3 allo', 'test', '2023-04-17', 'c01', 30),
+(4, 'teeeet', 'ttttttttt', '2023-04-17', 'c02', 30),
+(5, 'gklbjwhlkgfqdggqdg', 'fdqgfqgdfgqg', '2023-04-17', 'c04', 29),
+(6, 'dsdsqfdsfd', 'fdqsfdfqssf', '2023-04-17', 'c05', 29),
+(7, 'dgdsgsg', 'rfesqgfdsgsd', '2023-04-17', 'c06', 29);
 
 -- --------------------------------------------------------
 
@@ -110,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `client` (
   `tel` char(10) NOT NULL,
   `courriel` char(50) NOT NULL,
   PRIMARY KEY (`idCli`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `client`
@@ -131,7 +136,8 @@ INSERT INTO `client` (`idCli`, `nomUtil`, `mdp`, `nom`, `adresse`, `ville`, `cp`
 (24, '111', '$2y$10$AQ9kFwszyWlMnxRptlqSdO0XuDs/01WEJxJwChJJTfYX4cX57RUKq', '111', '111', '111', '11111', '1111111111', '111@1111.11'),
 (25, '222', '$2y$10$G1xfl6Mle1nGCYKu/gV5N.PhCezJRSMj19f8PkvI9BC2SHEaID1lq', '222', '222', '222', '22222', '2222222222', '222@222.22'),
 (28, 'Ryu', '$2y$10$bQv9qafeFpKDE5wT9.RgSuBvOIff5Q4n3JkopuOdGOXfz6m6OVHJG', 'vang', 'adresse', 'test', '45545', '0645645121', 'test@test.fr'),
-(29, 'test', '$2y$10$V.b1d/76Gpg3ngXB2m3Jxuw4apfVjUkmMFCsVrHSourt3tPISY5C.', 'test', 'test', 'test', '11111', '1111111111', 'test@test.test');
+(29, 'test', '$2y$10$V.b1d/76Gpg3ngXB2m3Jxuw4apfVjUkmMFCsVrHSourt3tPISY5C.', 'test', 'test', 'test', '11111', '1111111111', 'test@test.test'),
+(30, 'test3', '$2y$10$b2PCt/HoRuAAoemt.OIZtuaGaxHuT7k55si3NBDU2D6p35m.eWKVC', 'test3', 'test3', 'test3', '22222', '3333333333', 'test3@test3.test3');
 
 -- --------------------------------------------------------
 
@@ -142,16 +148,25 @@ INSERT INTO `client` (`idCli`, `nomUtil`, `mdp`, `nom`, `adresse`, `ville`, `cp`
 DROP TABLE IF EXISTS `commande`;
 CREATE TABLE IF NOT EXISTS `commande` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idCli` int(11) NOT NULL,
   `dateCommande` date DEFAULT NULL,
   `nomPrenomClient` char(32) DEFAULT NULL,
   `adresseRueClient` char(32) DEFAULT NULL,
   `cpClient` char(5) DEFAULT NULL,
   `villeClient` char(32) DEFAULT NULL,
   `mailClient` char(50) DEFAULT NULL,
-  `idCli` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `commande_client_FK` (`idCli`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `commande`
+--
+
+INSERT INTO `commande` (`id`, `idCli`, `dateCommande`, `nomPrenomClient`, `adresseRueClient`, `cpClient`, `villeClient`, `mailClient`) VALUES
+(1, 29, '2023-04-19', 'test', 'la rue', '11111', 'laville', 'test@test.test'),
+(2, 29, '2023-04-19', 'test', 'la rue', '11111', 'laville', 'test@test.test'),
+(3, 29, '2023-04-19', 'test', 'la rue', '11111', 'laville', 'test@test.test');
 
 -- --------------------------------------------------------
 
@@ -166,9 +181,22 @@ CREATE TABLE IF NOT EXISTS `detail_cmd` (
   `qte` int(11) NOT NULL,
   `id` int(11) NOT NULL,
   `qteAch` int(11) NOT NULL,
+  `prixCumul` float NOT NULL,
   PRIMARY KEY (`id_produit`,`id_unite`,`qte`,`id`),
   KEY `detail_cmd_commande0_FK` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `detail_cmd`
+--
+
+INSERT INTO `detail_cmd` (`id_produit`, `id_unite`, `qte`, `id`, `qteAch`, `prixCumul`) VALUES
+('c01', 3, 2, 1, 17, 340),
+('c03', 2, 100, 1, 16, 64),
+('c04', 2, 100, 2, 15, 60),
+('c06', 2, 100, 2, 16, 288),
+('c07', 2, 100, 3, 18, 144),
+('p05', 2, 100, 3, 18, 270);
 
 -- --------------------------------------------------------
 
@@ -217,7 +245,13 @@ CREATE TABLE IF NOT EXISTS `possede` (
 --
 
 INSERT INTO `possede` (`idCli`, `id`, `note`, `id_avis`) VALUES
-(29, 'c01', 5, 2);
+(29, 'c01', 1, 1),
+(29, 'c02', 4, 2),
+(29, 'c04', 3, 5),
+(29, 'c05', 1, 6),
+(29, 'c06', 3, 7),
+(30, 'c01', 5, 3),
+(30, 'c02', 2, 4);
 
 -- --------------------------------------------------------
 
@@ -229,7 +263,7 @@ DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
   `id` char(32) NOT NULL,
   `description` char(50) DEFAULT NULL,
-  `image` char(100) DEFAULT NULL,
+  `image` char(100) DEFAULT 'images/',
   `desc_detail` varchar(200) DEFAULT NULL,
   `id_categorie` char(32) NOT NULL,
   `id_marque` int(11) NOT NULL,
@@ -250,6 +284,7 @@ INSERT INTO `produit` (`id`, `description`, `image`, `desc_detail`, `id_categori
 ('c05', 'Klorane Shampooing sec à l\'extrait d\'ortie', 'images/klorane-shampooing-sec-a-l-extrait-d-ortie-spray-150ml.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.', 'CH', 4),
 ('c06', 'Phytopulp mousse volume intense', 'images/phytopulp-mousse-volume-intense-200ml.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.', 'CH', 5),
 ('c07', 'Bio Beaute by Nuxe Shampooing nutritif', 'images/bio-beaute-by-nuxe-shampooing-nutritif-200ml.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.', 'CH', 6),
+('c08', 'dsqddsqsd', 'images/menuGauche.gif', 'sqkdhgqkjdh', 'CH', 4),
 ('f01', 'Nuxe Men Contour des Yeux Multi-Fonctions', 'images/nuxe-men-contour-des-yeux-multi-fonctions-15ml.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.', 'FO', 2),
 ('f02', 'Tisane romon nature sommirel bio sachet 20', 'images/tisane-romon-nature-sommirel-bio-sachet-20.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.', 'FO', 1),
 ('f03', 'La Roche Posay Cicaplast crème pansement', 'images/la-roche-posay-cicaplast-creme-pansement-40ml.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.', 'FO', 3),
@@ -288,12 +323,15 @@ CREATE TABLE IF NOT EXISTS `produitcontenance` (
 
 INSERT INTO `produitcontenance` (`id_produit`, `id_unite`, `qte`, `stock`, `prix`) VALUES
 ('c01', 2, 100, 50, '4.00'),
+('c01', 3, 2, 20, '20.00'),
 ('c02', 2, 100, 50, '10.80'),
+('c02', 4, 15, 50, '30.00'),
 ('c03', 2, 100, 50, '4.00'),
 ('c04', 2, 100, 50, '4.00'),
 ('c05', 2, 100, 50, '6.10'),
 ('c06', 2, 100, 50, '18.00'),
 ('c07', 2, 100, 50, '8.00'),
+('c08', 2, 100, 255, '12.00'),
 ('f01', 2, 100, 50, '12.05'),
 ('f02', 6, 20, 50, '5.50'),
 ('f03', 2, 100, 50, '11.00'),
@@ -358,6 +396,72 @@ INSERT INTO `unite` (`id`, `label_unite`) VALUES
 (5, 'kg'),
 (6, 'sachet'),
 (7, 'exemplaire');
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `v_prixqte`
+-- (Voir ci-dessous la vue réelle)
+--
+DROP VIEW IF EXISTS `v_prixqte`;
+CREATE TABLE IF NOT EXISTS `v_prixqte` (
+`prixQte` decimal(20,2)
+,`id` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `v_prixtotal`
+-- (Voir ci-dessous la vue réelle)
+--
+DROP VIEW IF EXISTS `v_prixtotal`;
+CREATE TABLE IF NOT EXISTS `v_prixtotal` (
+`id` int(11)
+,`totalCmd` double
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `v_prixtotalcmd`
+-- (Voir ci-dessous la vue réelle)
+--
+DROP VIEW IF EXISTS `v_prixtotalcmd`;
+CREATE TABLE IF NOT EXISTS `v_prixtotalcmd` (
+`prixTotal` decimal(42,2)
+,`id` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `v_prixqte`
+--
+DROP TABLE IF EXISTS `v_prixqte`;
+
+DROP VIEW IF EXISTS `v_prixqte`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_prixqte`  AS SELECT `detail_cmd`.`qteAch`* `p`.`prix` AS `prixQte`, `detail_cmd`.`id` AS `id` FROM (`detail_cmd` join `produitcontenance` `p` on(`p`.`id_produit` = `detail_cmd`.`id_produit` and `p`.`id_unite` = `detail_cmd`.`id_unite`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `v_prixtotal`
+--
+DROP TABLE IF EXISTS `v_prixtotal`;
+
+DROP VIEW IF EXISTS `v_prixtotal`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_prixtotal`  AS SELECT `detail_cmd`.`id` AS `id`, sum(`detail_cmd`.`prixCumul` * `detail_cmd`.`qteAch`) AS `totalCmd` FROM `detail_cmd` GROUP BY `detail_cmd`.`id` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `v_prixtotalcmd`
+--
+DROP TABLE IF EXISTS `v_prixtotalcmd`;
+
+DROP VIEW IF EXISTS `v_prixtotalcmd`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_prixtotalcmd`  AS SELECT sum(`v_prixqte`.`prixQte`) AS `prixTotal`, `v_prixqte`.`id` AS `id` FROM `v_prixqte` GROUP BY `v_prixqte`.`id` ;
 
 --
 -- Contraintes pour les tables déchargées
