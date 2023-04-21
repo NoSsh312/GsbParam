@@ -224,8 +224,14 @@ function getLesProduitsDuTableau($desIdProduit)
 		$qteAch=$unIdProduit['qte'];
 		
 		$id_unite = $unIdProduit['idUnite'];
-		$prixdelacontenance=$unIdProduit['prixContenance'];
-		$prixCumul = $prixdelacontenance[0][0]*$qteAch;
+	
+		$prixdelacontenance= $unIdProduit['prixContenance'];
+		if(is_array($prixdelacontenance)){
+		$prixdelacontenance = $prixdelacontenance[0]['prix'];
+		
+		$prixdelacontenance=(float)$prixdelacontenance;
+		}
+		$prixCumul = $prixdelacontenance*$qteAch;
 
 		$prodQte =getQteContenance($idProd,$id_unite);
 		$prodQte= $prodQte['qte'];
@@ -496,9 +502,8 @@ function getIdCli(){
 	}
 }
 
-
 /**
-	 * Supprime un article
+	 * Supprime un article dans la table produit
 	 *
 	 * Supprime l'article sélectionné grâce à son id
 	 * @param string $idProduit l'id du produit
@@ -510,14 +515,36 @@ function getIdCli(){
 		try 
 		{
 			$monPdo = connexionPDO();
-				$reqN1=$monPdo -> prepare('DELETE FROM produit where id= :id ');
-			
+			$reqN1=$monPdo -> prepare('DELETE FROM produit where id= :id ');
 			$reqN1 -> bindParam(':id',$idProduit,PDO::PARAM_STR);
-			
 			$reqN1->execute();
-			$lesLignesN1 = $reqN1->fetch(PDO::FETCH_ASSOC);
-			
 
+		}
+		catch (PDOException $e) 
+		{
+			print "Erreur !: " . $e->getMessage();
+			die();
+		}
+		
+	}
+}
+
+/**
+	 * Supprime un article dans la table produitcontenance
+	 *
+	 * Supprime l'article sélectionné grâce à son id
+	 * @param string $idProduit l'id du produit
+	 
+	*/
+	function deleteProductFromProduitcontenance($idProduit){
+
+		if(isset($_SESSION['nomAdmin'])){
+		try 
+		{
+			$monPdo = connexionPDO();
+			$reqN1=$monPdo -> prepare('DELETE FROM produitcontenance where id_produit= :id ');
+			$reqN1 -> bindParam(':id',$idProduit,PDO::PARAM_STR);
+			$reqN1->execute();
 		}
 		catch (PDOException $e) 
 		{
@@ -1098,5 +1125,48 @@ function getImageLinkFromProduct($idProd){
 	$reqN->execute();
 	$image = $reqN->fetch(PDO::FETCH_ASSOC);
 	return $image;
+}
+
+
+
+function ajouterCat($id, $libelle){
+	$monPdo = connexionPDO();
+$ok=false;
+	$reqN=$monPdo -> prepare('INSERT INTO categorie Values (:id, :libelle)');
+	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
+	$reqN -> bindValue(':libelle',$libelle,PDO::PARAM_STR);
+	$reqN->execute();
+	if($reqN){
+		$ok=true;
+	}
+	return $ok;
+}
+
+
+function deleteCat($id){
+	$monPdo = connexionPDO();
+$ok=false;
+	$reqN=$monPdo -> prepare('delete from categorie WHERE id=:id');
+	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	if($reqN){
+		$ok=true;
+	}
+	return $ok;
+}
+function updateCat($id, $libelle, $idCatOld){
+	$monPdo = connexionPDO();
+$ok=false;
+	$reqN=$monPdo -> prepare('UPDATE categorie SET id=:id , libelle=:libelle WHERE id=:idCatOld');
+	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
+	$reqN -> bindValue(':libelle',$libelle,PDO::PARAM_STR);
+	$reqN -> bindValue(':idCatOld',$idCatOld,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	if($reqN){
+		$ok=true;
+	}
+	return $ok;
 }
 ?>	

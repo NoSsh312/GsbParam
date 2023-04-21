@@ -722,3 +722,24 @@ font-family: 'Helvetica Neue', sans-serif;
 .prodSugg{
 	overflow-y: auto;
 }
+
+/* CSS CAT*/
+.cat{
+	width: 100%;
+	display: flex;
+    justify-content: center;
+}
+.catAdm{
+height: 100% !important;
+    padding: 1em;
+}
+
+#formCat{
+width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* */

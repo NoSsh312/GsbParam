@@ -25,6 +25,11 @@
       <li class="nav-item active">
         <a class="nav-link" href="index.php?uc=accueil">Accueil</a>
       </li>
+      <?php if(isset($_SESSION['nomAdmin'])){ ?>
+        <li class="nav-item">
+        <a class="nav-link" href="index.php?uc=gererCat&action=voirCatAdmin">Gérer les Catégories</a>
+      </li>
+        <?php } ?>
       <li class="nav-item">
         <a class="nav-link" href="index.php?uc=voirProduits&action=voirCategories">Produits par catégorie</a>
       </li>

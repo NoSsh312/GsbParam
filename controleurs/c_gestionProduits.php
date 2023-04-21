@@ -83,13 +83,10 @@ switch($action)
 	case 'supprimerProd' :
 	{
 		$idProduit = $_REQUEST['produit'];
+		deleteProductFromProduitcontenance($idProduit);
 		supprimerArticleAdmin($idProduit);
-		if(isset($_REQUEST['categorie'])){
-		$categorie =$_REQUEST['categorie'];
-		header("Location:index.php?uc=voirProduits&action=voirProduits&categorie=$categorie");
-		}else{
+		echo '<script>alert("Produit bien supprimé")</script>';
 		header("Location:index.php?uc=administrer&action=modifLesProduits");
-		}
 		break;
 	}
 
@@ -127,7 +124,7 @@ switch($action)
 			}
 	
 	
-	
+			header("Location:index.php?uc=voirProduits&action=nosProduits");
 			break;
 		}	
 

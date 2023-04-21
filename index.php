@@ -49,6 +49,10 @@ case 'monProfil' :
 	{ include("controleurs/c_gestionProfil.php");
 	break;  
 	}
+	case 'gererCat' :
+		{ include("controleurs/c_gestionCategorie.php");
+		break;  
+		}
 }
 include("vues/v_pied.html") ;
 ?>
