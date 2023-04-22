@@ -16,7 +16,9 @@ if(!isset($_REQUEST['uc']))
 switch($uc) // traitement de l'uc : on charge le controleur approprié.
 {
 	case 'accueil':
-	{include("vues/v_accueil.html");
+	{
+		$lesNouv=getLesNouv();
+		include("vues/v_accueil.php");
 	break;
 }
 case 'voirProduits' :

@@ -1211,4 +1211,14 @@ function getCatInfoByIdProduct($idprod){
 	$infocat = $reqN->fetchAll(PDO::FETCH_ASSOC);
 	return $infocat;
 }
+
+function getLesNouv(){
+	$monPdo = connexionPDO();
+	$reqN=$monPdo -> prepare('SELECT  id, description, prix, image, 	id_categorie,id_marque , desc_detail,	id_unite ,	qte  FROM `v_prodNouv` INNER JOIN produitcontenance p on v_prodNouv.id = p.id_produit group by id');
+
+	
+	$reqN->execute();
+	$lesNouv = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	return $lesNouv;
+}
 ?>	
