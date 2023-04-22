@@ -53,6 +53,10 @@ case 'monProfil' :
 		{ include("controleurs/c_gestionCategorie.php");
 		break;  
 		}
+		case 'gererCommandes' :
+			{ include("controleurs/c_gestionCommandes.php");
+			break;  
+			}
 }
 include("vues/v_pied.html") ;
 ?>

@@ -82,47 +82,81 @@ foreach( $infoleprod as $uneInfoProd)
 					<div class="form-group row">
 						<label for="inputIdCategorie" class="col-sm-2 col-form-label">ID Catégorie :</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="inputIdCategorie" value="<?php echo $idcategorie ?>" name="inputIdCategorie">
+							<select class="form-control" id="inputIdCategorie" name="inputIdCategorie">
+								<option value="<?php echo $idcategorie ?>"><?php echo $idcategorie.'-'.$CatIDProd ?></option>
+								<?php
+								// Boucle pour afficher les options de la liste déroulante
+								foreach ($touteslescat as $categorie) {
+									if($categorie['id'] != $idcategorie){
+									$catID = $categorie['id'];
+									$catlib = $categorie['libelle'];
+									?>
+									<option value="<?php echo $catID ?>"><?php echo $catID. '-' . $catlib ?></option>
+									<?php
+								}}
+								?>
+							</select>
 						</div>
 					</div>
+
 					<div class="form-group row">
 						<label for="inputIdMarque" class="col-sm-2 col-form-label">ID Marque :</label>
 						<div class="col-sm-10">
-							<input type="number" class="form-control" id="inputIdMarque" value="<?php echo $idmarque ?>" name="inputIdMarque">
+							<select class="form-control" id="inputIdMarque" name="inputIdMarque">
+								<?php 
+								foreach($marqueDuProd as $lamarque){
+									$marq = $lamarque['id_marque'];
+									$marqlib = $lamarque['label_marque'];
+									
+									?>
+									<option value="<?php echo $marq ?>"><?php echo $marq. '-' . $marqlib ?></option>
+								<?php }
+								// Boucle pour afficher les options de la liste déroulante
+								foreach ($toutesLesMarques as $marque) {
+									if($marque['id'] != $lamarque['id_marque']){
+										$marqueID = $marque['id'];
+										$marquelibelle = $marque['label_marque'];
+										?>
+										<option value="<?php echo $marqueID ?>"><?php echo $marqueID. '-' . $marquelibelle?></option>
+										<?php
+									}}
+									?>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="inputIdUnite" class="col-sm-2 col-form-label">ID Unité :</label>
+							<div class="col-sm-10">
+								<input type="number" class="form-control" id="inputIdUnite" value="<?php echo $unite ?>" name="inputIdUnite" readonly>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputQte" class="col-sm-2 col-form-label">Quantité :</label>
+							<div class="col-sm-10">
+								<input type="number" class="form-control" id="inputQte" value="<?php echo $qte ?>" name="inputQte" readonly>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputStock" class="col-sm-2 col-form-label">Stock :</label>
+							<div class="col-sm-10">
+								<input type="number" class="form-control" id="inputStock" value="<?php echo $stock ?>" name="inputStock">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputPrix" class="col-sm-2 col-form-label">Prix :</label>
+							<div class="col-sm-10">
+								<input type="number" class="form-control" id="inputPrix" value="<?php echo $prix ?>" name="inputPrix" step=0.01 min=0.01 max=999999999999.99>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-12 text-center">
+								<button type="submit" class="btn btn-primary">Modifier</button>
+							</div>
 						</div>
 					</div>
-					<div class="form-group row">
-						<label for="inputIdUnite" class="col-sm-2 col-form-label">ID Unité :</label>
-						<div class="col-sm-10">
-							<input type="number" class="form-control" id="inputIdUnite" value="<?php echo $unite ?>" name="inputIdUnite" readonly>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="inputQte" class="col-sm-2 col-form-label">Quantité :</label>
-						<div class="col-sm-10">
-							<input type="number" class="form-control" id="inputQte" value="<?php echo $qte ?>" name="inputQte" readonly>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="inputStock" class="col-sm-2 col-form-label">Stock :</label>
-						<div class="col-sm-10">
-							<input type="number" class="form-control" id="inputStock" value="<?php echo $stock ?>" name="inputStock">
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="inputPrix" class="col-sm-2 col-form-label">Prix :</label>
-						<div class="col-sm-10">
-							<input type="number" class="form-control" id="inputPrix" value="<?php echo $prix ?>" name="inputPrix">
-						</div>
-					</div>
-					<div class="form-group row">
-						<div class="col-sm-12 text-center">
-							<button type="submit" class="btn btn-primary">Modifier</button>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	<?php }} ?>
+				</form>
+			</div>
+		<?php }} ?>
 
 

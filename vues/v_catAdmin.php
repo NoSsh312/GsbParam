@@ -2,6 +2,7 @@
 
 	<?php
 // parcours du tableau contenant les produits à afficher
+
 	foreach( $categories as $uneCat) 
 { 	// récupération des informations du produit
 	$id = $uneCat['id'];
@@ -24,6 +25,16 @@
 }// fin du foreach qui parcourt les produits
 ?>
 </div>
+<div>
+<?php if(isset($ok) ){
+	if($ok ==false){
+		echo '<p style="text-align:center;">Produits restants dans cette catégorie, Impossible de la supprimer.</p>';
+	}else{
+		echo '<p style="text-align:center;">Catégorie supprimée !</p>';
+	}
+
+}?></div>
+<div>
 <div class="cat">
 <a class ="btn btn-outline-success" href="index.php?uc=gererCat&action=ajouterCat">Ajouter une Catégorie</a>
 </div>

@@ -215,7 +215,8 @@ function getLesProduitsDuTableau($desIdProduit)
 		$maxi = $laLigne['maxi'] ;// on place le dernier id de commande dans $maxi
 		$idCommande = $maxi+1; // on augmente le dernier id de commande de 1 pour avoir le nouvel idCommande
 		$date = date('Y/m/d'); // récupération de la date système
-		$req = "insert into commande values ('$idCommande','$idCli','$date','$nom','$rue','$cp','$ville','$mail')";
+		$dateLiv = date('Y/m/d', strtotime('+2 day'));//date de livraison 2 jours pour la livraison
+		$req = "insert into commande values ('$idCommande','$idCli','$date','$nom','$rue','$cp','$ville','$mail','$dateLiv','En cours')";
 		$res = $monPdo->exec($req);
 		// insertion produits commandés
 		foreach($lesIdProduit as $unIdProduit)
@@ -1146,6 +1147,14 @@ $ok=false;
 function deleteCat($id){
 	$monPdo = connexionPDO();
 $ok=false;
+$reqN2=$monPdo -> prepare('SELECT id from produit WHERE id_categorie=:id');
+$reqN2 -> bindValue(':id',$id,PDO::PARAM_STR);
+$reqN2->execute();
+$pdt = $reqN2->fetchAll(PDO::FETCH_ASSOC);
+if(empty($pdt)){
+	
+
+
 	$reqN=$monPdo -> prepare('delete from categorie WHERE id=:id');
 	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
 	
@@ -1153,6 +1162,7 @@ $ok=false;
 	if($reqN){
 		$ok=true;
 	}
+}
 	return $ok;
 }
 function updateCat($id, $libelle, $idCatOld){
@@ -1168,5 +1178,37 @@ $ok=false;
 		$ok=true;
 	}
 	return $ok;
+}
+
+
+function getLesClients(){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT idCli , nomUtil from client');
+	$reqN->execute();
+	$lesCli= $reqN->fetchAll(PDO::FETCH_ASSOC);
+	return $lesCli;
+}
+
+function updateCmd($id){
+	$monPdo = connexionPDO();
+$ok=false;
+	$reqN=$monPdo -> prepare('UPDATE commande SET etat = "Livrée" WHERE id=:id');
+	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
+	$reqN->execute();
+	if($reqN){
+		$ok=true;
+	}
+	return $ok;
+}
+
+function getCatInfoByIdProduct($idprod){
+	$monPdo = connexionPDO();
+	$reqN=$monPdo -> prepare('SELECT categorie.id, `libelle` FROM `categorie` inner join produit on categorie.id = produit.id_categorie where produit.id = :id ; ');
+
+	$reqN -> bindValue(':id',$idprod,PDO::PARAM_STR);
+	$reqN->execute();
+	$infocat = $reqN->fetchAll(PDO::FETCH_ASSOC);
+	return $infocat;
 }
 ?>	

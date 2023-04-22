@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3307
--- Généré le : jeu. 20 avr. 2023 à 13:09
+-- Généré le : sam. 22 avr. 2023 à 15:54
 -- Version du serveur : 10.6.5-MariaDB
 -- Version de PHP : 7.4.26
 
@@ -60,20 +60,14 @@ CREATE TABLE IF NOT EXISTS `avis` (
   PRIMARY KEY (`id`),
   KEY `avis_produit_FK` (`id_produit`),
   KEY `avis_client0_FK` (`idCli`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `avis`
 --
 
 INSERT INTO `avis` (`id`, `titre_commentaire`, `commentaire`, `date_avis`, `id_produit`, `idCli`) VALUES
-(1, 'Le premier Avis', 'Ceci est le commentaire du premier avis', '2023-04-17', 'c01', 29),
-(2, 'Deuxieme  commentaire', 'Ceci est le deuxieme commentaire', '2023-04-17', 'c02', 29),
-(3, 'Ici test 3 allo', 'test', '2023-04-17', 'c01', 30),
-(4, 'teeeet', 'ttttttttt', '2023-04-17', 'c02', 30),
-(5, 'gklbjwhlkgfqdggqdg', 'fdqgfqgdfgqg', '2023-04-17', 'c04', 29),
-(6, 'dsdsqfdsfd', 'fdqsfdfqssf', '2023-04-17', 'c05', 29),
-(7, 'dgdsgsg', 'rfesqgfdsgsd', '2023-04-17', 'c06', 29);
+(16, 'fsdsfsfsfd', 'fdsfsfs', '2023-04-20', 'c01', 29);
 
 -- --------------------------------------------------------
 
@@ -115,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `client` (
   `tel` char(10) NOT NULL,
   `courriel` char(50) NOT NULL,
   PRIMARY KEY (`idCli`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `client`
@@ -137,7 +131,8 @@ INSERT INTO `client` (`idCli`, `nomUtil`, `mdp`, `nom`, `adresse`, `ville`, `cp`
 (25, '222', '$2y$10$G1xfl6Mle1nGCYKu/gV5N.PhCezJRSMj19f8PkvI9BC2SHEaID1lq', '222', '222', '222', '22222', '2222222222', '222@222.22'),
 (28, 'Ryu', '$2y$10$bQv9qafeFpKDE5wT9.RgSuBvOIff5Q4n3JkopuOdGOXfz6m6OVHJG', 'vang', 'adresse', 'test', '45545', '0645645121', 'test@test.fr'),
 (29, 'test', '$2y$10$V.b1d/76Gpg3ngXB2m3Jxuw4apfVjUkmMFCsVrHSourt3tPISY5C.', 'test', 'test', 'test', '11111', '1111111111', 'test@test.test'),
-(30, 'test3', '$2y$10$b2PCt/HoRuAAoemt.OIZtuaGaxHuT7k55si3NBDU2D6p35m.eWKVC', 'test3', 'test3', 'test3', '22222', '3333333333', 'test3@test3.test3');
+(30, 'test3', '$2y$10$b2PCt/HoRuAAoemt.OIZtuaGaxHuT7k55si3NBDU2D6p35m.eWKVC', 'test3', 'test3', 'test3', '22222', '3333333333', 'test3@test3.test3'),
+(31, 'ttt', '$2y$10$8EoEJ42zVAdok7tv1xrIeu/2xctlyXXzkbF9/DTDZaCdp6aFBLy9K', 'ttt', 'ttt', 'ttt', '22222', '1321231321', 'ttt@ttt.ttt');
 
 -- --------------------------------------------------------
 
@@ -155,18 +150,21 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `cpClient` char(5) DEFAULT NULL,
   `villeClient` char(32) DEFAULT NULL,
   `mailClient` char(50) DEFAULT NULL,
+  `dateLiv` date DEFAULT NULL,
+  `etat` varchar(10) DEFAULT 'En cours',
   PRIMARY KEY (`id`),
   KEY `commande_client_FK` (`idCli`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `commande`
 --
 
-INSERT INTO `commande` (`id`, `idCli`, `dateCommande`, `nomPrenomClient`, `adresseRueClient`, `cpClient`, `villeClient`, `mailClient`) VALUES
-(1, 29, '2023-04-19', 'test', 'la rue', '11111', 'laville', 'test@test.test'),
-(2, 29, '2023-04-19', 'test', 'la rue', '11111', 'laville', 'test@test.test'),
-(3, 29, '2023-04-19', 'test', 'la rue', '11111', 'laville', 'test@test.test');
+INSERT INTO `commande` (`id`, `idCli`, `dateCommande`, `nomPrenomClient`, `adresseRueClient`, `cpClient`, `villeClient`, `mailClient`, `dateLiv`, `etat`) VALUES
+(1, 29, '2023-04-22', 'test', 'la rue', '11111', 'laville', 'test@test.test', '2023-04-24', 'Livrée'),
+(2, 29, '2023-04-22', 'test', 'la rue', '11111', 'laville', 'test@test.test', '2023-04-24', 'Livrée'),
+(3, 29, '2023-04-22', 'test', 'la rue', '11111', 'laville', 'test@test.test', '2023-04-24', 'Livrée'),
+(4, 29, '2023-04-22', 'test', 'la rue', '11111', 'laville', 'test@test.test', '2023-04-24', 'Livrée');
 
 -- --------------------------------------------------------
 
@@ -191,12 +189,24 @@ CREATE TABLE IF NOT EXISTS `detail_cmd` (
 --
 
 INSERT INTO `detail_cmd` (`id_produit`, `id_unite`, `qte`, `id`, `qteAch`, `prixCumul`) VALUES
-('c01', 3, 2, 1, 17, 340),
-('c03', 2, 100, 1, 16, 64),
-('c04', 2, 100, 2, 15, 60),
-('c06', 2, 100, 2, 16, 288),
+('c01', 2, 100, 4, 14, 56),
+('c03', 2, 100, 1, 15, 150),
+('c04', 2, 100, 2, 17, 68),
 ('c07', 2, 100, 3, 18, 144),
-('p05', 2, 100, 3, 18, 270);
+('f01', 2, 100, 3, 7, 84.35);
+
+--
+-- Déclencheurs `detail_cmd`
+--
+DROP TRIGGER IF EXISTS `update_stock`;
+DELIMITER $$
+CREATE TRIGGER `update_stock` AFTER INSERT ON `detail_cmd` FOR EACH ROW BEGIN
+    UPDATE `produitcontenance`
+    SET `stock` = `stock` - NEW.`qteAch`
+    WHERE `id_produit` = NEW.`id_produit` AND `id_unite` = NEW.`id_unite`;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -245,13 +255,7 @@ CREATE TABLE IF NOT EXISTS `possede` (
 --
 
 INSERT INTO `possede` (`idCli`, `id`, `note`, `id_avis`) VALUES
-(29, 'c01', 1, 1),
-(29, 'c02', 4, 2),
-(29, 'c04', 3, 5),
-(29, 'c05', 1, 6),
-(29, 'c06', 3, 7),
-(30, 'c01', 5, 3),
-(30, 'c02', 2, 4);
+(29, 'c01', 2, 16);
 
 -- --------------------------------------------------------
 
@@ -262,7 +266,7 @@ INSERT INTO `possede` (`idCli`, `id`, `note`, `id_avis`) VALUES
 DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
   `id` char(32) NOT NULL,
-  `description` char(50) DEFAULT NULL,
+  `description` char(200) DEFAULT NULL,
   `image` char(100) DEFAULT 'images/',
   `desc_detail` varchar(200) DEFAULT NULL,
   `id_categorie` char(32) NOT NULL,
@@ -279,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
 INSERT INTO `produit` (`id`, `description`, `image`, `desc_detail`, `id_categorie`, `id_marque`) VALUES
 ('c01', 'Laino Shampooing Douche au Thé Vert BIO', 'images/laino-shampooing-douche-au-the-vert-bio-200ml.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud', 'CH', 1),
 ('c02', 'Klorane fibres de lin baume après shampooing', 'images/klorane-fibres-de-lin-baume-apres-shampooing-150-ml.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud', 'CH', 2),
-('c03', 'Weleda Kids 2in1 Shower & Shampoo Orange fruitée', 'images/weleda-kids-2in1-shower-shampoo-orange-fruitee-150-ml.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.', 'CH', 2),
+('c03', 'Weleda Kids 2in1 Shower & Shampoo Orange pas trop fruitée', 'images/weleda-kids-2in1-shower-shampoo-orange-fruitee-150-ml.jpg', 'Lorem dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.', 'CH', 2),
 ('c04', 'Weleda Kids 2in1 Shower & Shampoo vanille douce', 'images/weleda-kids-2in1-shower-shampoo-vanille-douce-150-ml.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.', 'CH', 3),
 ('c05', 'Klorane Shampooing sec à l\'extrait d\'ortie', 'images/klorane-shampooing-sec-a-l-extrait-d-ortie-spray-150ml.png', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.', 'CH', 4),
 ('c06', 'Phytopulp mousse volume intense', 'images/phytopulp-mousse-volume-intense-200ml.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.', 'CH', 5),
@@ -322,30 +326,31 @@ CREATE TABLE IF NOT EXISTS `produitcontenance` (
 --
 
 INSERT INTO `produitcontenance` (`id_produit`, `id_unite`, `qte`, `stock`, `prix`) VALUES
-('c01', 2, 100, 50, '4.00'),
-('c01', 3, 2, 20, '20.00'),
-('c02', 2, 100, 50, '10.80'),
+('c01', 2, 100, 7, '4.00'),
+('c01', 3, 2, 43, '20.00'),
+('c02', 2, 100, 30, '10.80'),
 ('c02', 4, 15, 50, '30.00'),
-('c03', 2, 100, 50, '4.00'),
-('c04', 2, 100, 50, '4.00'),
-('c05', 2, 100, 50, '6.10'),
-('c06', 2, 100, 50, '18.00'),
-('c07', 2, 100, 50, '8.00'),
+('c03', 2, 100, 35, '10.00'),
+('c03', 3, 15, 50, '20.00'),
+('c04', 2, 100, 12, '4.00'),
+('c05', 2, 100, 14, '6.10'),
+('c06', 2, 100, 24, '18.00'),
+('c07', 2, 100, 16, '8.00'),
 ('c08', 2, 100, 255, '12.00'),
-('f01', 2, 100, 50, '12.05'),
-('f02', 6, 20, 50, '5.50'),
-('f03', 2, 100, 50, '11.00'),
+('f01', 2, 100, 43, '12.05'),
+('f02', 6, 20, 37, '5.50'),
+('f03', 2, 100, 43, '11.00'),
 ('f04', 6, 10, 50, '26.50'),
-('f05', 7, 1, 50, '63.00'),
+('f05', 7, 1, 47, '63.00'),
 ('f06', 1, 500, 50, '6.50'),
-('f07', 1, 200, 50, '8.60'),
+('f07', 1, 200, 47, '8.60'),
 ('p01', 2, 100, 50, '22.00'),
 ('p02', 2, 100, 50, '17.50'),
-('p03', 2, 100, 50, '29.00'),
+('p03', 2, 100, 48, '29.00'),
 ('p04', 2, 100, 50, '8.75'),
-('p05', 2, 100, 50, '15.00'),
+('p05', 2, 100, 29, '15.00'),
 ('p06', 1, 4, 50, '5.65'),
-('p07', 2, 30, 50, '13.70');
+('p07', 2, 30, 48, '13.70');
 
 -- --------------------------------------------------------
 

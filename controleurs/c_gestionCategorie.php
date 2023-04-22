@@ -64,15 +64,18 @@ switch($action)
 
             case 'suppCat':
                 {
+                    
                     $idcat=$_GET['cat'];
                     
                 if(deleteCat($idcat)){
                     
                     $ok=true;
+                    $categories=getLesCategories();
                 }else{
                     $ok=false;
+                    $categories=getLesCategories();
                 }
-                    header('Location:index.php?uc=gererCat&action=voirCatAdmin');
+                    include('vues/v_catAdmin.php');
 
                     break;
                 }

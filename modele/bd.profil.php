@@ -29,7 +29,7 @@ function getLesCommandesUtil($id){
    
 	$monPdo = connexionPDO();
 
-	$reqN=$monPdo -> prepare('select commande.id, idCli, dateCommande, nomPrenomClient, adresseRueClient, cpClient, villeClient, mailClient, prixtotal from commande inner join v_prixtotalcmd v on v.id = commande.id where idCli=:id;');
+	$reqN=$monPdo -> prepare('select commande.id, idCli, dateCommande, nomPrenomClient, adresseRueClient, cpClient, villeClient, mailClient, prixtotal, dateLiv, etat from commande inner join v_prixtotalcmd v on v.id = commande.id where idCli=:id;');
 	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
 	
 	$reqN->execute();

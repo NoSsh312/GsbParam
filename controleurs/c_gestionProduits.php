@@ -35,22 +35,29 @@ switch($action)
 		}
 	
 		case 'modifValideContenance':
-		{
-			$idProduit = $_REQUEST['produit'];
-			$valueSelect = $_POST['categorie'];
-			$pieces = explode("-", $valueSelect);
-			$qte =  $pieces[0]; // piece1
-			$unite =  $pieces[1]; // piece2
-			$uniteV2 = getIdByLabelUnite($unite);
-			foreach($uniteV2 as $laUnite){
-				$uneUnite = $laUnite['id'];
-			}
-			$infoleprod=getInfoLeProd($idProduit);
-			$leproduitaveccontenance=getInfoProdInProduitcontenance($idProduit,$uneUnite,$qte);
-			include("vues/v_modifLeProdAdmin.php");
-			break;
-		}
+			{
+				$idProduit = $_REQUEST['produit'];
+				$valueSelect = $_POST['categorie'];
+				$pieces = explode("-", $valueSelect);
+				$qte =  $pieces[0]; // piece1
+				$unite =  $pieces[1]; // piece2
+				$uniteV2 = getIdByLabelUnite($unite);
+				$toutesLesMarques = getAllBrand();
+				$marqueDuProd = getMarque($idProduit);
+				$touteslescat = getLesCategories();
+				$lacategorie = getCatInfoByIdProduct($idProduit);
+				foreach($lacategorie as $cat){ //boucle pour avoir la categorie du produit 
+					$CatIDProd = $cat['libelle'];
+				}
+				foreach($uniteV2 as $laUnite){ // boucle pour avoir l'unite
 	
+					$uneUnite = $laUnite['id'];
+				}
+				$infoleprod=getInfoLeProd($idProduit);
+				$leproduitaveccontenance=getInfoProdInProduitcontenance($idProduit,$uneUnite,$qte);
+				include("vues/v_modifLeProdAdmin.php");
+				break;
+			}
 		case 'modifValide' :
 		{
 			$id=$_REQUEST['inputId'];
@@ -95,6 +102,7 @@ switch($action)
 		{
 			$lesUnites = getAllUnite();
 			$lesMarques = getAllBrand();
+			$lesCategories = getLesCategories();
 			include("vues/v_ajouterUnProduit.php");
 			break;
 		}
