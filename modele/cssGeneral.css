@@ -113,8 +113,8 @@ input[type="submit"] {
 .desc_detail {
 	text-align: justify;
 	display: block;
-	max-width: 200px;
-	max-height: 70px;
+	max-width: 218px;
+	height: 200px;
 	overflow: hidden;
 
 	text-overflow: ellipsis;
@@ -210,6 +210,9 @@ div.descrCard {
 	border-width: thin;
 	display: flex;
 	background-color: #dcedff;
+	height: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 div.prixCard {
@@ -673,10 +676,7 @@ img {
 .mb5{
 	margin-bottom: 5px;
 }
-.buttonVoir{
-	padding-top: 7%;
-    padding-right: 5%;
-}
+
 .prixCard .stock{
 	font-size: 10px;
 }

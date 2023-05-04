@@ -36,7 +36,7 @@ switch($action)
 			$lesProduitsSuggérés = getProductsYouMayAlsoLike($idProduit);
 			$leStock = getStockProducts($idProduit);
 			$contenance = getContenanceProd($idProduit);
-			$lesAvis=getLesAvisProd($idProduit);
+			
 			$stock = null;
 			$prix = null;
 
@@ -49,6 +49,7 @@ switch($action)
 			}
 			$avisOuPas= getIfDejaAvis($idProduit,$idClient);
 		}
+		$lesAvis=getLesAvisProd($idProduit);
 			$nbAvis=getNbAvis($idProduit);
 		
 				include("vues/v_leProduit.php");
@@ -104,7 +105,7 @@ switch($action)
 				$lesProduitsSuggérés = getProductsYouMayAlsoLike($idProduit);
 				$leStock = getStockProducts($idProduit);
 				$contenance = getContenanceProd($idProduit);
-				$lesAvis=getLesAvisProd($idProduit);
+				
 			$idProd =$_REQUEST['leProd'];
 			$categorie=getCatById($idProd);
 			foreach($categorie as $cat){
@@ -119,6 +120,7 @@ switch($action)
 			$laMarque=getMarque($idProduit);
 			$noteMoy= getNoteMoy($idProduit);
 			$nbAvis=getNbAvis($idProduit);
+			$lesAvis=getLesAvisProd($idProduit);
 			include("vues/v_leProduit.php");
 			//header('Location:index.php?uc=voirProduits&categorie='.$idCat.'&action=voirInfoProduit&leProd='.$idProd);
 			break;
@@ -134,7 +136,7 @@ switch($action)
 				$lesProduitsSuggérés = getProductsYouMayAlsoLike($idProduit);
 				$leStock = getStockProducts($idProduit);
 				$contenance = getContenanceProd($idProduit);
-				$lesAvis=getLesAvisProd($idProduit);
+				
 			$idProd =$_REQUEST['leProd'];
 
 			$lesInfoUtil= getLesInfoUtil($_SESSION['nomUtil']);
@@ -151,6 +153,7 @@ if($avisOuPas == false){
 			ajoutNote($idAvis,$idClient,$idProduit,$_POST['rate']);
 			
 }
+$lesAvis=getLesAvisProd($idProduit);
 $nbAvis=getNbAvis($idProduit);
 	$noteMoy= getNoteMoy($idProduit);
 			include("vues/v_leProduit.php");

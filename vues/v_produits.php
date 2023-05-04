@@ -18,7 +18,7 @@
             <div class="priceMin">
 				<p class="mb5">Minimum</p>
                <div class="input-group">
-                  <input type="number" class="form-control" id="prixmin" name="prixmin" value="<?php if(isset($prixMin)){echo $prixMin;} ?>">
+                  <input type="number" class="form-control" id="prixmin" name="prixmin" min=0 value="<?php if(isset($prixMin)){echo $prixMin;} ?>">
                   <div class="input-group-append">
                      <span class="input-group-text">€</span>
                   </div>
@@ -27,7 +27,7 @@
             <div class="priceMax">
 			<p class="mb5">Maximum</p>
                <div class="input-group">
-                  <input type="number" class="form-control" id="prixmax" name="prixmax" value="<?php if(isset($prixMax)){echo $prixMax;} ?>">
+                  <input type="number" class="form-control" id="prixmax" name="prixmax" min=0 value="<?php if(isset($prixMax)){echo $prixMax;} ?>">
                   <div class="input-group-append">
                      <span class="input-group-text">€</span>
                   </div>
@@ -87,6 +87,8 @@
          	$image = $unProduit['image'];
          	$detail = $unProduit['desc_detail'];
             $categorie = $unProduit['id_categorie'];
+            $stock =  nbDeProd($id);
+            $stock =$stock['nbProduit'];
          
          	// affichage d'un produit avec ses informations
          	?>	
@@ -95,8 +97,9 @@
          <div class="photoCard"><img src="<?php echo $image ?>" alt=image /></div>
          <div class="desc_detail"><?php echo $detail ?></div>
          <div class="info-card">
-            <div class="prixCard">A partir de <?php echo $prix."€" ?></div>
-            <div class="stock">En Stock</div>
+            <div class="prixCard"><?php echo $prix."€" ?></div>
+          
+            <div class="stock"><?php if($stock != 0){ echo 'En Stock';} else{echo 'Indisponible';}?></div>
             <div class="buttonVoir" ><button type="button" class="btn btn-outline-success" onclick="window.location.href = 'index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&action=voirInfoProduit&leProd=<?php echo $id ?>';">Voir</button></div>
          </div>
       </div>

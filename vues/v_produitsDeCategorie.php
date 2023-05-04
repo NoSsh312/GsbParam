@@ -43,7 +43,8 @@ foreach($lesCategories as $uneCategorie){
 			$prix=$unProduit['prix'];
 			$image = $unProduit['image'];
 			$detail = $unProduit['desc_detail'];
-
+            $stock =  nbDeProd($id);
+			$stock =$stock['nbProduit'];
 			// affichage d'un produit avec ses informations
 			?>	
 			<div class="card">
@@ -51,8 +52,8 @@ foreach($lesCategories as $uneCategorie){
 					<div class="photoCard"><img src="<?php echo $image ?>" alt=image /></div>
 					<div class="desc_detail"><?php echo $detail ?></div>
 				<div class="info-card">
-					<div class="prixCard"> A partir de <?php echo $prix."€" ?></div>
-					<div class="stock">En Stock</div>
+					<div class="prixCard"><?php echo $prix."€" ?></div>
+					<div class="stock"><?php if($stock != 0){ echo 'En Stock';} else{echo 'Indisponible';}?></div>
 					<div class="voirProd"><button type="button" class="btn btn-outline-success" onclick="window.location.href = 'index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&action=voirInfoProduit&leProd=<?php echo $id ?>';">Voir</button></div>
 				</div>
 			</div>

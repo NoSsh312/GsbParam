@@ -1221,4 +1221,16 @@ function getLesNouv(){
 	$lesNouv = $reqN->fetchAll(PDO::FETCH_ASSOC);
 	return $lesNouv;
 }
+
+
+function nbDeProd($id){
+	$monPdo = connexionPDO();
+	$reqN=$monPdo -> prepare('SELECT SUM(stock) AS "nbProduit" from produitcontenance where id_produit=:id');
+	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	$lesNouv = $reqN->fetch(PDO::FETCH_ASSOC);
+	return $lesNouv;
+}
+
 ?>	
