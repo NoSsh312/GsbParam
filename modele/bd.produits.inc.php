@@ -33,6 +33,9 @@ include_once 'bd.inc.php';
 		}
 	}
 
+	/**
+ * function qui récupère les categories différente de la catégorie CH
+ */
 	function getLesCatSansCH()
 	{
 		try 
@@ -247,6 +250,12 @@ catch (PDOException $e)
 }
 }
 
+
+/**
+ * function qui récupère la quantite d'un produit en fonction de son unité
+ * @param $idProd qui correspond à l'id du produit regardé 
+ * @param $id_unite qui correspond à l'id de l'unité du produit regardé 
+ */
 function getQteContenance($idProd,$id_unite){
 	$monPdo = connexionPDO();
 
@@ -273,7 +282,7 @@ function getQteContenance($idProd,$id_unite){
 	 * @param string $ville ville du client
 	 * @param string $tel le numero de telephone du client
 	 * @param string $mail mail du client
-	 * @return booléen $testDouble false s'il existe déja un client qui possède ce nom d'utilisateur ou ce mail
+	 * @return boolean $testDouble false s'il existe déja un client qui possède ce nom d'utilisateur ou ce mail
 	 
 	 
 	*/
@@ -1003,6 +1012,10 @@ function getAllBrand(){
 	
 	return $lesMarques;
 }
+/**
+ *function qui récupère les informations d'une marque
+ * @param $idmarque fait ref a l'id de la marque
+**/
 function getMarqueById($idmarque){
 	$monPdo = connexionPDO();
 
@@ -1076,6 +1089,15 @@ function addProductInProduitContenance($idprod, $idunite, $qte, $stock, $prix){
 	$reqN -> bindValue(':prix',$prix,PDO::PARAM_STR);
 	$reqN->execute();
 }
+
+
+/**
+ *function qui récupère les informations d'un produit dans produit contenance
+ *  
+ * @param $idprod fait ref a l'id du produit
+  * @param $unite fait ref a l'id de l'unité du produit
+  * @param $qte fait ref a la quantité du produit
+**/
 function getInfoProdInProduitcontenance($idprod,$unite,$qte){
 	$monPdo = connexionPDO();
 
@@ -1090,6 +1112,17 @@ function getInfoProdInProduitcontenance($idprod,$unite,$qte){
 	return $lesInfosProd;
 }
 
+
+/**
+ *function qui update les informations d'un produit dans produit contenance
+ *  
+ * @param $idprod fait ref a l'id du produit
+  * @param $idunite fait ref a l'id de l'unité du produit
+  * @param $qte fait ref a la quantité du produit
+  * @param $stock fait ref au stock avancée du produit
+  * @param $prix fait ref au prix du produit
+
+**/
 function updateProductInProduitcontenance($idprod,$idunite,$qte,$stock,$prix){
 	
 	$monPdo = connexionPDO();
@@ -1103,6 +1136,16 @@ function updateProductInProduitcontenance($idprod,$idunite,$qte,$stock,$prix){
 	$reqN->execute();
 }
 
+/**
+ *function qui update les informations d'un produit
+ *  
+ * @param $idprod fait ref a l'id du produit
+  * @param $desc fait ref a la description du produit
+  * @param $image fait ref a l'image du produit
+  * @param $descdetail fait ref a la description avancée du produit
+  * @param $idcat fait ref a l'id de la catégorie du produit
+  * @param $idmarque fait ref a l'id de la marque du produit
+**/
 function updateProductInProduit($idprod,$desc,$image,$descdetail,$idcat,$idmarque){
 	
 	$monPdo = connexionPDO();
@@ -1117,7 +1160,11 @@ function updateProductInProduit($idprod,$desc,$image,$descdetail,$idcat,$idmarqu
 	$reqN->execute();
 }
 
-
+/**
+ *function qui récupère l'image d'un produit
+ *  
+ * @param $id fait ref a l'id du produit
+**/
 function getImageLinkFromProduct($idProd){
 	$monPdo = connexionPDO();
 
@@ -1129,7 +1176,12 @@ function getImageLinkFromProduct($idProd){
 }
 
 
-
+/**
+ *function qui insert une nouvelle catégorie
+ *  
+ * @param $id fait ref a id de catégorie
+ * @param $libelle fait ref a libelle de categorie
+**/
 function ajouterCat($id, $libelle){
 	$monPdo = connexionPDO();
 $ok=false;
@@ -1143,7 +1195,13 @@ $ok=false;
 	return $ok;
 }
 
-
+/**
+ *function qui delete une catégorie
+ *  
+ * @param $id fait ref a id de catégorie
+ * 
+ * 
+**/
 function deleteCat($id){
 	$monPdo = connexionPDO();
 $ok=false;
@@ -1165,6 +1223,16 @@ if(empty($pdt)){
 }
 	return $ok;
 }
+
+/**
+ *function qui update une catégorie
+ *  
+ * @param $id fait ref au nouvel id de catégorie 
+ * @param $libelle fait ref a libelle de categorie
+* @param $idCatOld fait ref a l'ancien id de categorie
+ * 
+ * 
+**/
 function updateCat($id, $libelle, $idCatOld){
 	$monPdo = connexionPDO();
 $ok=false;
@@ -1180,7 +1248,9 @@ $ok=false;
 	return $ok;
 }
 
-
+/**
+ *function qui récupère les clients
+**/
 function getLesClients(){
 	$monPdo = connexionPDO();
 
@@ -1190,6 +1260,14 @@ function getLesClients(){
 	return $lesCli;
 }
 
+
+/**
+ *function qui update une commande pour la passer à l'etat Livrée
+ *  
+ * @param $id fait ref a id de commande 
+ * 
+ * 
+**/
 function updateCmd($id){
 	$monPdo = connexionPDO();
 $ok=false;
@@ -1202,6 +1280,13 @@ $ok=false;
 	return $ok;
 }
 
+/**
+ *function qui récupere les infos de la catégorie selon le produit
+ *  
+ * @param $id fait ref a id du produit
+ * 
+ * 
+**/
 function getCatInfoByIdProduct($idprod){
 	$monPdo = connexionPDO();
 	$reqN=$monPdo -> prepare('SELECT categorie.id, `libelle` FROM `categorie` inner join produit on categorie.id = produit.id_categorie where produit.id = :id ; ');
@@ -1212,6 +1297,9 @@ function getCatInfoByIdProduct($idprod){
 	return $infocat;
 }
 
+/**
+ *function qui récupere les produits nouveaux
+**/
 function getLesNouv(){
 	$monPdo = connexionPDO();
 	$reqN=$monPdo -> prepare('SELECT  id, description, prix, image, 	id_categorie,id_marque , desc_detail,	id_unite ,	qte  FROM `v_prodNouv` INNER JOIN produitcontenance p on v_prodNouv.id = p.id_produit group by id');
@@ -1222,7 +1310,10 @@ function getLesNouv(){
 	return $lesNouv;
 }
 
-
+/**
+ *function qui récupere le stock d'un produit
+  * @param $id fait ref a id du produit
+**/
 function nbDeProd($id){
 	$monPdo = connexionPDO();
 	$reqN=$monPdo -> prepare('SELECT SUM(stock) AS "nbProduit" from produitcontenance where id_produit=:id');

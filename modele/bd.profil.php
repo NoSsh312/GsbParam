@@ -91,26 +91,7 @@ function getLaQteAch($idProd, $idCmd){
 	return $lesLignesN;
 }
 
-/**
- * function qui récupère le prix*qte achetée d'un produit d'une commande
- 
- * @param idProd qui correspond a l'id  d'un produit
- */
-function getLaPrixQte($idProd){
 
-
-   
-	$monPdo = connexionPDO();
-
-	$reqN=$monPdo -> prepare('SELECT (qteAch*prix) from detail_cmd where id_produit = :idProd and id = :idCmd;');
-	$reqN -> bindValue(':idProd',$idProd,PDO::PARAM_STR);
-	$reqN -> bindValue(':idCmd',$idCmd,PDO::PARAM_STR);
-
-	$reqN->execute();
-	$lesLignesN = $reqN->fetch(PDO::FETCH_ASSOC); 
-	
-	return $lesLignesN;
-}
 /**
  * function qui récupère les avis que l'utilisateur à donner aux produits
  

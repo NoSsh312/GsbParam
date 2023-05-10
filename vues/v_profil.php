@@ -26,6 +26,9 @@ foreach($lesInfoUtil as $uneInfo){
 		<div class="avis-wrapper">	
 		
 		<?php
+		if(empty($lesCommandesUtil)){
+			echo '<p>Pas de commande réalisée</p>';
+		}else{
 foreach($lesCommandesUtil as $uneCommande){
 	$idCommande =$uneCommande['id'];
 	$date = $uneCommande['dateCommande'];
@@ -79,7 +82,7 @@ foreach($lesCommandesUtil as $uneCommande){
 
 
 <?php
-}
+}}
 ?>
 		
 	</div>
@@ -110,6 +113,9 @@ foreach($lesCommandesUtil as $uneCommande){
 		</br>
 		<div class="avis-wrapper">
 <?php
+	if(empty($lesAvisUtil)){
+		echo '<p>Pas d\'avis réalisé</p>';
+	}else{
 		foreach($lesAvisUtil as $unAvis){?>
 			<div class="user-info bis">
 	<?php
@@ -130,7 +136,7 @@ foreach($lesCommandesUtil as $uneCommande){
 	</div>
 	
 
-<?php } }else{
+<?php } }}else{
 	
 		?>
 	<div class="tabs">
