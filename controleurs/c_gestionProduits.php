@@ -29,7 +29,8 @@ switch($action)
 			$idProduit =$_REQUEST['produit'];
 			$infoleprod=getInfoLeProd($idProduit);
 			$contenance = getContenanceProd($idProduit);
-	
+			$tousProd =getTousLesProduits();
+			$suggestions=getProductsYouMayAlsoLike($idProduit);
 			include("vues/v_modifLeProdAdmin.php");
 			break;
 		}
@@ -53,6 +54,8 @@ switch($action)
 	
 					$uneUnite = $laUnite['id'];
 				}
+				$tousProd =getTousLesProduits();
+				$suggestions=getProductsYouMayAlsoLike($idProduit);
 				$infoleprod=getInfoLeProd($idProduit);
 				$leproduitaveccontenance=getInfoProdInProduitcontenance($idProduit,$uneUnite,$qte);
 				include("vues/v_modifLeProdAdmin.php");
@@ -179,6 +182,29 @@ switch($action)
 		
 
 	}
+
+	case 'modifSug' :
+		{
+			$idProduit=$_REQUEST['produit'];
+			
+			$NombreProduits = $_COOKIE["numbersofspecialities"];
+			var_dump($NombreProduits);
+			
+
+			if($NombreProduits != 0){
+				deleteSugProd($idProduit);
+				for($i = 1; $i<=$NombreProduits; $i++){ //boucle qui prend les valeurs de toutes les spécialités
+					if(isset($_REQUEST['specialite'.$i]))
+					addSugProd($idProduit, $_REQUEST['specialite'.$i]);
+					//ajoutSpecialitePraticien($id, $_REQUEST['specialite'+$i]);
+				}
+				if(isset($_REQUEST['specialite'.$NombreProduits+1]))
+				addSugProd($idProduit, $_REQUEST['specialite'.$NombreProduits+1]);
+			}
+			header('Location:index.php?uc=administrer&produit='.$idProduit.'&action=modifLeProduit');
+			break;
+		}
+	
 	
 
 }

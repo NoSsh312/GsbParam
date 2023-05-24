@@ -618,7 +618,22 @@ function searchProductByPrice($prixMin, $prixMax){
 	
 	return $lesLignesN;
 }
+/**
+ * function qui récupère les infos d'un produit
+ * @param id qui correspond à l'id du produit regardé 
+ */
 
+ function getInfoProdunique($id){
+	$monPdo = connexionPDO();
+
+	$reqN=$monPdo -> prepare('SELECT `id`, `description`,  `image`, `id_categorie`, `desc_detail`,id_marque FROM produit  WHERE id=:id');
+	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
+	
+	$reqN->execute();
+	$lesLignesN = $reqN->fetch(PDO::FETCH_ASSOC);
+	
+	return $lesLignesN;
+}
 
 /**
  * function qui récupère les infos d'un produit
@@ -644,7 +659,7 @@ function getInfoLeProd($id){
 function getProductsYouMayAlsoLike($id){
 	$monPdo = connexionPDO();
 
-	$reqN=$monPdo -> prepare('SELECT id, id_produit FROM suggestion WHERE id = :id');
+	$reqN=$monPdo -> prepare('SELECT id, id_produit FROM suggestion  WHERE id = :id');
 	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
 	
 	$reqN->execute();
@@ -1324,4 +1339,18 @@ function nbDeProd($id){
 	return $lesNouv;
 }
 
+function deleteSugProd($id){
+	$monPdo = connexionPDO();
+	$reqN=$monPdo -> prepare('DELETE FROM `suggestion` WHERE id=:id');
+	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
+	$reqN->execute();
+}
+
+function addSugProd($id, $idSug){
+	$monPdo = connexionPDO();
+	$reqN=$monPdo -> prepare('INSERT INTO `suggestion`(`id`, `id_produit`) VALUES (:id , :idSug)');
+	$reqN -> bindValue(':id',$id,PDO::PARAM_STR);
+	$reqN -> bindValue(':idSug',$idSug,PDO::PARAM_STR);
+	$reqN->execute();
+}
 ?>	
