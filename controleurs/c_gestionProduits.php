@@ -178,7 +178,7 @@ switch($action)
 		$lesMarques = getAllBrand();
 		include('vues/v_produits.php');
 
-	
+	break;
 		
 
 	}
@@ -188,7 +188,7 @@ switch($action)
 			$idProduit=$_REQUEST['produit'];
 			
 			$NombreProduits = $_COOKIE["numbersofspecialities"];
-			var_dump($NombreProduits);
+		
 			
 
 			if($NombreProduits != 0){
@@ -198,8 +198,9 @@ switch($action)
 					addSugProd($idProduit, $_REQUEST['specialite'.$i]);
 					//ajoutSpecialitePraticien($id, $_REQUEST['specialite'+$i]);
 				}
-				if(isset($_REQUEST['specialite'.$NombreProduits+1]))
-				addSugProd($idProduit, $_REQUEST['specialite'.$NombreProduits+1]);
+				$temp = $NombreProduits + 1;
+				if(isset($_REQUEST['specialite'.$temp]))
+				addSugProd($idProduit, $_REQUEST['specialite'.$temp]);
 			}
 			header('Location:index.php?uc=administrer&produit='.$idProduit.'&action=modifLeProduit');
 			break;

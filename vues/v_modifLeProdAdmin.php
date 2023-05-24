@@ -52,7 +52,9 @@ foreach ($infoleprod as $uneInfoProd) {
 
 
 		</form>
-
+					</br>
+<p>Gérer les suggestions : </p>
+					</br>
 		<form method="POST" action="index.php?uc=administrer&produit=<?php echo $id ?>&action=modifSug">
 			<div id="divspeciality">
 				<?php
@@ -89,7 +91,7 @@ foreach ($infoleprod as $uneInfoProd) {
 				?>
 			</div>
 			<p class="text-center"><button type="button" onclick="addSelectList(<?php echo $i ?>)">ajouter</button></p>
-			<input type="submit" value="Valider">
+			<input type="submit" class="btn btn-primary"  value="Valider">
 		</form>
 
 
